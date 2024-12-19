@@ -1,0 +1,9 @@
+{
+  "version": "4.0",
+  "datasetReference": {
+    "byPath": {
+      "path": "../Campaign_analysis_model.SemanticModel"
+    },
+    "byConnection": null
+  }
+}
