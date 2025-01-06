@@ -1,0 +1,9 @@
+{
+  "version": "4.0",
+  "datasetReference": {
+    "byPath": {
+      "path": "../AB_Test_Analysis.SemanticModel"
+    },
+    "byConnection": null
+  }
+}

@@ -152,12 +152,54 @@ cleansed_df.show(truncate=False)
 error_table.show(truncate=False)
 
 # Define the output path or table name for your Delta table
-table_name = "abfss://Malathi@onelake.dfs.fabric.microsoft.com/Silver_Layer.Lakehouse/Tables/Campaign/cleansed_campaign"  # Example of a table name
+#table_name = "abfss://Malathi@onelake.dfs.fabric.microsoft.com/Silver_Layer.Lakehouse/Tables/Campaign/cleansed_campaign"  # Example of a table name
 error_table_name = "abfss://Malathi@onelake.dfs.fabric.microsoft.com/Silver_Layer.Lakehouse/Tables/gold_layer_campaign/Error_log_details"  # Example of a table name
 
 # Save the DataFrame as a Delta table
-cleansed_df.write.format("delta").mode("overwrite").save(table_name)
+#cleansed_df.write.format("delta").mode("overwrite").save(table_name)
 error_table.write.format("delta").mode("overwrite").save(error_table_name)
+
+
+# METADATA ********************
+
+# META {
+# META   "language": "python",
+# META   "language_group": "synapse_pyspark"
+# META }
+
+# CELL ********************
+
+from pyspark.sql import functions as F
+
+# Assuming campaign_df is your original DataFrame
+
+# Step 1: Add the `variant` column to your DataFrame, setting "A" for "Spring Sale" campaigns, else null
+campaign_df = cleansed_df.withColumn(
+    "variant", 
+    F.when(F.col("campaign_name") == "Spring Sale", "A").otherwise(F.lit(None))
+)
+
+# Step 2: Create a DataFrame for the new "Mega Sale" campaign with Variant B
+mega_sale = [
+    ("camp_001", "Spring Mega Sale", "google", "cpc", "2024-04-01", "2024-04-30", 6000, 250000, 200, 1500.0, 1100.0, 1, 6, "general", 1, "B")
+]
+
+# Define the columns for the Mega Sale record
+columns = ["campaign_id", "campaign_name", "source", "medium", "start_date", "end_date", "clicks", "impressions", "conversions", "revenue", "campaign_cost", "source_id", "medium_id", "campaign_type", "campaign_type_id", "variant"]
+
+# Create a DataFrame for Mega Sale record
+mega_sale_df = spark.createDataFrame(mega_sale, columns)
+
+# Step 3: Append the Mega Sale record to the original campaign DataFrame
+campaign_df = campaign_df.union(mega_sale_df)
+
+# Show the updated DataFrame with the new campaign
+campaign_df.show()
+
+table_name = "abfss://Malathi@onelake.dfs.fabric.microsoft.com/Silver_Layer.Lakehouse/Tables/Campaign/cleansed_campaign"  # Example of a table name
+
+# Save the DataFrame as a Delta table
+campaign_df.write.format("delta").mode("overwrite").save(table_name)
 
 
 # METADATA ********************

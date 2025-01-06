@@ -58,7 +58,40 @@ df_cleaned = df.withColumn(
 df_cleaned.show()
 
 # Define the output path or table name for your Delta table
-table_name = "abfss://Malathi@onelake.dfs.fabric.microsoft.com/Silver_Layer.Lakehouse/Tables/Campaign/cleansed_customerprofiles"  # Example of a table name
+#table_name = "abfss://Malathi@onelake.dfs.fabric.microsoft.com/Silver_Layer.Lakehouse/Tables/Campaign/cleansed_customerprofiles"  # Example of a table name
+
+# Save the DataFrame as a Delta table
+#df_cleaned.write.format("delta").mode("overwrite").save(table_name)
+
+
+# METADATA ********************
+
+# META {
+# META   "language": "python",
+# META   "language_group": "synapse_pyspark"
+# META }
+
+# CELL ********************
+
+# Assuming df_cleaned is your PySpark DataFrame
+# Generate a random number between 0 and 1 for each row in df_cleaned
+df_cleaned = df_cleaned.withColumn("random_split", F.rand())
+
+# Assign Variant A (50%) and Variant B (50%)
+df_cleaned = df_cleaned.withColumn(
+    "variant",
+    F.when(F.col("random_split") <= 0.70, "A").otherwise("B")
+)
+
+# Drop the 'random_split' column as it's no longer needed
+df_cleaned = df_cleaned.drop("random_split")
+
+# Show the result
+df_cleaned.show()
+
+
+# Define the output path or table name for your Delta table
+table_name = "abfss://Malathi@onelake.dfs.fabric.microsoft.com/Silver_Layer.Lakehouse/Tables/Campaign/cleansed_customerprofiles"
 
 # Save the DataFrame as a Delta table
 df_cleaned.write.format("delta").mode("overwrite").save(table_name)

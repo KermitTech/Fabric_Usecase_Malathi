@@ -19,7 +19,7 @@
               "typeProperties": {
                 "location": {
                   "type": "AmazonS3Location",
-                  "bucketName": "fabriccampaignbucket",
+                  "bucketName": "campaignfabricbucket",
                   "folderPath": "email_campaignfiles",
                   "fileName": "email_campaign.csv"
                 },
@@ -99,7 +99,7 @@
               "typeProperties": {
                 "location": {
                   "type": "AmazonS3Location",
-                  "bucketName": "fabriccampaignbucket",
+                  "bucketName": "campaignfabricbucket",
                   "folderPath": "website_logs",
                   "fileName": "websitelogs_data.csv"
                 },
@@ -182,7 +182,7 @@
               },
               "schema": [],
               "externalReferences": {
-                "connection": "895d0621-bc6d-4364-8847-a99fe5f8a768"
+                "connection": "a4f0c27e-01ca-4bbc-aabc-d29280b056ec"
               },
               "annotations": []
             }
@@ -261,12 +261,9 @@
             "requestInterval": "00.00:00:00.010",
             "datasetSettings": {
               "type": "RestResource",
-              "typeProperties": {
-                "relativeUrl": ""
-              },
               "schema": [],
               "externalReferences": {
-                "connection": "e8cad58e-b484-42a5-8cbb-20cf9e951ec3"
+                "connection": "321d7a6d-de09-41b3-aec4-28b749d56951"
               },
               "annotations": []
             }
@@ -347,7 +344,7 @@
               "type": "RestResource",
               "schema": [],
               "externalReferences": {
-                "connection": "cb50565a-5285-41e8-b627-a1df158a1f28"
+                "connection": "6d1bc8e0-f139-40ba-aba6-a6b1033433a2"
               },
               "annotations": []
             }
@@ -431,7 +428,7 @@
               },
               "schema": [],
               "externalReferences": {
-                "connection": "66f3b0a6-951e-4604-bc65-a25507d6eda4"
+                "connection": "42bcf62e-1c17-4a29-b662-1b1b015907bb"
               },
               "annotations": []
             }
@@ -505,7 +502,7 @@
               "type": "RestResource",
               "schema": [],
               "externalReferences": {
-                "connection": "4b6d6558-e472-4ffd-89ad-8d04f617b938"
+                "connection": "b27e8209-82ff-4237-8270-6cd67aa77240"
               },
               "annotations": []
             }

@@ -1,0 +1,2644 @@
+{
+  "compatibilityLevel": 1604,
+  "model": {
+    "annotations": [
+      {
+        "name": "__PBI_TimeIntelligenceEnabled",
+        "value": "0"
+      },
+      {
+        "name": "PBIDesktopVersion",
+        "value": "2.139.7496.1 (Main)+061188de2d27b556d0c15d8f70c4426f68783390"
+      },
+      {
+        "name": "PBI_QueryOrder",
+        "value": "[\"DatabaseQuery\"]"
+      }
+    ],
+    "collation": "Latin1_General_100_BIN2_UTF8",
+    "culture": "en-US",
+    "cultures": [
+      {
+        "name": "en-US",
+        "linguisticMetadata": {
+          "content": {
+            "Language": "en-US",
+            "Version": "1.0.0"
+          },
+          "contentType": "json"
+        }
+      }
+    ],
+    "dataAccessOptions": {
+      "legacyRedirects": true,
+      "returnErrorValuesAsNull": true
+    },
+    "defaultPowerBIDataSourceVersion": "powerBI_V3",
+    "expressions": [
+      {
+        "name": "DatabaseQuery",
+        "annotations": [
+          {
+            "name": "PBI_IncludeFutureArtifacts",
+            "value": "False"
+          }
+        ],
+        "expression": [
+          "let",
+          "    database = Sql.Database(\"A5KOTALDWSCEVLCCUY24CRMQSY-56CP7RUQSTQUVN6GXYIGXVGLRQ.datawarehouse.fabric.microsoft.com\", \"1ca20bc4-90ab-4709-a9d3-fded3e0f78ec\")",
+          "in",
+          "    database"
+        ],
+        "kind": "m",
+        "lineageTag": "ad8050d6-03ca-4b8d-9df4-57c3f0111eea"
+      }
+    ],
+    "sourceQueryCulture": "en-US",
+    "tables": [
+      {
+        "name": "RPT_Campaign_Touch_Analysis",
+        "annotations": [
+          {
+            "name": "PBI_ResultType",
+            "value": "Table"
+          }
+        ],
+        "columns": [
+          {
+            "name": "campaign_id",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "a1f5daa9-092b-4322-bd93-8e99a25a9916",
+            "sourceColumn": "campaign_id",
+            "sourceLineageTag": "campaign_id",
+            "sourceProviderType": "varchar(8000)",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "source_id",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "lineageTag": "09d3892d-b60d-4640-ae22-3022e517bc39",
+            "sourceColumn": "source_id",
+            "sourceLineageTag": "source_id",
+            "sourceProviderType": "bigint",
+            "summarizeBy": "sum"
+          },
+          {
+            "name": "first_touch_count",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "lineageTag": "81197bd7-5cdb-4f21-97fa-10415a3a9ae7",
+            "sourceColumn": "first_touch_count",
+            "sourceLineageTag": "first_touch_count",
+            "sourceProviderType": "bigint",
+            "summarizeBy": "sum"
+          },
+          {
+            "name": "last_touch_count",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "lineageTag": "33476767-9f48-4309-aad4-5516af6c87c5",
+            "sourceColumn": "last_touch_count",
+            "sourceLineageTag": "last_touch_count",
+            "sourceProviderType": "bigint",
+            "summarizeBy": "sum"
+          },
+          {
+            "name": "purchased_count",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "lineageTag": "675234a6-d2f1-45ca-b33d-1559fc2406a8",
+            "sourceColumn": "purchased_count",
+            "sourceLineageTag": "purchased_count",
+            "sourceProviderType": "bigint",
+            "summarizeBy": "sum"
+          }
+        ],
+        "lineageTag": "80e7cc4c-f425-4dc2-be94-95fcacbca873",
+        "partitions": [
+          {
+            "name": "RPT_Campaign_Touch_Analysis",
+            "mode": "directLake",
+            "source": {
+              "entityName": "RPT_Campaign_Touch_Analysis",
+              "expressionSource": "DatabaseQuery",
+              "schemaName": "gold_layer_campaign",
+              "type": "entity"
+            }
+          }
+        ],
+        "sourceLineageTag": "[gold_layer_campaign].[RPT_Campaign_Touch_Analysis]"
+      },
+      {
+        "name": "Fact_WebsiteLogs",
+        "annotations": [
+          {
+            "name": "PBI_ResultType",
+            "value": "Table"
+          }
+        ],
+        "columns": [
+          {
+            "name": "user_id",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "aa6935cc-42d1-4656-95ef-55cbc296b98e",
+            "sourceColumn": "user_id",
+            "sourceLineageTag": "user_id",
+            "sourceProviderType": "varchar(8000)",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "page_url",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "cac84156-962a-463e-a643-a1a8405a1921",
+            "sourceColumn": "page_url",
+            "sourceLineageTag": "page_url",
+            "sourceProviderType": "varchar(8000)",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "session_duration",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "6c7f93cd-800a-4a6a-9ab6-99c78ff59db3",
+            "sourceColumn": "session_duration",
+            "sourceLineageTag": "session_duration",
+            "sourceProviderType": "varchar(8000)",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "source_id",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "aebf2135-2072-48fa-be44-489f35602a52",
+            "sourceColumn": "source_id",
+            "sourceLineageTag": "source_id",
+            "sourceProviderType": "varchar(8000)",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "medium_id",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "9a8e3979-c13c-4f35-812f-ac2f2ba48449",
+            "sourceColumn": "medium_id",
+            "sourceLineageTag": "medium_id",
+            "sourceProviderType": "varchar(8000)",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "campaign_id",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "9029bf13-c366-4466-b84f-23c9004920cd",
+            "sourceColumn": "campaign_id",
+            "sourceLineageTag": "campaign_id",
+            "sourceProviderType": "varchar(8000)",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "timestamp_key",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "lineageTag": "57c25472-16d5-4999-83f3-d458b56b9e76",
+            "sourceColumn": "timestamp_key",
+            "sourceLineageTag": "timestamp_key",
+            "sourceProviderType": "int",
+            "summarizeBy": "sum"
+          }
+        ],
+        "lineageTag": "5176f063-2314-4577-868b-2091b8739a26",
+        "partitions": [
+          {
+            "name": "Fact_WebsiteLogs",
+            "mode": "directLake",
+            "source": {
+              "entityName": "Fact_WebsiteLogs",
+              "expressionSource": "DatabaseQuery",
+              "schemaName": "gold_layer_campaign",
+              "type": "entity"
+            }
+          }
+        ],
+        "sourceLineageTag": "[gold_layer_campaign].[Fact_WebsiteLogs]"
+      },
+      {
+        "name": "RPT_WinningCampaigns",
+        "annotations": [
+          {
+            "name": "PBI_ResultType",
+            "value": "Table"
+          }
+        ],
+        "columns": [
+          {
+            "name": "campaign_id",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "5048aaf9-681a-438c-925f-07aca677e35e",
+            "sourceColumn": "campaign_id",
+            "sourceLineageTag": "campaign_id",
+            "sourceProviderType": "varchar(8000)",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "source_id",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "lineageTag": "a2d2babd-e1b0-4aa8-8bf7-e1bd49563d49",
+            "sourceColumn": "source_id",
+            "sourceLineageTag": "source_id",
+            "sourceProviderType": "bigint",
+            "summarizeBy": "sum"
+          },
+          {
+            "name": "Purchased_count",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "lineageTag": "a92ffe40-63a5-48fd-baf6-799d95d38108",
+            "sourceColumn": "Purchased_count",
+            "sourceLineageTag": "Purchased_count",
+            "sourceProviderType": "bigint",
+            "summarizeBy": "sum"
+          }
+        ],
+        "lineageTag": "610bf6d0-ed06-439e-aa39-c37a03fcdc1d",
+        "partitions": [
+          {
+            "name": "RPT_WinningCampaigns",
+            "mode": "directLake",
+            "source": {
+              "entityName": "RPT_WinningCampaigns",
+              "expressionSource": "DatabaseQuery",
+              "schemaName": "gold_layer_campaign",
+              "type": "entity"
+            }
+          }
+        ],
+        "sourceLineageTag": "[gold_layer_campaign].[RPT_WinningCampaigns]"
+      },
+      {
+        "name": "Error_log_details",
+        "annotations": [
+          {
+            "name": "PBI_ResultType",
+            "value": "Table"
+          }
+        ],
+        "columns": [
+          {
+            "name": "error_id",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "lineageTag": "a3cdaa44-da3f-4b62-a23e-63000ef16336",
+            "sourceColumn": "error_id",
+            "sourceLineageTag": "error_id",
+            "sourceProviderType": "int",
+            "summarizeBy": "sum"
+          },
+          {
+            "name": "entity_name",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "a0eaa960-3d1d-48ad-b9e2-07a87c56a818",
+            "sourceColumn": "entity_name",
+            "sourceLineageTag": "entity_name",
+            "sourceProviderType": "varchar(8000)",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "error_key",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "2d555a55-b255-4e8a-bafc-d3e21120febf",
+            "sourceColumn": "error_key",
+            "sourceLineageTag": "error_key",
+            "sourceProviderType": "varchar(8000)",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "error_description",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "09f4cb93-06c6-4bb7-9e91-78e55e597a3f",
+            "sourceColumn": "error_description",
+            "sourceLineageTag": "error_description",
+            "sourceProviderType": "varchar(8000)",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "created_date",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "dateTime",
+            "formatString": "General Date",
+            "lineageTag": "b8d01e7b-fe1e-4c25-8f2b-1cc24b0cf58f",
+            "sourceColumn": "created_date",
+            "sourceLineageTag": "created_date",
+            "sourceProviderType": "datetime2",
+            "summarizeBy": "none"
+          }
+        ],
+        "lineageTag": "2528147b-e2b5-4286-884b-bbb6ccb6a9d8",
+        "partitions": [
+          {
+            "name": "Error_log_details",
+            "mode": "directLake",
+            "source": {
+              "entityName": "Error_log_details",
+              "expressionSource": "DatabaseQuery",
+              "schemaName": "gold_layer_campaign",
+              "type": "entity"
+            }
+          }
+        ],
+        "sourceLineageTag": "[gold_layer_campaign].[Error_log_details]"
+      },
+      {
+        "name": "Dim_Date",
+        "annotations": [
+          {
+            "name": "PBI_ResultType",
+            "value": "Table"
+          }
+        ],
+        "columns": [
+          {
+            "name": "date_key",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "lineageTag": "f1d29d6d-462f-4578-bfa8-1f6980d8ca00",
+            "sourceColumn": "date_key",
+            "sourceLineageTag": "date_key",
+            "sourceProviderType": "int",
+            "summarizeBy": "sum"
+          },
+          {
+            "name": "signup_date",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "dateTime",
+            "formatString": "General Date",
+            "lineageTag": "7cdc828f-0520-49b3-837e-5a2f28151dbc",
+            "sourceColumn": "signup_date",
+            "sourceLineageTag": "signup_date",
+            "sourceProviderType": "date",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "day_name",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "5298213c-fd38-488e-8427-d3cc7980dd80",
+            "sourceColumn": "day_name",
+            "sourceLineageTag": "day_name",
+            "sourceProviderType": "varchar(8000)",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "day_of_month",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "lineageTag": "91db45eb-f960-41cd-861b-defecf286122",
+            "sourceColumn": "day_of_month",
+            "sourceLineageTag": "day_of_month",
+            "sourceProviderType": "int",
+            "summarizeBy": "sum"
+          },
+          {
+            "name": "day_of_week",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "lineageTag": "62ecec20-a0de-4c1a-8e3a-ef1beaa1ece4",
+            "sourceColumn": "day_of_week",
+            "sourceLineageTag": "day_of_week",
+            "sourceProviderType": "int",
+            "summarizeBy": "sum"
+          },
+          {
+            "name": "month",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "lineageTag": "07331441-aebf-4425-998a-2d38cecddc20",
+            "sourceColumn": "month",
+            "sourceLineageTag": "month",
+            "sourceProviderType": "int",
+            "summarizeBy": "sum"
+          },
+          {
+            "name": "year",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "lineageTag": "8a34d358-33a0-47a5-89a7-83da1f5e1a7e",
+            "sourceColumn": "year",
+            "sourceLineageTag": "year",
+            "sourceProviderType": "int",
+            "summarizeBy": "sum"
+          },
+          {
+            "name": "week_of_year",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "lineageTag": "d22442dc-fce4-4309-93b5-5ecff43a09c9",
+            "sourceColumn": "week_of_year",
+            "sourceLineageTag": "week_of_year",
+            "sourceProviderType": "int",
+            "summarizeBy": "sum"
+          }
+        ],
+        "lineageTag": "53f52dc1-ed3d-4c79-b6e2-b7b83318f711",
+        "partitions": [
+          {
+            "name": "Dim_Date",
+            "mode": "directLake",
+            "source": {
+              "entityName": "Dim_Date",
+              "expressionSource": "DatabaseQuery",
+              "schemaName": "gold_layer_campaign",
+              "type": "entity"
+            }
+          }
+        ],
+        "sourceLineageTag": "[gold_layer_campaign].[Dim_Date]"
+      },
+      {
+        "name": "Dim_Customer",
+        "annotations": [
+          {
+            "name": "PBI_ResultType",
+            "value": "Table"
+          }
+        ],
+        "columns": [
+          {
+            "name": "customer_id",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "32b99b0d-ae34-4379-b596-81af78128b92",
+            "sourceColumn": "customer_id",
+            "sourceLineageTag": "customer_id",
+            "sourceProviderType": "varchar(8000)",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "email",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "f482448d-6a73-421c-b80b-203b646044bf",
+            "sourceColumn": "email",
+            "sourceLineageTag": "email",
+            "sourceProviderType": "varchar(8000)",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "dob",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "a9c43053-1960-49e0-93e9-d1c01e2a4dd6",
+            "sourceColumn": "dob",
+            "sourceLineageTag": "dob",
+            "sourceProviderType": "varchar(8000)",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "gender",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "91d90675-0340-4584-9143-fcb853c770d0",
+            "sourceColumn": "gender",
+            "sourceLineageTag": "gender",
+            "sourceProviderType": "varchar(8000)",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "address",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "84a482ce-6ecc-4e2a-ba80-13086a1c9905",
+            "sourceColumn": "address",
+            "sourceLineageTag": "address",
+            "sourceProviderType": "varchar(8000)",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "city",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "83d878f9-c86e-47dc-9135-7c8c1c324cab",
+            "sourceColumn": "city",
+            "sourceLineageTag": "city",
+            "sourceProviderType": "varchar(8000)",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "country",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "97cb97ae-8694-4762-9e61-f5b62f32bf6f",
+            "sourceColumn": "country",
+            "sourceLineageTag": "country",
+            "sourceProviderType": "varchar(8000)",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "social_security_number",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "e9b4bc83-caf0-4e64-b890-61dcc93e7948",
+            "sourceColumn": "social_security_number",
+            "sourceLineageTag": "social_security_number",
+            "sourceProviderType": "varchar(8000)",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "phone_number",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "a3c97722-6572-4cdf-be06-c4f58c228a23",
+            "sourceColumn": "phone_number",
+            "sourceLineageTag": "phone_number",
+            "sourceProviderType": "varchar(8000)",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "variant",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "ca7bdb83-3567-4495-b2d2-b7f35cae80fc",
+            "sourceColumn": "variant",
+            "sourceLineageTag": "variant",
+            "sourceProviderType": "varchar(8000)",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "full_name",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "68d12c77-7db2-4c35-b91c-7a02c12d646e",
+            "sourceColumn": "full_name",
+            "sourceLineageTag": "full_name",
+            "sourceProviderType": "varchar(8000)",
+            "summarizeBy": "none"
+          }
+        ],
+        "lineageTag": "9941d23c-7c22-40ba-882a-822606b5d1f1",
+        "partitions": [
+          {
+            "name": "Dim_Customer",
+            "mode": "directLake",
+            "source": {
+              "entityName": "Dim_Customer",
+              "expressionSource": "DatabaseQuery",
+              "schemaName": "gold_layer_campaign",
+              "type": "entity"
+            }
+          }
+        ],
+        "sourceLineageTag": "[gold_layer_campaign].[Dim_Customer]"
+      },
+      {
+        "name": "Dim_Email_Campaign",
+        "annotations": [
+          {
+            "name": "PBI_ResultType",
+            "value": "Table"
+          }
+        ],
+        "columns": [
+          {
+            "name": "campaign_id",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "632902bc-dce2-4eaf-8ee8-c06e9b777b7e",
+            "sourceColumn": "campaign_id",
+            "sourceLineageTag": "campaign_id",
+            "sourceProviderType": "varchar(8000)",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "email_subject",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "629985c3-6450-4fbc-81bb-8b7907702d12",
+            "sourceColumn": "email_subject",
+            "sourceLineageTag": "email_subject",
+            "sourceProviderType": "varchar(8000)",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "discount_code",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "5f5d7eb6-3e68-459d-9239-870c2d521a45",
+            "sourceColumn": "discount_code",
+            "sourceLineageTag": "discount_code",
+            "sourceProviderType": "varchar(8000)",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "start_date",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "63b619c4-5dc2-4bd4-ba2c-9a424ae2141c",
+            "sourceColumn": "start_date",
+            "sourceLineageTag": "start_date",
+            "sourceProviderType": "varchar(8000)",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "end_date",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "117a3715-82c7-4d7c-9f5f-2ada336a3130",
+            "sourceColumn": "end_date",
+            "sourceLineageTag": "end_date",
+            "sourceProviderType": "varchar(8000)",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "send_date",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "dateTime",
+            "formatString": "General Date",
+            "lineageTag": "53fcbbe1-499d-4770-8aea-794b07223b2a",
+            "sourceColumn": "send_date",
+            "sourceLineageTag": "send_date",
+            "sourceProviderType": "date",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "open_rate",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "ecb16346-9739-4e96-8f15-5a107da45e5c",
+            "sourceColumn": "open_rate",
+            "sourceLineageTag": "open_rate",
+            "sourceProviderType": "varchar(8000)",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "click_rate",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "90e3c9b2-ebab-41a7-981e-382ad906e277",
+            "sourceColumn": "click_rate",
+            "sourceLineageTag": "click_rate",
+            "sourceProviderType": "varchar(8000)",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "revenue",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "a0297a54-d1fe-443d-8c97-ab5dd526d828",
+            "sourceColumn": "revenue",
+            "sourceLineageTag": "revenue",
+            "sourceProviderType": "varchar(8000)",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "email_cost",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "2ae58532-0e66-4153-bdb2-5bd40d028598",
+            "sourceColumn": "email_cost",
+            "sourceLineageTag": "email_cost",
+            "sourceProviderType": "varchar(8000)",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "campaign_type",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "6f75dfa1-d765-4c9c-9e6d-aaf9c42a9686",
+            "sourceColumn": "campaign_type",
+            "sourceLineageTag": "campaign_type",
+            "sourceProviderType": "varchar(8000)",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "campaign_type_id",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "4ccf8500-31c4-4146-bc2a-917f101435b9",
+            "sourceColumn": "campaign_type_id",
+            "sourceLineageTag": "campaign_type_id",
+            "sourceProviderType": "varchar(8000)",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "valid_campaign",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "45490b57-2b13-451e-b558-9ee02c3e65eb",
+            "sourceColumn": "valid_campaign",
+            "sourceLineageTag": "valid_campaign",
+            "sourceProviderType": "varchar(8000)",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "CTOR",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              },
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isGeneralNumber\":true}"
+              }
+            ],
+            "dataType": "double",
+            "lineageTag": "9e365f6f-5e96-4216-8e06-86343bd499a4",
+            "sourceColumn": "CTOR",
+            "sourceLineageTag": "CTOR",
+            "sourceProviderType": "float",
+            "summarizeBy": "sum"
+          },
+          {
+            "name": "ROI",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              },
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isGeneralNumber\":true}"
+              }
+            ],
+            "dataType": "double",
+            "lineageTag": "811e1e08-e707-491b-8671-8197f2bd0c0c",
+            "sourceColumn": "ROI",
+            "sourceLineageTag": "ROI",
+            "sourceProviderType": "float",
+            "summarizeBy": "sum"
+          },
+          {
+            "name": "Revenue_to_Cost_Ratio",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              },
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isGeneralNumber\":true}"
+              }
+            ],
+            "dataType": "double",
+            "lineageTag": "17e5a715-0f8a-4818-b1fd-66ee7c12c538",
+            "sourceColumn": "Revenue_to_Cost_Ratio",
+            "sourceLineageTag": "Revenue_to_Cost_Ratio",
+            "sourceProviderType": "float",
+            "summarizeBy": "sum"
+          },
+          {
+            "name": "CPE",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              },
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isGeneralNumber\":true}"
+              }
+            ],
+            "dataType": "double",
+            "lineageTag": "c7f4f6b2-dbc1-43a9-a22f-a9e1d4a1f323",
+            "sourceColumn": "CPE",
+            "sourceLineageTag": "CPE",
+            "sourceProviderType": "float",
+            "summarizeBy": "sum"
+          },
+          {
+            "name": "RPE",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              },
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isGeneralNumber\":true}"
+              }
+            ],
+            "dataType": "double",
+            "lineageTag": "0f7f3dd0-5c3b-4dae-b794-02ad47930a6a",
+            "sourceColumn": "RPE",
+            "sourceLineageTag": "RPE",
+            "sourceProviderType": "float",
+            "summarizeBy": "sum"
+          }
+        ],
+        "lineageTag": "3a0bf498-64f3-4700-84fc-649862d20ec7",
+        "partitions": [
+          {
+            "name": "Dim_Email_Campaign",
+            "mode": "directLake",
+            "source": {
+              "entityName": "Dim_Email_Campaign",
+              "expressionSource": "DatabaseQuery",
+              "schemaName": "gold_layer_campaign",
+              "type": "entity"
+            }
+          }
+        ],
+        "sourceLineageTag": "[gold_layer_campaign].[Dim_Email_Campaign]"
+      },
+      {
+        "name": "Dim_Social_Campaign",
+        "annotations": [
+          {
+            "name": "PBI_ResultType",
+            "value": "Table"
+          }
+        ],
+        "columns": [
+          {
+            "name": "campaign_id",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "f6abaa0b-cdb4-4c3c-b8ca-444e3c11b097",
+            "sourceColumn": "campaign_id",
+            "sourceLineageTag": "campaign_id",
+            "sourceProviderType": "varchar(8000)",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "campaign_name",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "ff697408-0ea9-4524-83e2-46e75460d6a1",
+            "sourceColumn": "campaign_name",
+            "sourceLineageTag": "campaign_name",
+            "sourceProviderType": "varchar(8000)",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "platform",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "5426e3a5-e445-420c-a7f0-4b62fd9aa8f1",
+            "sourceColumn": "platform",
+            "sourceLineageTag": "platform",
+            "sourceProviderType": "varchar(8000)",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "discount_amount",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              },
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isGeneralNumber\":true}"
+              }
+            ],
+            "dataType": "double",
+            "lineageTag": "f87ebcfc-52a6-4be3-9fd7-d9480d96923b",
+            "sourceColumn": "discount_amount",
+            "sourceLineageTag": "discount_amount",
+            "sourceProviderType": "float",
+            "summarizeBy": "sum"
+          },
+          {
+            "name": "discount_condition",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "32324004-548e-4bca-98d4-200a31431ee6",
+            "sourceColumn": "discount_condition",
+            "sourceLineageTag": "discount_condition",
+            "sourceProviderType": "varchar(8000)",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "start_date",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "dateTime",
+            "formatString": "General Date",
+            "lineageTag": "31099895-8fc2-4d54-a7a6-17686af08770",
+            "sourceColumn": "start_date",
+            "sourceLineageTag": "start_date",
+            "sourceProviderType": "date",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "end_date",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "dateTime",
+            "formatString": "General Date",
+            "lineageTag": "9e7b3cac-d4e0-4bc7-8360-58e73ff09cc1",
+            "sourceColumn": "end_date",
+            "sourceLineageTag": "end_date",
+            "sourceProviderType": "date",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "clicks",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "lineageTag": "8b832be3-3532-4d5e-9bb5-5ba973154e91",
+            "sourceColumn": "clicks",
+            "sourceLineageTag": "clicks",
+            "sourceProviderType": "bigint",
+            "summarizeBy": "sum"
+          },
+          {
+            "name": "impressions",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "lineageTag": "95049584-be35-4b35-b89f-95c35372e4eb",
+            "sourceColumn": "impressions",
+            "sourceLineageTag": "impressions",
+            "sourceProviderType": "bigint",
+            "summarizeBy": "sum"
+          },
+          {
+            "name": "engagements",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "lineageTag": "05668b9e-9f21-4e3c-b471-a8e21116fe74",
+            "sourceColumn": "engagements",
+            "sourceLineageTag": "engagements",
+            "sourceProviderType": "bigint",
+            "summarizeBy": "sum"
+          },
+          {
+            "name": "shares",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "lineageTag": "2ba2a652-b010-48d7-93d9-586824f95890",
+            "sourceColumn": "shares",
+            "sourceLineageTag": "shares",
+            "sourceProviderType": "bigint",
+            "summarizeBy": "sum"
+          },
+          {
+            "name": "comments",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "lineageTag": "73525c35-ffc9-4900-8542-7c8ac4b25290",
+            "sourceColumn": "comments",
+            "sourceLineageTag": "comments",
+            "sourceProviderType": "bigint",
+            "summarizeBy": "sum"
+          },
+          {
+            "name": "likes",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "lineageTag": "aa33a88c-22ae-487d-aef3-17e4f0d25aa6",
+            "sourceColumn": "likes",
+            "sourceLineageTag": "likes",
+            "sourceProviderType": "bigint",
+            "summarizeBy": "sum"
+          },
+          {
+            "name": "revenue",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              },
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isGeneralNumber\":true}"
+              }
+            ],
+            "dataType": "double",
+            "lineageTag": "ea8eb8c9-03ba-401f-9431-3472a4444266",
+            "sourceColumn": "revenue",
+            "sourceLineageTag": "revenue",
+            "sourceProviderType": "float",
+            "summarizeBy": "sum"
+          },
+          {
+            "name": "social_media_cost",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              },
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isGeneralNumber\":true}"
+              }
+            ],
+            "dataType": "double",
+            "lineageTag": "002e6892-3ddf-467f-8d39-3650cee0ac3e",
+            "sourceColumn": "social_media_cost",
+            "sourceLineageTag": "social_media_cost",
+            "sourceProviderType": "float",
+            "summarizeBy": "sum"
+          },
+          {
+            "name": "conversions",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "lineageTag": "d4a80201-2cdb-45cd-ae49-4234d7906169",
+            "sourceColumn": "conversions",
+            "sourceLineageTag": "conversions",
+            "sourceProviderType": "bigint",
+            "summarizeBy": "sum"
+          },
+          {
+            "name": "platform_id",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "lineageTag": "32cbcf4a-169b-4fec-a328-a8cabef76ad8",
+            "sourceColumn": "platform_id",
+            "sourceLineageTag": "platform_id",
+            "sourceProviderType": "bigint",
+            "summarizeBy": "sum"
+          },
+          {
+            "name": "medium_id",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "eed691bc-142c-424c-abfb-b1bb68ddfef6",
+            "sourceColumn": "medium_id",
+            "sourceLineageTag": "medium_id",
+            "sourceProviderType": "varchar(8000)",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "campaign_type_id",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "lineageTag": "e1931d0c-642f-458c-9db7-069a7470eaad",
+            "sourceColumn": "campaign_type_id",
+            "sourceLineageTag": "campaign_type_id",
+            "sourceProviderType": "bigint",
+            "summarizeBy": "sum"
+          },
+          {
+            "name": "campaign_type",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "3b92da13-0273-49c1-8862-e58caf407352",
+            "sourceColumn": "campaign_type",
+            "sourceLineageTag": "campaign_type",
+            "sourceProviderType": "varchar(8000)",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "cleaned_comment",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "32975ab7-35da-43c8-a246-35c69b0e74a0",
+            "sourceColumn": "cleaned_comment",
+            "sourceLineageTag": "cleaned_comment",
+            "sourceProviderType": "varchar(8000)",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "hashtags",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "57db0041-57ec-43f5-9908-ca5803e68ac5",
+            "sourceColumn": "hashtags",
+            "sourceLineageTag": "hashtags",
+            "sourceProviderType": "varchar(8000)",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "mentions",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "6468c979-d680-4c05-a3d9-ca7b747f7a10",
+            "sourceColumn": "mentions",
+            "sourceLineageTag": "mentions",
+            "sourceProviderType": "varchar(8000)",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "conversion_rate",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              },
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isGeneralNumber\":true}"
+              }
+            ],
+            "dataType": "double",
+            "lineageTag": "7d8c8992-995f-435c-afec-b10f4cefe9f5",
+            "sourceColumn": "conversion_rate",
+            "sourceLineageTag": "conversion_rate",
+            "sourceProviderType": "float",
+            "summarizeBy": "sum"
+          },
+          {
+            "name": "CTR",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              },
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isGeneralNumber\":true}"
+              }
+            ],
+            "dataType": "double",
+            "lineageTag": "217bc47a-23c8-4860-896e-2b7a14419724",
+            "sourceColumn": "CTR",
+            "sourceLineageTag": "CTR",
+            "sourceProviderType": "float",
+            "summarizeBy": "sum"
+          },
+          {
+            "name": "CPC",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              },
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isGeneralNumber\":true}"
+              }
+            ],
+            "dataType": "double",
+            "lineageTag": "c154e497-593c-486e-a263-64aee5181ce4",
+            "sourceColumn": "CPC",
+            "sourceLineageTag": "CPC",
+            "sourceProviderType": "float",
+            "summarizeBy": "sum"
+          },
+          {
+            "name": "CPA",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              },
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isGeneralNumber\":true}"
+              }
+            ],
+            "dataType": "double",
+            "lineageTag": "32d57c82-fe7c-4928-9b04-5e6235649370",
+            "sourceColumn": "CPA",
+            "sourceLineageTag": "CPA",
+            "sourceProviderType": "float",
+            "summarizeBy": "sum"
+          },
+          {
+            "name": "ROAS",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              },
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isGeneralNumber\":true}"
+              }
+            ],
+            "dataType": "double",
+            "lineageTag": "e69cc9e9-0d24-4ffd-88f9-84dc66a71134",
+            "sourceColumn": "ROAS",
+            "sourceLineageTag": "ROAS",
+            "sourceProviderType": "float",
+            "summarizeBy": "sum"
+          },
+          {
+            "name": "ROI",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              },
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isGeneralNumber\":true}"
+              }
+            ],
+            "dataType": "double",
+            "lineageTag": "093a35cf-71a8-4dab-a171-78eb3c50a3bb",
+            "sourceColumn": "ROI",
+            "sourceLineageTag": "ROI",
+            "sourceProviderType": "float",
+            "summarizeBy": "sum"
+          },
+          {
+            "name": "CES",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              },
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isGeneralNumber\":true}"
+              }
+            ],
+            "dataType": "double",
+            "lineageTag": "6d996869-7d7b-475b-af8d-b7a8a6d8956c",
+            "sourceColumn": "CES",
+            "sourceLineageTag": "CES",
+            "sourceProviderType": "float",
+            "summarizeBy": "sum"
+          }
+        ],
+        "lineageTag": "f12a251d-d122-4d30-9cd0-6ce8621b869d",
+        "partitions": [
+          {
+            "name": "Dim_Social_Campaign",
+            "mode": "directLake",
+            "source": {
+              "entityName": "Dim_Social_Campaign",
+              "expressionSource": "DatabaseQuery",
+              "schemaName": "gold_layer_campaign",
+              "type": "entity"
+            }
+          }
+        ],
+        "sourceLineageTag": "[gold_layer_campaign].[Dim_Social_Campaign]"
+      },
+      {
+        "name": "Dim_Campaign",
+        "annotations": [
+          {
+            "name": "PBI_ResultType",
+            "value": "Table"
+          }
+        ],
+        "columns": [
+          {
+            "name": "campaign_id",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "10e37ad7-ecbd-41c9-9a76-07632eb7f394",
+            "sourceColumn": "campaign_id",
+            "sourceLineageTag": "campaign_id",
+            "sourceProviderType": "varchar(8000)",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "campaign_name",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "a845d2b2-6064-4a51-998a-a5929d77e233",
+            "sourceColumn": "campaign_name",
+            "sourceLineageTag": "campaign_name",
+            "sourceProviderType": "varchar(8000)",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "source",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "58703fc1-cbe1-4c78-ac75-788e6ebcc09c",
+            "sourceColumn": "source",
+            "sourceLineageTag": "source",
+            "sourceProviderType": "varchar(8000)",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "medium",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "da5c9270-fb4e-4b57-b61b-669d7acd0938",
+            "sourceColumn": "medium",
+            "sourceLineageTag": "medium",
+            "sourceProviderType": "varchar(8000)",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "start_date",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "7efa52b9-adf4-4c7d-91f1-fd6f8a808da4",
+            "sourceColumn": "start_date",
+            "sourceLineageTag": "start_date",
+            "sourceProviderType": "varchar(8000)",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "end_date",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "5ddfb024-05f6-474f-b7aa-174e64e781aa",
+            "sourceColumn": "end_date",
+            "sourceLineageTag": "end_date",
+            "sourceProviderType": "varchar(8000)",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "clicks",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "lineageTag": "a3f4a4a0-4d3a-47b9-94f0-ac483692f634",
+            "sourceColumn": "clicks",
+            "sourceLineageTag": "clicks",
+            "sourceProviderType": "bigint",
+            "summarizeBy": "sum"
+          },
+          {
+            "name": "impressions",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "lineageTag": "f5869381-e59d-4d9a-929e-fee3c1af742f",
+            "sourceColumn": "impressions",
+            "sourceLineageTag": "impressions",
+            "sourceProviderType": "bigint",
+            "summarizeBy": "sum"
+          },
+          {
+            "name": "conversions",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "lineageTag": "23e26684-8020-4b47-93ad-13d5851e0b4b",
+            "sourceColumn": "conversions",
+            "sourceLineageTag": "conversions",
+            "sourceProviderType": "bigint",
+            "summarizeBy": "sum"
+          },
+          {
+            "name": "revenue",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              },
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isGeneralNumber\":true}"
+              }
+            ],
+            "dataType": "double",
+            "lineageTag": "94599b86-393a-4553-82e8-5deeb7e20e53",
+            "sourceColumn": "revenue",
+            "sourceLineageTag": "revenue",
+            "sourceProviderType": "float",
+            "summarizeBy": "sum"
+          },
+          {
+            "name": "campaign_cost",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              },
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isGeneralNumber\":true}"
+              }
+            ],
+            "dataType": "double",
+            "lineageTag": "920e1d9c-05a7-4907-afc1-4d229ee93bb2",
+            "sourceColumn": "campaign_cost",
+            "sourceLineageTag": "campaign_cost",
+            "sourceProviderType": "float",
+            "summarizeBy": "sum"
+          },
+          {
+            "name": "source_id",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "lineageTag": "6e20f3b0-b835-43ca-bc18-2a9464cce641",
+            "sourceColumn": "source_id",
+            "sourceLineageTag": "source_id",
+            "sourceProviderType": "bigint",
+            "summarizeBy": "sum"
+          },
+          {
+            "name": "medium_id",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "lineageTag": "fbf89fba-c365-4749-9b78-8030a3372ad3",
+            "sourceColumn": "medium_id",
+            "sourceLineageTag": "medium_id",
+            "sourceProviderType": "bigint",
+            "summarizeBy": "sum"
+          },
+          {
+            "name": "campaign_type",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "e1c31e62-c9a4-4392-bc9b-efbef7503271",
+            "sourceColumn": "campaign_type",
+            "sourceLineageTag": "campaign_type",
+            "sourceProviderType": "varchar(8000)",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "campaign_type_id",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "lineageTag": "d4907b20-583e-4670-9b10-900be95db9ac",
+            "sourceColumn": "campaign_type_id",
+            "sourceLineageTag": "campaign_type_id",
+            "sourceProviderType": "bigint",
+            "summarizeBy": "sum"
+          },
+          {
+            "name": "variant",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "aaf14489-3ea0-4aca-92cf-62f8b1b4623d",
+            "sourceColumn": "variant",
+            "sourceLineageTag": "variant",
+            "sourceProviderType": "varchar(8000)",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "conversion_rate",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              },
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isGeneralNumber\":true}"
+              }
+            ],
+            "dataType": "double",
+            "lineageTag": "6bbf7593-fe53-4ed2-a954-1e5ea8e070cb",
+            "sourceColumn": "conversion_rate",
+            "sourceLineageTag": "conversion_rate",
+            "sourceProviderType": "float",
+            "summarizeBy": "sum"
+          },
+          {
+            "name": "CTR",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              },
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isGeneralNumber\":true}"
+              }
+            ],
+            "dataType": "double",
+            "lineageTag": "7a8c9141-403d-4972-a539-7041689a9b66",
+            "sourceColumn": "CTR",
+            "sourceLineageTag": "CTR",
+            "sourceProviderType": "float",
+            "summarizeBy": "sum"
+          },
+          {
+            "name": "CPC",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              },
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isGeneralNumber\":true}"
+              }
+            ],
+            "dataType": "double",
+            "lineageTag": "d29a7440-c740-4044-aa04-90562e08275f",
+            "sourceColumn": "CPC",
+            "sourceLineageTag": "CPC",
+            "sourceProviderType": "float",
+            "summarizeBy": "sum"
+          },
+          {
+            "name": "CPA",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              },
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isGeneralNumber\":true}"
+              }
+            ],
+            "dataType": "double",
+            "lineageTag": "51dfe290-f959-471f-a6e0-1a2309520530",
+            "sourceColumn": "CPA",
+            "sourceLineageTag": "CPA",
+            "sourceProviderType": "float",
+            "summarizeBy": "sum"
+          },
+          {
+            "name": "ROAS",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              },
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isGeneralNumber\":true}"
+              }
+            ],
+            "dataType": "double",
+            "lineageTag": "aaee31d6-7495-4a78-8d54-5c2a84119279",
+            "sourceColumn": "ROAS",
+            "sourceLineageTag": "ROAS",
+            "sourceProviderType": "float",
+            "summarizeBy": "sum"
+          },
+          {
+            "name": "ROI",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              },
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isGeneralNumber\":true}"
+              }
+            ],
+            "dataType": "double",
+            "lineageTag": "0e942fae-82a9-4447-b496-0fb9d4923046",
+            "sourceColumn": "ROI",
+            "sourceLineageTag": "ROI",
+            "sourceProviderType": "float",
+            "summarizeBy": "sum"
+          },
+          {
+            "name": "CES",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              },
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isGeneralNumber\":true}"
+              }
+            ],
+            "dataType": "double",
+            "lineageTag": "4f55b860-4158-4c55-9369-bc31599c8f26",
+            "sourceColumn": "CES",
+            "sourceLineageTag": "CES",
+            "sourceProviderType": "float",
+            "summarizeBy": "sum"
+          }
+        ],
+        "lineageTag": "e6a3f40d-4619-412b-bc2a-b6e258dd86f6",
+        "partitions": [
+          {
+            "name": "Dim_Campaign",
+            "mode": "directLake",
+            "source": {
+              "entityName": "Dim_Campaign",
+              "expressionSource": "DatabaseQuery",
+              "schemaName": "gold_layer_campaign",
+              "type": "entity"
+            }
+          }
+        ],
+        "sourceLineageTag": "[gold_layer_campaign].[Dim_Campaign]"
+      },
+      {
+        "name": "Fact_Channel_Attribution",
+        "annotations": [
+          {
+            "name": "PBI_ResultType",
+            "value": "Table"
+          }
+        ],
+        "columns": [
+          {
+            "name": "customer_id",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "9e40eb33-6d1b-4a4e-ba50-5564f49503df",
+            "sourceColumn": "customer_id",
+            "sourceLineageTag": "customer_id",
+            "sourceProviderType": "varchar(8000)",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "campaign_id",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "ea6501f4-70c7-45b5-b899-7765c1d044e8",
+            "sourceColumn": "campaign_id",
+            "sourceLineageTag": "campaign_id",
+            "sourceProviderType": "varchar(8000)",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "source_id",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "lineageTag": "d0deb7d7-9eda-416f-82a1-e9e427a2df9d",
+            "sourceColumn": "source_id",
+            "sourceLineageTag": "source_id",
+            "sourceProviderType": "bigint",
+            "summarizeBy": "sum"
+          },
+          {
+            "name": "touch_position",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "lineageTag": "c25888b7-8ac4-48a3-a6a0-00fac9983ad7",
+            "sourceColumn": "touch_position",
+            "sourceLineageTag": "touch_position",
+            "sourceProviderType": "int",
+            "summarizeBy": "sum"
+          },
+          {
+            "name": "is_conversion",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "lineageTag": "90302686-be15-481c-b8b0-ab361ee134d2",
+            "sourceColumn": "is_conversion",
+            "sourceLineageTag": "is_conversion",
+            "sourceProviderType": "int",
+            "summarizeBy": "sum"
+          },
+          {
+            "name": "first_touch_attributions",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "lineageTag": "9c65d4d2-3b0d-4885-b1ed-978c415045d6",
+            "sourceColumn": "first_touch_attributions",
+            "sourceLineageTag": "first_touch_attributions",
+            "sourceProviderType": "int",
+            "summarizeBy": "sum"
+          },
+          {
+            "name": "last_touch_attributions",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "lineageTag": "6fb45f91-fa2a-473d-ab26-bfaf70cee67c",
+            "sourceColumn": "last_touch_attributions",
+            "sourceLineageTag": "last_touch_attributions",
+            "sourceProviderType": "int",
+            "summarizeBy": "sum"
+          },
+          {
+            "name": "linear_attribution_value",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              },
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isGeneralNumber\":true}"
+              }
+            ],
+            "dataType": "double",
+            "lineageTag": "7fbdab25-e7b9-48b3-acb7-4395e4d551f8",
+            "sourceColumn": "linear_attribution_value",
+            "sourceLineageTag": "linear_attribution_value",
+            "sourceProviderType": "float",
+            "summarizeBy": "sum"
+          },
+          {
+            "name": "total_touches",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "lineageTag": "982bac46-eb3a-4f5a-9f2b-b03fc62ac672",
+            "sourceColumn": "total_touches",
+            "sourceLineageTag": "total_touches",
+            "sourceProviderType": "bigint",
+            "summarizeBy": "sum"
+          }
+        ],
+        "lineageTag": "1cb0e0a8-89e2-4f8d-b60a-dfa98570895d",
+        "partitions": [
+          {
+            "name": "Fact_Channel_Attribution",
+            "mode": "directLake",
+            "source": {
+              "entityName": "Fact_Channel_Attribution",
+              "expressionSource": "DatabaseQuery",
+              "schemaName": "gold_layer_campaign",
+              "type": "entity"
+            }
+          }
+        ],
+        "sourceLineageTag": "[gold_layer_campaign].[Fact_Channel_Attribution]"
+      },
+      {
+        "name": "RPT_Customer_Engagement_Campaigns",
+        "annotations": [
+          {
+            "name": "PBI_ResultType",
+            "value": "Table"
+          }
+        ],
+        "columns": [
+          {
+            "name": "campaign_id",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "4b57c236-1a5c-4dc3-a982-41d845dd1a7b",
+            "sourceColumn": "campaign_id",
+            "sourceLineageTag": "campaign_id",
+            "sourceProviderType": "varchar(8000)",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "source_id",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "lineageTag": "f75d0de7-5dd6-46ec-a8aa-7cb6217288f1",
+            "sourceColumn": "source_id",
+            "sourceLineageTag": "source_id",
+            "sourceProviderType": "bigint",
+            "summarizeBy": "sum"
+          },
+          {
+            "name": "first_touch_count",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "lineageTag": "127f73f2-47c5-4e99-9870-f205f649faad",
+            "sourceColumn": "first_touch_count",
+            "sourceLineageTag": "first_touch_count",
+            "sourceProviderType": "bigint",
+            "summarizeBy": "sum"
+          }
+        ],
+        "lineageTag": "594be189-2de8-41ec-8f89-57de985a9bec",
+        "partitions": [
+          {
+            "name": "RPT_Customer_Engagement_Campaigns",
+            "mode": "directLake",
+            "source": {
+              "entityName": "RPT_Customer_Engagement_Campaigns",
+              "expressionSource": "DatabaseQuery",
+              "schemaName": "gold_layer_campaign",
+              "type": "entity"
+            }
+          }
+        ],
+        "sourceLineageTag": "[gold_layer_campaign].[RPT_Customer_Engagement_Campaigns]"
+      },
+      {
+        "name": "Fact_CampaignPerformance",
+        "annotations": [
+          {
+            "name": "PBI_ResultType",
+            "value": "Table"
+          }
+        ],
+        "columns": [
+          {
+            "name": "campaign_id",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "7ff2a2f2-3aa7-4175-900c-3093167c5194",
+            "sourceColumn": "campaign_id",
+            "sourceLineageTag": "campaign_id",
+            "sourceProviderType": "varchar(8000)",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "source_id",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "lineageTag": "f4251f60-d6b0-4775-9f29-5efa37187183",
+            "sourceColumn": "source_id",
+            "sourceLineageTag": "source_id",
+            "sourceProviderType": "bigint",
+            "summarizeBy": "sum"
+          },
+          {
+            "name": "medium_id",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "lineageTag": "2cffd5f3-a8d4-46ac-958f-fed2bee0a294",
+            "sourceColumn": "medium_id",
+            "sourceLineageTag": "medium_id",
+            "sourceProviderType": "bigint",
+            "summarizeBy": "sum"
+          },
+          {
+            "name": "campaign_type_id",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "lineageTag": "f2e20b9d-dbda-4f0d-8590-0fa0b1537c15",
+            "sourceColumn": "campaign_type_id",
+            "sourceLineageTag": "campaign_type_id",
+            "sourceProviderType": "bigint",
+            "summarizeBy": "sum"
+          },
+          {
+            "name": "total_spend",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              },
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isGeneralNumber\":true}"
+              }
+            ],
+            "dataType": "double",
+            "lineageTag": "3c91ebc2-d013-428b-8910-c5e8039773af",
+            "sourceColumn": "total_spend",
+            "sourceLineageTag": "total_spend",
+            "sourceProviderType": "float",
+            "summarizeBy": "sum"
+          }
+        ],
+        "lineageTag": "6b89b406-6b92-4134-8cc0-da9e857f09f6",
+        "partitions": [
+          {
+            "name": "Fact_CampaignPerformance",
+            "mode": "directLake",
+            "source": {
+              "entityName": "Fact_CampaignPerformance",
+              "expressionSource": "DatabaseQuery",
+              "schemaName": "gold_layer_campaign",
+              "type": "entity"
+            }
+          }
+        ],
+        "sourceLineageTag": "[gold_layer_campaign].[Fact_CampaignPerformance]"
+      },
+      {
+        "name": "Fact_CustomerJourney",
+        "annotations": [
+          {
+            "name": "PBI_ResultType",
+            "value": "Table"
+          }
+        ],
+        "columns": [
+          {
+            "name": "campaign_id",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "b85bcce9-b6e3-4895-86ec-cc077c62a7a5",
+            "sourceColumn": "campaign_id",
+            "sourceLineageTag": "campaign_id",
+            "sourceProviderType": "varchar(8000)",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "customer_id",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "3c3cca4b-9799-48ae-8d7f-73cd08863380",
+            "sourceColumn": "customer_id",
+            "sourceLineageTag": "customer_id",
+            "sourceProviderType": "varchar(8000)",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "interaction_id",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "4be38327-6ec0-44e8-b51a-56097dfeee75",
+            "sourceColumn": "interaction_id",
+            "sourceLineageTag": "interaction_id",
+            "sourceProviderType": "varchar(8000)",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "total_spend",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              },
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isGeneralNumber\":true}"
+              }
+            ],
+            "dataType": "double",
+            "lineageTag": "8afd8223-b100-4f4e-bbd5-a66828e5cb0f",
+            "sourceColumn": "total_spend",
+            "sourceLineageTag": "total_spend",
+            "sourceProviderType": "float",
+            "summarizeBy": "sum"
+          },
+          {
+            "name": "source_id",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "lineageTag": "c0feb728-9d11-487d-a2f9-184672eb525e",
+            "sourceColumn": "source_id",
+            "sourceLineageTag": "source_id",
+            "sourceProviderType": "bigint",
+            "summarizeBy": "sum"
+          },
+          {
+            "name": "medium_id",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "lineageTag": "919684db-24bd-4af3-a23f-dc453ffe2605",
+            "sourceColumn": "medium_id",
+            "sourceLineageTag": "medium_id",
+            "sourceProviderType": "bigint",
+            "summarizeBy": "sum"
+          },
+          {
+            "name": "campaign_type_id",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "lineageTag": "bf8b4b68-71f3-4be0-8f1c-0e7289196ca5",
+            "sourceColumn": "campaign_type_id",
+            "sourceLineageTag": "campaign_type_id",
+            "sourceProviderType": "bigint",
+            "summarizeBy": "sum"
+          },
+          {
+            "name": "event_type_id",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "lineageTag": "21cec1ad-ff29-4948-b502-4e16e2dfbf98",
+            "sourceColumn": "event_type_id",
+            "sourceLineageTag": "event_type_id",
+            "sourceProviderType": "bigint",
+            "summarizeBy": "sum"
+          },
+          {
+            "name": "variant",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "19f95e0d-3cca-483f-b2b2-b197488d4bcf",
+            "sourceColumn": "variant",
+            "sourceLineageTag": "variant",
+            "sourceProviderType": "varchar(8000)",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "event_order",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "126ba627-30c9-41fb-a006-daab638aa36e",
+            "sourceColumn": "event_order",
+            "sourceLineageTag": "event_order",
+            "sourceProviderType": "varchar(8000)",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "previous_event_order",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "41264611-b638-47a4-a330-0b840cee2c96",
+            "sourceColumn": "previous_event_order",
+            "sourceLineageTag": "previous_event_order",
+            "sourceProviderType": "varchar(8000)",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "signup_date_key",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "lineageTag": "e9ff5cd7-ff1a-4bd4-93d4-750afb3bee14",
+            "sourceColumn": "signup_date_key",
+            "sourceLineageTag": "signup_date_key",
+            "sourceProviderType": "int",
+            "summarizeBy": "sum"
+          },
+          {
+            "name": "previous_signup_date_key",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "lineageTag": "a2d921db-31af-45ef-b8b5-348b5625adc4",
+            "sourceColumn": "previous_signup_date_key",
+            "sourceLineageTag": "previous_signup_date_key",
+            "sourceProviderType": "int",
+            "summarizeBy": "sum"
+          }
+        ],
+        "lineageTag": "02b15473-df8c-4e54-97ba-2004c3e978a3",
+        "partitions": [
+          {
+            "name": "Fact_CustomerJourney",
+            "mode": "directLake",
+            "source": {
+              "entityName": "Fact_CustomerJourney",
+              "expressionSource": "DatabaseQuery",
+              "schemaName": "gold_layer_campaign",
+              "type": "entity"
+            }
+          }
+        ],
+        "sourceLineageTag": "[gold_layer_campaign].[Fact_CustomerJourney]"
+      }
+    ]
+  }
+}
