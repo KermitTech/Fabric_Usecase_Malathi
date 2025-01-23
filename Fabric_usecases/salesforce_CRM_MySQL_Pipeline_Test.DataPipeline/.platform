@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "DataPipeline",
+    "displayName": "salesforce_CRM_MySQL_Pipeline_Test"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "1f9305a1-0e7e-af1f-4f65-0a2f045d8d67"
+  }
+}

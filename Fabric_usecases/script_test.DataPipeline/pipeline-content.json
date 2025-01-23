@@ -1,0 +1,102 @@
+{
+  "properties": {
+    "activities": [
+      {
+        "name": "Update Batch ID",
+        "type": "Script",
+        "dependsOn": [
+          {
+            "activity": "Lookup_Max_RecValue",
+            "dependencyConditions": [
+              "Succeeded"
+            ]
+          }
+        ],
+        "policy": {
+          "timeout": "0.12:00:00",
+          "retry": 0,
+          "retryIntervalInSeconds": 30,
+          "secureOutput": false,
+          "secureInput": false
+        },
+        "linkedService": {
+          "name": "Salesforce_CRM",
+          "properties": {
+            "annotations": [],
+            "type": "DataWarehouse",
+            "typeProperties": {
+              "endpoint": "a5kotaldwscevlccuy24crmqsy-56cp7ruqstquvn6gxyigxvglrq.datawarehouse.fabric.microsoft.com",
+              "artifactId": "efb7127e-7522-47d9-a937-6b9d085d9d80",
+              "workspaceId": "c6ff84ef-9490-4ae1-b7c6-be106bd4cb8c"
+            }
+          }
+        },
+        "typeProperties": {
+          "scripts": [
+            {
+              "parameters": [
+                {
+                  "name": "maxvalue",
+                  "type": "Datetime",
+                  "value": {
+                    "value": "@activity('Lookup_Max_RecValue').output.firstRow.tgt_max_value",
+                    "type": "Expression"
+                  },
+                  "direction": "Input"
+                }
+              ],
+              "type": "NonQuery",
+              "text": {
+                "value": "@concat('UPDATE [salesforce_CRM].[ControlTable] SET BatchValue = ''3''', ', MaxValue = ''', activity('Lookup_Max_RecValue').output.firstRow.tgt_max_value, ''' WHERE TableName = ''Contact''')",
+                "type": "Expression"
+              }
+            }
+          ],
+          "scriptBlockExecutionTimeout": "02:00:00"
+        }
+      },
+      {
+        "name": "Lookup_Max_RecValue",
+        "type": "Lookup",
+        "dependsOn": [],
+        "policy": {
+          "timeout": "0.12:00:00",
+          "retry": 0,
+          "retryIntervalInSeconds": 30,
+          "secureOutput": false,
+          "secureInput": false
+        },
+        "typeProperties": {
+          "source": {
+            "type": "DataWarehouseSource",
+            "sqlReaderQuery": {
+              "value": "select coalesce(max(CreatedDate), '2025-01-15T00:00:00') as tgt_max_value \nfrom [salesforce_CRM].[Contact] \nwhere batch_id = 1",
+              "type": "Expression"
+            },
+            "queryTimeout": "02:00:00",
+            "partitionOption": "None"
+          },
+          "firstRowOnly": true,
+          "datasetSettings": {
+            "annotations": [],
+            "linkedService": {
+              "name": "Salesforce_CRM",
+              "properties": {
+                "annotations": [],
+                "type": "DataWarehouse",
+                "typeProperties": {
+                  "endpoint": "a5kotaldwscevlccuy24crmqsy-56cp7ruqstquvn6gxyigxvglrq.datawarehouse.fabric.microsoft.com",
+                  "artifactId": "efb7127e-7522-47d9-a937-6b9d085d9d80",
+                  "workspaceId": "c6ff84ef-9490-4ae1-b7c6-be106bd4cb8c"
+                }
+              }
+            },
+            "type": "DataWarehouseTable",
+            "schema": [],
+            "typeProperties": {}
+          }
+        }
+      }
+    ]
+  }
+}

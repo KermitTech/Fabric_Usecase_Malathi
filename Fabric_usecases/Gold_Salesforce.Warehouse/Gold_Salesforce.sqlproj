@@ -1,7 +1,7 @@
 <Project DefaultTargets="Build">
   <Sdk Name="Microsoft.Build.Sql" Version="0.1.19-preview" />
   <PropertyGroup>
-    <Name>DataflowsStagingWarehouse</Name>
+    <Name>Gold_Salesforce</Name>
     <DSP>Microsoft.Data.Tools.Schema.Sql.SqlDwUnifiedDatabaseSchemaProvider</DSP>
   </PropertyGroup>
   <Target Name="BeforeBuild">

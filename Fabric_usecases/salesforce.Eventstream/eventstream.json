@@ -1,0 +1,59 @@
+{
+  "sources": [
+    {
+      "id": "dc435468-14e4-4550-bf73-eb1a5681f6b6",
+      "name": "AzureEventHub",
+      "type": "AzureEventHub",
+      "properties": {
+        "dataConnectionId": "3d141be6-de7d-4171-815f-86fcd64a69a4",
+        "consumerGroupName": "$Default",
+        "inputSerialization": {
+          "type": "Json",
+          "properties": {
+            "encoding": "UTF8"
+          }
+        }
+      }
+    }
+  ],
+  "destinations": [
+    {
+      "id": "c425394b-7e8a-4f82-8d59-273ae7026f56",
+      "name": "salesforce-crm",
+      "type": "Lakehouse",
+      "properties": {
+        "workspaceId": "00000000-0000-0000-0000-000000000000",
+        "itemId": "f79fa720-a3d1-8c88-4f30-66d706ec93f7",
+        "schema": "",
+        "deltaTable": "Contacts",
+        "inputSerialization": {
+          "type": "Json",
+          "properties": {
+            "encoding": "UTF8"
+          }
+        }
+      },
+      "inputNodes": [
+        {
+          "name": "salesforce-stream"
+        }
+      ],
+      "inputSchemas": []
+    }
+  ],
+  "streams": [
+    {
+      "id": "9dc0a90c-9c63-4dca-aafd-033e21a9b3d8",
+      "name": "salesforce-stream",
+      "type": "DefaultStream",
+      "properties": {},
+      "inputNodes": [
+        {
+          "name": "AzureEventHub"
+        }
+      ]
+    }
+  ],
+  "operators": [],
+  "compatibilityLevel": "1.0"
+}

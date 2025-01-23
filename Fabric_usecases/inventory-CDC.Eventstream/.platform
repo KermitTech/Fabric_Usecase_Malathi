@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "Eventstream",
+    "displayName": "inventory-CDC"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "af1b5915-d05b-898d-4a6f-b365b7195fcb"
+  }
+}

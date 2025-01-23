@@ -1,0 +1,755 @@
+{
+  "properties": {
+    "activities": [
+      {
+        "name": "Insert Contact",
+        "type": "Copy",
+        "dependsOn": [
+          {
+            "activity": "Set_max_batchvalue",
+            "dependencyConditions": [
+              "Succeeded"
+            ]
+          }
+        ],
+        "policy": {
+          "timeout": "0.12:00:00",
+          "retry": 0,
+          "retryIntervalInSeconds": 30,
+          "secureOutput": false,
+          "secureInput": false
+        },
+        "typeProperties": {
+          "source": {
+            "type": "SalesforceSource",
+            "query": {
+              "value": "SELECT \n   FirstName, \n    LastName, \n    Account.Name, \n    Title, \n    LastActivityDate, \n    Email, \n    Phone, \n    MobilePhone, \n    MailingState, \n    MailingCountry, \n    Account.Owner.Name, \n    CreatedDate\nFROM Contact \nwhere CreatedDate >\n@{variables('set_max_value')}",
+              "type": "Expression"
+            },
+            "includeDeletedObjects": false,
+            "datasetSettings": {
+              "annotations": [],
+              "type": "SalesforceObject",
+              "schema": [],
+              "typeProperties": {
+                "objectApiName": "00Od1000000Ze7REAS"
+              },
+              "externalReferences": {
+                "connection": "dfcc8c00-c3f1-489d-81cb-68d3c4b016ef"
+              }
+            }
+          },
+          "sink": {
+            "type": "DataWarehouseSink",
+            "allowCopyCommand": true,
+            "copyCommandSettings": {},
+            "datasetSettings": {
+              "annotations": [],
+              "linkedService": {
+                "name": "Salesforce_CRM",
+                "properties": {
+                  "annotations": [],
+                  "type": "DataWarehouse",
+                  "typeProperties": {
+                    "endpoint": "a5kotaldwscevlccuy24crmqsy-56cp7ruqstquvn6gxyigxvglrq.datawarehouse.fabric.microsoft.com",
+                    "artifactId": "efb7127e-7522-47d9-a937-6b9d085d9d80",
+                    "workspaceId": "c6ff84ef-9490-4ae1-b7c6-be106bd4cb8c"
+                  }
+                }
+              },
+              "type": "DataWarehouseTable",
+              "schema": [],
+              "typeProperties": {
+                "schema": "salesforce_CRM",
+                "table": "Contact"
+              }
+            }
+          },
+          "enableStaging": true,
+          "translator": {
+            "type": "TabularTranslator",
+            "mappings": [
+              {
+                "source": {
+                  "name": "FirstName",
+                  "type": "String",
+                  "physicalType": "string"
+                },
+                "sink": {
+                  "name": "FirstName",
+                  "physicalType": "varchar",
+                  "length": "8000"
+                }
+              },
+              {
+                "source": {
+                  "name": "LastName",
+                  "type": "String",
+                  "physicalType": "string"
+                },
+                "sink": {
+                  "name": "LastName",
+                  "physicalType": "varchar",
+                  "length": "8000"
+                }
+              },
+              {
+                "source": {
+                  "name": "Account.Name",
+                  "type": "String",
+                  "physicalType": "string"
+                },
+                "sink": {
+                  "name": "AccountName",
+                  "physicalType": "varchar"
+                }
+              },
+              {
+                "source": {
+                  "name": "Account.Owner.Name",
+                  "type": "String",
+                  "physicalType": "string"
+                },
+                "sink": {
+                  "name": "AccountOwner",
+                  "physicalType": "varchar"
+                }
+              },
+              {
+                "source": {
+                  "name": "Title",
+                  "type": "String",
+                  "physicalType": "string"
+                },
+                "sink": {
+                  "name": "Title",
+                  "physicalType": "varchar",
+                  "length": "8000"
+                }
+              },
+              {
+                "source": {
+                  "name": "LastActivityDate",
+                  "type": "DateTime",
+                  "physicalType": "date"
+                },
+                "sink": {
+                  "name": "LastActivityDate",
+                  "physicalType": "datetime2",
+                  "precision": 6
+                }
+              },
+              {
+                "source": {
+                  "name": "Email",
+                  "type": "String",
+                  "physicalType": "email"
+                },
+                "sink": {
+                  "name": "Email",
+                  "physicalType": "varchar",
+                  "length": "8000"
+                }
+              },
+              {
+                "source": {
+                  "name": "Phone",
+                  "type": "String",
+                  "physicalType": "phone"
+                },
+                "sink": {
+                  "name": "Phone",
+                  "physicalType": "varchar",
+                  "length": "8000"
+                }
+              },
+              {
+                "source": {
+                  "name": "MobilePhone",
+                  "type": "String",
+                  "physicalType": "phone"
+                },
+                "sink": {
+                  "name": "Mobile",
+                  "physicalType": "varchar"
+                }
+              },
+              {
+                "source": {
+                  "name": "MailingState",
+                  "type": "String",
+                  "physicalType": "string"
+                },
+                "sink": {
+                  "name": "MailingState",
+                  "physicalType": "varchar",
+                  "length": "8000"
+                }
+              },
+              {
+                "source": {
+                  "name": "MailingCountry",
+                  "type": "String",
+                  "physicalType": "string"
+                },
+                "sink": {
+                  "name": "MailingCountry",
+                  "physicalType": "varchar",
+                  "length": "8000"
+                }
+              },
+              {
+                "source": {
+                  "name": "CreatedDate",
+                  "type": "DateTime",
+                  "physicalType": "datetime"
+                },
+                "sink": {
+                  "name": "CreatedDate",
+                  "physicalType": "datetime2",
+                  "precision": 6
+                }
+              }
+            ],
+            "typeConversion": true,
+            "typeConversionSettings": {
+              "allowDataTruncation": true,
+              "treatBooleanAsNumber": false
+            }
+          }
+        }
+      },
+      {
+        "name": "Get_Max_Value",
+        "type": "Lookup",
+        "dependsOn": [],
+        "policy": {
+          "timeout": "0.12:00:00",
+          "retry": 0,
+          "retryIntervalInSeconds": 30,
+          "secureOutput": false,
+          "secureInput": false
+        },
+        "typeProperties": {
+          "source": {
+            "type": "DataWarehouseSource",
+            "sqlReaderQuery": " SELECT \n    'Contact' AS TableName,\n    COALESCE(MaxValue, '1990-01-01 00:00:00') AS max_value,\n    COALESCE(BatchValue, 0) + 1 AS batchvalue\nFROM [Salesforce_CRM].[salesforce_CRM].[ControlTable]\nWHERE TableName = 'Contact'\n\nUNION ALL\n\nSELECT \n    'Contact' AS TableName,\n    '1990-01-01 00:00:00' AS max_value,\n    1 AS batchvalue\nWHERE NOT EXISTS (\n    SELECT 1 \n    FROM [Salesforce_CRM].[salesforce_CRM].[ControlTable] \n    WHERE TableName = 'Contact'\n)",
+            "queryTimeout": "02:00:00",
+            "partitionOption": "None"
+          },
+          "datasetSettings": {
+            "annotations": [],
+            "linkedService": {
+              "name": "Salesforce_CRM",
+              "properties": {
+                "annotations": [],
+                "type": "DataWarehouse",
+                "typeProperties": {
+                  "endpoint": "a5kotaldwscevlccuy24crmqsy-56cp7ruqstquvn6gxyigxvglrq.datawarehouse.fabric.microsoft.com",
+                  "artifactId": "efb7127e-7522-47d9-a937-6b9d085d9d80",
+                  "workspaceId": "c6ff84ef-9490-4ae1-b7c6-be106bd4cb8c"
+                }
+              }
+            },
+            "type": "DataWarehouseTable",
+            "schema": [],
+            "typeProperties": {}
+          }
+        }
+      },
+      {
+        "name": "Set_max_value",
+        "type": "SetVariable",
+        "dependsOn": [
+          {
+            "activity": "Get_Max_Value",
+            "dependencyConditions": [
+              "Succeeded"
+            ]
+          }
+        ],
+        "policy": {
+          "secureOutput": false,
+          "secureInput": false
+        },
+        "typeProperties": {
+          "variableName": "set_max_value",
+          "value": {
+            "value": "@formatDateTime(activity('Get_Max_Value').output.firstRow.max_value, 'yyyy-MM-ddTHH:mm:ss+00:00')",
+            "type": "Expression"
+          }
+        }
+      },
+      {
+        "name": "Get_DateMax_Value",
+        "type": "Lookup",
+        "dependsOn": [],
+        "policy": {
+          "timeout": "0.12:00:00",
+          "retry": 0,
+          "retryIntervalInSeconds": 30,
+          "secureOutput": false,
+          "secureInput": false
+        },
+        "typeProperties": {
+          "source": {
+            "type": "DataWarehouseSource",
+            "sqlReaderQuery": " SELECT \n    'Contact' AS TableName,\n    COALESCE(MaxValue, '1990-01-01 00:00:00') AS max_value,\n    COALESCE(BatchValue, 0) + 1 AS batchvalue\nFROM [Salesforce_CRM].[salesforce_CRM].[ControlTable]\nWHERE TableName = 'Contact'\n\nUNION ALL\n\nSELECT \n    'Contact' AS TableName,\n    '1990-01-01 00:00:00' AS max_value,\n    1 AS batchvalue\nWHERE NOT EXISTS (\n    SELECT 1 \n    FROM [Salesforce_CRM].[salesforce_CRM].[ControlTable] \n    WHERE TableName = 'Contact'\n)",
+            "queryTimeout": "02:00:00",
+            "partitionOption": "None"
+          },
+          "datasetSettings": {
+            "annotations": [],
+            "linkedService": {
+              "name": "Salesforce_CRM",
+              "properties": {
+                "annotations": [],
+                "type": "DataWarehouse",
+                "typeProperties": {
+                  "endpoint": "a5kotaldwscevlccuy24crmqsy-56cp7ruqstquvn6gxyigxvglrq.datawarehouse.fabric.microsoft.com",
+                  "artifactId": "efb7127e-7522-47d9-a937-6b9d085d9d80",
+                  "workspaceId": "c6ff84ef-9490-4ae1-b7c6-be106bd4cb8c"
+                }
+              }
+            },
+            "type": "DataWarehouseTable",
+            "schema": [],
+            "typeProperties": {}
+          }
+        }
+      },
+      {
+        "name": "set_datemax_value",
+        "type": "SetVariable",
+        "dependsOn": [
+          {
+            "activity": "Get_DateMax_Value",
+            "dependencyConditions": [
+              "Succeeded"
+            ]
+          }
+        ],
+        "policy": {
+          "secureOutput": false,
+          "secureInput": false
+        },
+        "typeProperties": {
+          "variableName": "set_datemax_value",
+          "value": {
+            "value": "@formatDateTime(activity('Get_DateMax_Value').output.firstRow.max_value, 'yyyy-MM-ddTHH:mm:ss+00:00')",
+            "type": "Expression"
+          }
+        }
+      },
+      {
+        "name": "Update Contact",
+        "type": "Copy",
+        "dependsOn": [
+          {
+            "activity": "set_datemax_value",
+            "dependencyConditions": [
+              "Skipped"
+            ]
+          }
+        ],
+        "policy": {
+          "timeout": "0.12:00:00",
+          "retry": 0,
+          "retryIntervalInSeconds": 30,
+          "secureOutput": false,
+          "secureInput": false
+        },
+        "typeProperties": {
+          "source": {
+            "type": "SalesforceSource",
+            "query": {
+              "value": "SELECT \n    FirstName , \n    LastName , \n    Account.Name, \n    Title, \n    LastActivityDate, \n    Email, \n    Phone, \n    MobilePhone, \n    MailingState, \n    MailingCountry, \n    Account.Owner.Name, \n    CreatedDate\nFROM Contact \nwhere CreatedDate >\n@{variables('set_datemax_value')}",
+              "type": "Expression"
+            },
+            "includeDeletedObjects": false,
+            "datasetSettings": {
+              "annotations": [],
+              "type": "SalesforceObject",
+              "schema": [],
+              "typeProperties": {
+                "objectApiName": "00Od1000000Ze7REAS"
+              },
+              "externalReferences": {
+                "connection": "dfcc8c00-c3f1-489d-81cb-68d3c4b016ef"
+              }
+            }
+          },
+          "sink": {
+            "type": "DataWarehouseSink",
+            "preCopyScript": "delete from [salesforce_CRM].[Contact_Updated]",
+            "allowCopyCommand": true,
+            "copyCommandSettings": {},
+            "disableMetricsCollection": false,
+            "datasetSettings": {
+              "annotations": [],
+              "linkedService": {
+                "name": "Salesforce_CRM",
+                "properties": {
+                  "annotations": [],
+                  "type": "DataWarehouse",
+                  "typeProperties": {
+                    "endpoint": "a5kotaldwscevlccuy24crmqsy-56cp7ruqstquvn6gxyigxvglrq.datawarehouse.fabric.microsoft.com",
+                    "artifactId": "efb7127e-7522-47d9-a937-6b9d085d9d80",
+                    "workspaceId": "c6ff84ef-9490-4ae1-b7c6-be106bd4cb8c"
+                  }
+                }
+              },
+              "type": "DataWarehouseTable",
+              "schema": [],
+              "typeProperties": {
+                "schema": "salesforce_CRM",
+                "table": "Contact_Updated"
+              }
+            }
+          },
+          "enableStaging": true,
+          "translator": {
+            "type": "TabularTranslator",
+            "mappings": [
+              {
+                "source": {
+                  "name": "FirstName",
+                  "type": "String",
+                  "physicalType": "string"
+                },
+                "sink": {
+                  "name": "FirstName",
+                  "physicalType": "varchar",
+                  "length": "8000"
+                }
+              },
+              {
+                "source": {
+                  "name": "LastName",
+                  "type": "String",
+                  "physicalType": "string"
+                },
+                "sink": {
+                  "name": "LastName",
+                  "physicalType": "varchar",
+                  "length": "8000"
+                }
+              },
+              {
+                "source": {
+                  "name": "Account.Name",
+                  "type": "String",
+                  "physicalType": "string"
+                },
+                "sink": {
+                  "name": "AccountName",
+                  "physicalType": "varchar"
+                }
+              },
+              {
+                "source": {
+                  "name": "Account.Owner.Name",
+                  "type": "String",
+                  "physicalType": "string"
+                },
+                "sink": {
+                  "name": "AccountOwner",
+                  "physicalType": "varchar"
+                }
+              },
+              {
+                "source": {
+                  "name": "Title",
+                  "type": "String",
+                  "physicalType": "string"
+                },
+                "sink": {
+                  "name": "Title",
+                  "physicalType": "varchar",
+                  "length": "8000"
+                }
+              },
+              {
+                "source": {
+                  "name": "LastActivityDate",
+                  "type": "DateTime",
+                  "physicalType": "date"
+                },
+                "sink": {
+                  "name": "LastActivityDate",
+                  "physicalType": "datetime2",
+                  "precision": 6
+                }
+              },
+              {
+                "source": {
+                  "name": "Email",
+                  "type": "String",
+                  "physicalType": "email"
+                },
+                "sink": {
+                  "name": "Email",
+                  "physicalType": "varchar",
+                  "length": "8000"
+                }
+              },
+              {
+                "source": {
+                  "name": "Phone",
+                  "type": "String",
+                  "physicalType": "phone"
+                },
+                "sink": {
+                  "name": "Phone",
+                  "physicalType": "varchar",
+                  "length": "8000"
+                }
+              },
+              {
+                "source": {
+                  "name": "MobilePhone",
+                  "type": "String",
+                  "physicalType": "phone"
+                },
+                "sink": {
+                  "name": "Mobile",
+                  "physicalType": "varchar"
+                }
+              },
+              {
+                "source": {
+                  "name": "MailingState",
+                  "type": "String",
+                  "physicalType": "string"
+                },
+                "sink": {
+                  "name": "MailingState",
+                  "physicalType": "varchar",
+                  "length": "8000"
+                }
+              },
+              {
+                "source": {
+                  "name": "MailingCountry",
+                  "type": "String",
+                  "physicalType": "string"
+                },
+                "sink": {
+                  "name": "MailingCountry",
+                  "physicalType": "varchar",
+                  "length": "8000"
+                }
+              },
+              {
+                "source": {
+                  "name": "CreatedDate",
+                  "type": "DateTime",
+                  "physicalType": "datetime"
+                },
+                "sink": {
+                  "name": "CreatedDate",
+                  "physicalType": "datetime2",
+                  "precision": 6
+                }
+              }
+            ],
+            "typeConversion": true,
+            "typeConversionSettings": {
+              "allowDataTruncation": true,
+              "treatBooleanAsNumber": false
+            }
+          }
+        }
+      },
+      {
+        "name": "Stored procedure1",
+        "type": "SqlServerStoredProcedure",
+        "dependsOn": [
+          {
+            "activity": "Update Contact",
+            "dependencyConditions": [
+              "Skipped"
+            ]
+          }
+        ],
+        "policy": {
+          "timeout": "0.12:00:00",
+          "retry": 0,
+          "retryIntervalInSeconds": 30,
+          "secureOutput": false,
+          "secureInput": false
+        },
+        "typeProperties": {
+          "storedProcedureName": "[salesforce_CRM].[SyncContactData]"
+        },
+        "linkedService": {
+          "name": "Salesforce_CRM",
+          "properties": {
+            "annotations": [],
+            "type": "DataWarehouse",
+            "typeProperties": {
+              "endpoint": "a5kotaldwscevlccuy24crmqsy-56cp7ruqstquvn6gxyigxvglrq.datawarehouse.fabric.microsoft.com",
+              "artifactId": "efb7127e-7522-47d9-a937-6b9d085d9d80",
+              "workspaceId": "c6ff84ef-9490-4ae1-b7c6-be106bd4cb8c"
+            }
+          }
+        }
+      },
+      {
+        "name": "Update Batch ID_ControlTable",
+        "type": "Script",
+        "dependsOn": [
+          {
+            "activity": "Lookup_Max_RecValue",
+            "dependencyConditions": [
+              "Succeeded"
+            ]
+          }
+        ],
+        "policy": {
+          "timeout": "0.12:00:00",
+          "retry": 0,
+          "retryIntervalInSeconds": 30,
+          "secureOutput": false,
+          "secureInput": false
+        },
+        "linkedService": {
+          "name": "Salesforce_CRM",
+          "properties": {
+            "annotations": [],
+            "type": "DataWarehouse",
+            "typeProperties": {
+              "endpoint": "a5kotaldwscevlccuy24crmqsy-56cp7ruqstquvn6gxyigxvglrq.datawarehouse.fabric.microsoft.com",
+              "artifactId": "efb7127e-7522-47d9-a937-6b9d085d9d80",
+              "workspaceId": "c6ff84ef-9490-4ae1-b7c6-be106bd4cb8c"
+            }
+          }
+        },
+        "typeProperties": {
+          "scripts": [
+            {
+              "parameters": [
+                {
+                  "name": "batchvalue",
+                  "type": "Int32",
+                  "value": {
+                    "value": "@variables('set_batch_value')",
+                    "type": "Expression"
+                  },
+                  "direction": "Input"
+                },
+                {
+                  "name": "maxvalue",
+                  "type": "Datetime",
+                  "value": {
+                    "value": "@activity('Lookup_Max_RecValue').output.firstRow.tgt_max_value",
+                    "type": "Expression"
+                  },
+                  "direction": "Input"
+                }
+              ],
+              "type": "NonQuery",
+              "text": {
+                "value": "@concat('UPDATE [salesforce_CRM].[ControlTable] SET BatchValue = ',variables('set_batch_value'), ', MaxValue = ''', activity('Lookup_Max_RecValue').output.firstRow.tgt_max_value, ''' WHERE TableName = ''Contact''')",
+                "type": "Expression"
+              }
+            }
+          ],
+          "scriptBlockExecutionTimeout": "02:00:00"
+        }
+      },
+      {
+        "name": "Set_max_batchvalue",
+        "type": "SetVariable",
+        "dependsOn": [
+          {
+            "activity": "Set_max_value",
+            "dependencyConditions": [
+              "Succeeded"
+            ]
+          }
+        ],
+        "policy": {
+          "secureOutput": false,
+          "secureInput": false
+        },
+        "typeProperties": {
+          "variableName": "set_batch_value",
+          "value": {
+            "value": "@activity('Get_Max_Value').output.firstRow.batchvalue",
+            "type": "Expression"
+          }
+        }
+      },
+      {
+        "name": "Lookup_Max_RecValue",
+        "type": "Lookup",
+        "dependsOn": [
+          {
+            "activity": "Insert Contact",
+            "dependencyConditions": [
+              "Succeeded"
+            ]
+          }
+        ],
+        "policy": {
+          "timeout": "0.12:00:00",
+          "retry": 0,
+          "retryIntervalInSeconds": 30,
+          "secureOutput": false,
+          "secureInput": false
+        },
+        "typeProperties": {
+          "source": {
+            "type": "DataWarehouseSource",
+            "sqlReaderQuery": {
+              "value": "select max(CreatedDate) as tgt_max_value \nfrom [salesforce_CRM].[Contact]",
+              "type": "Expression"
+            },
+            "queryTimeout": "02:00:00",
+            "partitionOption": "None"
+          },
+          "firstRowOnly": true,
+          "datasetSettings": {
+            "annotations": [],
+            "linkedService": {
+              "name": "Salesforce_CRM",
+              "properties": {
+                "annotations": [],
+                "type": "DataWarehouse",
+                "typeProperties": {
+                  "endpoint": "a5kotaldwscevlccuy24crmqsy-56cp7ruqstquvn6gxyigxvglrq.datawarehouse.fabric.microsoft.com",
+                  "artifactId": "efb7127e-7522-47d9-a937-6b9d085d9d80",
+                  "workspaceId": "c6ff84ef-9490-4ae1-b7c6-be106bd4cb8c"
+                }
+              }
+            },
+            "type": "DataWarehouseTable",
+            "schema": [],
+            "typeProperties": {}
+          }
+        }
+      }
+    ],
+    "variables": {
+      "set_max_value": {
+        "type": "String"
+      },
+      "set_datemax_value": {
+        "type": "String"
+      },
+      "accountname": {
+        "type": "String"
+      },
+      "firstname": {
+        "type": "String"
+      },
+      "lastname": {
+        "type": "String"
+      },
+      "set_batch_value": {
+        "type": "Integer"
+      }
+    }
+  }
+}

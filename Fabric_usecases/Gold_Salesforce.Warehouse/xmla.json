@@ -13,15 +13,15 @@
     "sourceQueryCulture": "en-US",
     "tables": [
       {
-        "name": "217430040d804ec8a649ca8ba75ff68f_c06aac15_002Db2ea_002D4e0c_002D8513_002Dcd17b2496e39",
-        "sourceLineageTag": "[dbo].[217430040d804ec8a649ca8ba75ff68f_c06aac15_002Db2ea_002D4e0c_002D8513_002Dcd17b2496e39]",
+        "name": "Contact",
+        "sourceLineageTag": "[Salesforce_CRM].[Contact]",
         "columns": [
           {
-            "name": "Column1",
+            "name": "FirstName",
             "dataType": "string",
-            "sourceColumn": "Column1",
+            "sourceColumn": "FirstName",
             "sourceProviderType": "varchar",
-            "sourceLineageTag": "Column1",
+            "sourceLineageTag": "FirstName",
             "summarizeBy": "none",
             "annotations": [
               {
@@ -31,11 +31,11 @@
             ]
           },
           {
-            "name": "Column2",
+            "name": "LastName",
             "dataType": "string",
-            "sourceColumn": "Column2",
+            "sourceColumn": "LastName",
             "sourceProviderType": "varchar",
-            "sourceLineageTag": "Column2",
+            "sourceLineageTag": "LastName",
             "summarizeBy": "none",
             "annotations": [
               {
@@ -45,11 +45,11 @@
             ]
           },
           {
-            "name": "Column3",
+            "name": "AccountName",
             "dataType": "string",
-            "sourceColumn": "Column3",
+            "sourceColumn": "AccountName",
             "sourceProviderType": "varchar",
-            "sourceLineageTag": "Column3",
+            "sourceLineageTag": "AccountName",
             "summarizeBy": "none",
             "annotations": [
               {
@@ -59,11 +59,11 @@
             ]
           },
           {
-            "name": "Column4",
+            "name": "Title",
             "dataType": "string",
-            "sourceColumn": "Column4",
+            "sourceColumn": "Title",
             "sourceProviderType": "varchar",
-            "sourceLineageTag": "Column4",
+            "sourceLineageTag": "Title",
             "summarizeBy": "none",
             "annotations": [
               {
@@ -73,12 +73,141 @@
             ]
           },
           {
-            "name": "Column5",
+            "name": "LastActivityDate",
+            "dataType": "dateTime",
+            "sourceColumn": "LastActivityDate",
+            "formatString": "General Date",
+            "sourceProviderType": "datetime2",
+            "sourceLineageTag": "LastActivityDate",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "Email",
+            "dataType": "string",
+            "sourceColumn": "Email",
+            "sourceProviderType": "varchar",
+            "sourceLineageTag": "Email",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "Phone",
+            "dataType": "string",
+            "sourceColumn": "Phone",
+            "sourceProviderType": "varchar",
+            "sourceLineageTag": "Phone",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "Mobile",
+            "dataType": "string",
+            "sourceColumn": "Mobile",
+            "sourceProviderType": "varchar",
+            "sourceLineageTag": "Mobile",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "MailingState",
+            "dataType": "string",
+            "sourceColumn": "MailingState",
+            "sourceProviderType": "varchar",
+            "sourceLineageTag": "MailingState",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "MailingCountry",
+            "dataType": "string",
+            "sourceColumn": "MailingCountry",
+            "sourceProviderType": "varchar",
+            "sourceLineageTag": "MailingCountry",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "AccountOwner",
+            "dataType": "string",
+            "sourceColumn": "AccountOwner",
+            "sourceProviderType": "varchar",
+            "sourceLineageTag": "AccountOwner",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "CreatedDate",
+            "dataType": "dateTime",
+            "sourceColumn": "CreatedDate",
+            "formatString": "General Date",
+            "sourceProviderType": "datetime2",
+            "sourceLineageTag": "CreatedDate",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "updated_at",
+            "dataType": "dateTime",
+            "sourceColumn": "updated_at",
+            "formatString": "General Date",
+            "sourceProviderType": "datetime2",
+            "sourceLineageTag": "updated_at",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "batch_id",
             "dataType": "int64",
-            "sourceColumn": "Column5",
+            "sourceColumn": "batch_id",
             "formatString": "0",
-            "sourceProviderType": "bigint",
-            "sourceLineageTag": "Column5",
+            "sourceProviderType": "int",
+            "sourceLineageTag": "batch_id",
             "summarizeBy": "sum",
             "annotations": [
               {
@@ -88,81 +217,11 @@
             ]
           },
           {
-            "name": "Column6",
+            "name": "LOAD_TYPE",
             "dataType": "string",
-            "sourceColumn": "Column6",
+            "sourceColumn": "LOAD_TYPE",
             "sourceProviderType": "varchar",
-            "sourceLineageTag": "Column6",
-            "summarizeBy": "none",
-            "annotations": [
-              {
-                "name": "SummarizationSetBy",
-                "value": "Automatic"
-              }
-            ]
-          },
-          {
-            "name": "Column7",
-            "dataType": "string",
-            "sourceColumn": "Column7",
-            "sourceProviderType": "varchar",
-            "sourceLineageTag": "Column7",
-            "summarizeBy": "none",
-            "annotations": [
-              {
-                "name": "SummarizationSetBy",
-                "value": "Automatic"
-              }
-            ]
-          },
-          {
-            "name": "Column8",
-            "dataType": "string",
-            "sourceColumn": "Column8",
-            "sourceProviderType": "varchar",
-            "sourceLineageTag": "Column8",
-            "summarizeBy": "none",
-            "annotations": [
-              {
-                "name": "SummarizationSetBy",
-                "value": "Automatic"
-              }
-            ]
-          },
-          {
-            "name": "Column9",
-            "dataType": "string",
-            "sourceColumn": "Column9",
-            "sourceProviderType": "varchar",
-            "sourceLineageTag": "Column9",
-            "summarizeBy": "none",
-            "annotations": [
-              {
-                "name": "SummarizationSetBy",
-                "value": "Automatic"
-              }
-            ]
-          },
-          {
-            "name": "Column10",
-            "dataType": "string",
-            "sourceColumn": "Column10",
-            "sourceProviderType": "varchar",
-            "sourceLineageTag": "Column10",
-            "summarizeBy": "none",
-            "annotations": [
-              {
-                "name": "SummarizationSetBy",
-                "value": "Automatic"
-              }
-            ]
-          },
-          {
-            "name": "Column11",
-            "dataType": "string",
-            "sourceColumn": "Column11",
-            "sourceProviderType": "varchar",
-            "sourceLineageTag": "Column11",
+            "sourceLineageTag": "LOAD_TYPE",
             "summarizeBy": "none",
             "annotations": [
               {
@@ -178,9 +237,9 @@
             "mode": "directLake",
             "source": {
               "type": "entity",
-              "entityName": "217430040d804ec8a649ca8ba75ff68f_c06aac15_002Db2ea_002D4e0c_002D8513_002Dcd17b2496e39",
+              "entityName": "Contact",
               "expressionSource": "DatabaseQuery",
-              "schemaName": "dbo"
+              "schemaName": "Salesforce_CRM"
             }
           }
         ],

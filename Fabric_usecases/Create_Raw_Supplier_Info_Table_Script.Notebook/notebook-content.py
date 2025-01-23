@@ -56,3 +56,40 @@ print("Supplier table created successfully!")
 # META   "language": "python",
 # META   "language_group": "synapse_pyspark"
 # META }
+
+# CELL ********************
+
+from delta.tables import DeltaTable
+from pyspark.sql import SparkSession
+from pyspark.sql.types import *
+import json 
+
+# Initialize Spark session
+spark = SparkSession.builder.appName("LakehouseTable").getOrCreate()
+
+# Define the table path
+table_path = "abfss://Malathi@onelake.dfs.fabric.microsoft.com/SupplyChain_Bronze_Layer.Lakehouse/Tables/raw_inventory"
+
+
+
+# Define the schema for the error table
+schema = StructType([
+    StructField("payload", StringType(), True),    
+    StructField("schema", StringType(), False) 
+])
+# Create an empty DataFrame using the schema
+empty_df = spark.createDataFrame([], schema)
+
+# Create a table in the Lakehouse or any target database
+# Replace 'database_name' with the desired database and 'error_table' with the table name
+empty_df.write.format("delta").mode("overwrite").save(table_path)
+
+print("Inventory table created successfully!")
+
+
+# METADATA ********************
+
+# META {
+# META   "language": "python",
+# META   "language_group": "synapse_pyspark"
+# META }
