@@ -1,12 +1,11 @@
 {
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
   "metadata": {
-    "type": "Notebook",
-    "displayName": "Insert_Contact_Data_Script",
-    "description": "New notebook"
+    "type": "Lakehouse",
+    "displayName": "Salesforce_Bronze_Layer"
   },
   "config": {
     "version": "2.0",
-    "logicalId": "a054da8d-fbd0-bea0-4de8-59b206467f1d"
+    "logicalId": "4c8a63b9-9ab7-8fa2-43ba-6128dc9f2652"
   }
 }

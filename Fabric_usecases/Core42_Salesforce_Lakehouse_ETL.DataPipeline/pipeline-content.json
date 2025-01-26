@@ -1,0 +1,757 @@
+{
+  "properties": {
+    "activities": [
+      {
+        "type": "Copy",
+        "typeProperties": {
+          "source": {
+            "type": "SalesforceSource",
+            "query": {
+              "value": "SELECT \n    FirstName , \n    LastName , \n    Account.Name, \n    Title, \n    LastActivityDate, \n    Email, \n    Phone, \n    MobilePhone, \n    MailingState, \n    MailingCountry, \n    Account.Owner.Name, \n    CreatedDate\nFROM Contact \nwhere CreatedDate > \n@{variables('set_max_value')}",
+              "type": "Expression"
+            },
+            "includeDeletedObjects": false,
+            "datasetSettings": {
+              "type": "SalesforceObject",
+              "typeProperties": {
+                "objectApiName": "00Od1000000Ze7REAS"
+              },
+              "schema": [],
+              "externalReferences": {
+                "connection": "dfcc8c00-c3f1-489d-81cb-68d3c4b016ef"
+              },
+              "annotations": []
+            }
+          },
+          "sink": {
+            "type": "LakehouseTableSink",
+            "tableActionOption": "OverwriteSchema",
+            "partitionOption": "None",
+            "datasetSettings": {
+              "type": "LakehouseTable",
+              "typeProperties": {
+                "schema": "salesforce",
+                "table": "Tmp_Contact"
+              },
+              "schema": [],
+              "linkedService": {
+                "name": "Campaign_Bronze_Layer",
+                "properties": {
+                  "type": "Lakehouse",
+                  "typeProperties": {
+                    "artifactId": "880f9bc4-7f7e-4049-95b2-53e7bd965f00",
+                    "workspaceId": "00000000-0000-0000-0000-000000000000",
+                    "rootFolder": "Tables"
+                  },
+                  "annotations": []
+                }
+              },
+              "annotations": []
+            }
+          },
+          "translator": {
+            "type": "TabularTranslator",
+            "mappings": [
+              {
+                "source": {
+                  "name": "FirstName",
+                  "type": "String",
+                  "physicalType": "string"
+                },
+                "sink": {
+                  "name": "FirstName",
+                  "physicalType": "string"
+                }
+              },
+              {
+                "source": {
+                  "name": "LastName",
+                  "type": "String",
+                  "physicalType": "string"
+                },
+                "sink": {
+                  "name": "LastName",
+                  "physicalType": "string"
+                }
+              },
+              {
+                "source": {
+                  "name": "Account.Name",
+                  "type": "String",
+                  "physicalType": "string"
+                },
+                "sink": {
+                  "name": "Account_Name",
+                  "physicalType": "string"
+                }
+              },
+              {
+                "source": {
+                  "name": "Account.Owner.Name",
+                  "type": "String",
+                  "physicalType": "string"
+                },
+                "sink": {
+                  "name": "Account_Owner_Name",
+                  "physicalType": "string"
+                }
+              },
+              {
+                "source": {
+                  "name": "Title",
+                  "type": "String",
+                  "physicalType": "string"
+                },
+                "sink": {
+                  "name": "Title",
+                  "physicalType": "string"
+                }
+              },
+              {
+                "source": {
+                  "name": "LastActivityDate",
+                  "type": "DateTime",
+                  "physicalType": "date"
+                },
+                "sink": {
+                  "name": "LastActivityDate",
+                  "physicalType": "timestamp"
+                }
+              },
+              {
+                "source": {
+                  "name": "Email",
+                  "type": "String",
+                  "physicalType": "email"
+                },
+                "sink": {
+                  "name": "Email",
+                  "physicalType": "string"
+                }
+              },
+              {
+                "source": {
+                  "name": "Phone",
+                  "type": "String",
+                  "physicalType": "phone"
+                },
+                "sink": {
+                  "name": "Phone",
+                  "physicalType": "string"
+                }
+              },
+              {
+                "source": {
+                  "name": "MobilePhone",
+                  "type": "String",
+                  "physicalType": "phone"
+                },
+                "sink": {
+                  "name": "MobilePhone",
+                  "physicalType": "string"
+                }
+              },
+              {
+                "source": {
+                  "name": "MailingState",
+                  "type": "String",
+                  "physicalType": "string"
+                },
+                "sink": {
+                  "name": "MailingState",
+                  "physicalType": "string"
+                }
+              },
+              {
+                "source": {
+                  "name": "MailingCountry",
+                  "type": "String",
+                  "physicalType": "string"
+                },
+                "sink": {
+                  "name": "MailingCountry",
+                  "physicalType": "string"
+                }
+              },
+              {
+                "source": {
+                  "name": "CreatedDate",
+                  "type": "DateTime",
+                  "physicalType": "datetime"
+                },
+                "sink": {
+                  "name": "CreatedDate",
+                  "physicalType": "timestamp"
+                }
+              }
+            ],
+            "typeConversion": true,
+            "typeConversionSettings": {
+              "allowDataTruncation": true,
+              "treatBooleanAsNumber": false
+            }
+          },
+          "enableStaging": false
+        },
+        "policy": {
+          "timeout": "0.12:00:00",
+          "retry": 0,
+          "retryIntervalInSeconds": 30,
+          "secureInput": false,
+          "secureOutput": false
+        },
+        "name": "Copy Contact",
+        "dependsOn": [
+          {
+            "activity": "Set_max_batchvalue",
+            "dependencyConditions": [
+              "Succeeded"
+            ]
+          }
+        ]
+      },
+      {
+        "type": "Lookup",
+        "typeProperties": {
+          "source": {
+            "type": "DataWarehouseSource",
+            "sqlReaderQuery": " SELECT \n    'Organization' AS TableName,\n    COALESCE(MaxValue, '1990-01-01 00:00:00') AS max_value,\n    COALESCE(BatchValue, 0) + 1 AS batchvalue\nFROM [Campaign_Bronze_Layer].[salesforce].[Control_Table]\nWHERE TableName = 'Organization'\n\nUNION ALL\n\nSELECT \n    'Organisation' AS TableName,\n    '1990-01-01 00:00:00' AS max_value,\n    1 AS batchvalue\nWHERE NOT EXISTS (\n    SELECT 1 \n    FROM [Campaign_Bronze_Layer].[salesforce].[Control_Table]\n    WHERE TableName = 'Organization'\n)",
+            "partitionOption": "None",
+            "queryTimeout": "02:00:00"
+          },
+          "datasetSettings": {
+            "type": "DataWarehouseTable",
+            "schema": [],
+            "linkedService": {
+              "name": "Salesforce_CRM",
+              "properties": {
+                "type": "DataWarehouse",
+                "typeProperties": {
+                  "artifactId": "efb7127e-7522-47d9-a937-6b9d085d9d80",
+                  "endpoint": "a5kotaldwscevlccuy24crmqsy-56cp7ruqstquvn6gxyigxvglrq.datawarehouse.fabric.microsoft.com",
+                  "workspaceId": "c6ff84ef-9490-4ae1-b7c6-be106bd4cb8c"
+                },
+                "annotations": []
+              }
+            },
+            "annotations": []
+          }
+        },
+        "policy": {
+          "timeout": "0.12:00:00",
+          "retry": 0,
+          "retryIntervalInSeconds": 30,
+          "secureInput": false,
+          "secureOutput": false
+        },
+        "name": "Get_Max_Value",
+        "dependsOn": [
+          {
+            "activity": "Pre Create Tables",
+            "dependencyConditions": [
+              "Succeeded"
+            ]
+          }
+        ]
+      },
+      {
+        "type": "SetVariable",
+        "typeProperties": {
+          "variableName": "set_max_value",
+          "value": {
+            "value": "@formatDateTime(activity('Get_Max_Value').output.firstRow.max_value, 'yyyy-MM-ddTHH:mm:ss+00:00')",
+            "type": "Expression"
+          }
+        },
+        "policy": {
+          "secureInput": false,
+          "secureOutput": false
+        },
+        "name": "Set_max_value",
+        "dependsOn": [
+          {
+            "activity": "Get_Max_Value",
+            "dependencyConditions": [
+              "Succeeded"
+            ]
+          }
+        ]
+      },
+      {
+        "type": "SetVariable",
+        "typeProperties": {
+          "variableName": "set_batch_value",
+          "value": {
+            "value": "@activity('Get_Max_Value').output.firstRow.batchvalue",
+            "type": "Expression"
+          }
+        },
+        "policy": {
+          "secureInput": false,
+          "secureOutput": false
+        },
+        "name": "Set_max_batchvalue",
+        "dependsOn": [
+          {
+            "activity": "Set_max_value",
+            "dependencyConditions": [
+              "Succeeded"
+            ]
+          }
+        ]
+      },
+      {
+        "type": "Copy",
+        "typeProperties": {
+          "source": {
+            "type": "SalesforceSource",
+            "query": {
+              "value": "SELECT \n    Account.Name, \n    Phone, \n    Account.Owner.Name,\n    CreatedDate\nFROM Account\nwhere \nCreatedDate > \n@{variables('set_max_value')}",
+              "type": "Expression"
+            },
+            "includeDeletedObjects": false,
+            "datasetSettings": {
+              "type": "SalesforceObject",
+              "typeProperties": {
+                "objectApiName": "00Od1000000Ze7REAS"
+              },
+              "schema": [],
+              "externalReferences": {
+                "connection": "dfcc8c00-c3f1-489d-81cb-68d3c4b016ef"
+              },
+              "annotations": []
+            }
+          },
+          "sink": {
+            "type": "LakehouseTableSink",
+            "tableActionOption": "OverwriteSchema",
+            "partitionOption": "None",
+            "datasetSettings": {
+              "type": "LakehouseTable",
+              "typeProperties": {
+                "schema": "salesforce",
+                "table": "Tmp_Organisation"
+              },
+              "schema": [],
+              "linkedService": {
+                "name": "Campaign_Bronze_Layer",
+                "properties": {
+                  "type": "Lakehouse",
+                  "typeProperties": {
+                    "artifactId": "880f9bc4-7f7e-4049-95b2-53e7bd965f00",
+                    "workspaceId": "00000000-0000-0000-0000-000000000000",
+                    "rootFolder": "Tables"
+                  },
+                  "annotations": []
+                }
+              },
+              "annotations": []
+            }
+          },
+          "translator": {
+            "type": "TabularTranslator",
+            "mappings": [
+              {
+                "source": {
+                  "name": "Name",
+                  "type": "String",
+                  "physicalType": "string"
+                },
+                "sink": {
+                  "name": "Account_Name",
+                  "physicalType": "string"
+                }
+              },
+              {
+                "source": {
+                  "name": "Phone",
+                  "type": "String",
+                  "physicalType": "phone"
+                },
+                "sink": {
+                  "name": "Phone",
+                  "physicalType": "string"
+                }
+              },
+              {
+                "source": {
+                  "name": "Owner.Name",
+                  "type": "String",
+                  "physicalType": "string"
+                },
+                "sink": {
+                  "name": "Account_Owner_Name",
+                  "physicalType": "string"
+                }
+              },
+              {
+                "source": {
+                  "name": "CreatedDate",
+                  "type": "DateTime",
+                  "physicalType": "datetime"
+                },
+                "sink": {
+                  "name": "CreatedDate",
+                  "physicalType": "timestamp"
+                }
+              }
+            ],
+            "typeConversion": true,
+            "typeConversionSettings": {
+              "allowDataTruncation": true,
+              "treatBooleanAsNumber": false
+            }
+          },
+          "enableStaging": false
+        },
+        "policy": {
+          "timeout": "0.12:00:00",
+          "retry": 0,
+          "retryIntervalInSeconds": 30,
+          "secureInput": false,
+          "secureOutput": false
+        },
+        "name": "Copy Account",
+        "dependsOn": [
+          {
+            "activity": "Copy Contact",
+            "dependencyConditions": [
+              "Succeeded"
+            ]
+          }
+        ]
+      },
+      {
+        "type": "Copy",
+        "typeProperties": {
+          "source": {
+            "type": "SalesforceSource",
+            "query": {
+              "value": "SELECT \n    Opportunity.Name, \n    Amount, \n    Account.Name,\n    CreatedDate,\n    Probability,\n    Owner.Name,\n    LastModifiedBy.Name,\n    LastModifiedDate\nFROM Opportunity \nwhere \nCreatedDate > \n@{variables('set_max_value')}",
+              "type": "Expression"
+            },
+            "includeDeletedObjects": false,
+            "datasetSettings": {
+              "type": "SalesforceObject",
+              "typeProperties": {
+                "objectApiName": "00Od1000000Ze7REAS"
+              },
+              "schema": [],
+              "externalReferences": {
+                "connection": "dfcc8c00-c3f1-489d-81cb-68d3c4b016ef"
+              },
+              "annotations": []
+            }
+          },
+          "sink": {
+            "type": "LakehouseTableSink",
+            "tableActionOption": "OverwriteSchema",
+            "partitionOption": "None",
+            "datasetSettings": {
+              "type": "LakehouseTable",
+              "typeProperties": {
+                "schema": "salesforce",
+                "table": "Tmp_Opportunities"
+              },
+              "schema": [],
+              "linkedService": {
+                "name": "Campaign_Bronze_Layer",
+                "properties": {
+                  "type": "Lakehouse",
+                  "typeProperties": {
+                    "artifactId": "880f9bc4-7f7e-4049-95b2-53e7bd965f00",
+                    "workspaceId": "00000000-0000-0000-0000-000000000000",
+                    "rootFolder": "Tables"
+                  },
+                  "annotations": []
+                }
+              },
+              "annotations": []
+            }
+          },
+          "translator": {
+            "type": "TabularTranslator",
+            "mappings": [
+              {
+                "source": {
+                  "name": "Name",
+                  "type": "String",
+                  "physicalType": "string"
+                },
+                "sink": {
+                  "name": "Name",
+                  "physicalType": "string"
+                }
+              },
+              {
+                "source": {
+                  "name": "Amount",
+                  "type": "Decimal",
+                  "physicalType": "currency"
+                },
+                "sink": {
+                  "name": "Amount",
+                  "physicalType": "decimal"
+                }
+              },
+              {
+                "source": {
+                  "name": "Account.Name",
+                  "type": "String",
+                  "physicalType": "string"
+                },
+                "sink": {
+                  "name": "Account_Name",
+                  "physicalType": "string"
+                }
+              },
+              {
+                "source": {
+                  "name": "CreatedDate",
+                  "type": "DateTime",
+                  "physicalType": "datetime"
+                },
+                "sink": {
+                  "name": "CreatedDate",
+                  "physicalType": "timestamp"
+                }
+              },
+              {
+                "source": {
+                  "name": "Probability",
+                  "type": "Decimal",
+                  "physicalType": "percent"
+                },
+                "sink": {
+                  "name": "Probability",
+                  "physicalType": "decimal"
+                }
+              },
+              {
+                "source": {
+                  "name": "Owner.Name",
+                  "type": "String",
+                  "physicalType": "string"
+                },
+                "sink": {
+                  "name": "Owner_Name",
+                  "physicalType": "string"
+                }
+              },
+              {
+                "source": {
+                  "name": "LastModifiedBy.Name",
+                  "type": "String",
+                  "physicalType": "string"
+                },
+                "sink": {
+                  "name": "LastModifiedBy_Name",
+                  "physicalType": "string"
+                }
+              },
+              {
+                "source": {
+                  "name": "LastModifiedDate",
+                  "type": "DateTime",
+                  "physicalType": "datetime"
+                },
+                "sink": {
+                  "name": "LastModifiedDate",
+                  "physicalType": "timestamp"
+                }
+              }
+            ],
+            "typeConversion": true,
+            "typeConversionSettings": {
+              "allowDataTruncation": true,
+              "treatBooleanAsNumber": false
+            }
+          },
+          "enableStaging": false
+        },
+        "policy": {
+          "timeout": "0.12:00:00",
+          "retry": 0,
+          "retryIntervalInSeconds": 30,
+          "secureInput": false,
+          "secureOutput": false
+        },
+        "name": "Copy Opportunity",
+        "dependsOn": [
+          {
+            "activity": "Copy Account",
+            "dependencyConditions": [
+              "Succeeded"
+            ]
+          }
+        ]
+      },
+      {
+        "type": "TridentNotebook",
+        "typeProperties": {
+          "notebookId": "a054da8d-fbd0-bea0-4de8-59b206467f1d",
+          "workspaceId": "00000000-0000-0000-0000-000000000000",
+          "parameters": {
+            "get_batch_id": {
+              "value": "1",
+              "type": "int"
+            }
+          }
+        },
+        "policy": {
+          "timeout": "0.12:00:00",
+          "retry": 0,
+          "retryIntervalInSeconds": 30,
+          "secureInput": false,
+          "secureOutput": false
+        },
+        "name": "Organisation_Insert_Update",
+        "dependsOn": [
+          {
+            "activity": "Copy Opportunity",
+            "dependencyConditions": [
+              "Succeeded"
+            ]
+          }
+        ]
+      },
+      {
+        "type": "TridentNotebook",
+        "typeProperties": {
+          "notebookId": "6a4fb413-d00b-9377-4300-53972160cd88",
+          "workspaceId": "00000000-0000-0000-0000-000000000000",
+          "parameters": {
+            "batch_id": {
+              "value": "1",
+              "type": "int"
+            }
+          }
+        },
+        "policy": {
+          "timeout": "0.12:00:00",
+          "retry": 0,
+          "retryIntervalInSeconds": 30,
+          "secureInput": false,
+          "secureOutput": false
+        },
+        "name": "Pre Create Tables",
+        "dependsOn": []
+      },
+      {
+        "type": "Office365Outlook",
+        "typeProperties": {
+          "inputs": {
+            "body": {
+              "To": "malathi.s@kermittech.no",
+              "Subject": "Organisation Insert/Updarte Pipeline ran successfully",
+              "Body": "<p>Hi,</p>\n<p>Pipeline ran successfully. Please find the below details.</p>\n<p>Recent Batch ID : @{variables('set_max_value')}</p>\n<p>Entity Max Name : set_tgt_maxvalue @{activity('Get_Tgt_MaxValue').output}</p>\n<p>Number of Records Inserted :&nbsp;</p>\n<p>Number of Records Updated :&nbsp;</p>\n<p></p>",
+              "Sensitivity": "",
+              "Importance": "Normal"
+            },
+            "method": "post",
+            "path": "/v2/Mail"
+          }
+        },
+        "name": "Office 365 Outlook1",
+        "dependsOn": [
+          {
+            "activity": "Set_max_value_copy1",
+            "dependencyConditions": [
+              "Succeeded"
+            ]
+          }
+        ]
+      },
+      {
+        "type": "Lookup",
+        "typeProperties": {
+          "source": {
+            "type": "DataWarehouseSource",
+            "sqlReaderQuery": " SELECT \n    'Organization' AS tgt_TableName,\n    COALESCE(MaxValue, '1990-01-01 00:00:00') AS tgt_max_value,\n    COALESCE(BatchValue, 0)  AS batchvalue\nFROM [Campaign_Bronze_Layer].[salesforce].[Control_Table]\nWHERE TableName = 'Organization'",
+            "partitionOption": "None",
+            "queryTimeout": "02:00:00"
+          },
+          "datasetSettings": {
+            "type": "DataWarehouseTable",
+            "schema": [],
+            "linkedService": {
+              "name": "Salesforce_CRM",
+              "properties": {
+                "type": "DataWarehouse",
+                "typeProperties": {
+                  "artifactId": "efb7127e-7522-47d9-a937-6b9d085d9d80",
+                  "endpoint": "a5kotaldwscevlccuy24crmqsy-56cp7ruqstquvn6gxyigxvglrq.datawarehouse.fabric.microsoft.com",
+                  "workspaceId": "c6ff84ef-9490-4ae1-b7c6-be106bd4cb8c"
+                },
+                "annotations": []
+              }
+            },
+            "annotations": []
+          }
+        },
+        "policy": {
+          "timeout": "0.12:00:00",
+          "retry": 0,
+          "retryIntervalInSeconds": 30,
+          "secureInput": false,
+          "secureOutput": false
+        },
+        "name": "Get_Tgt_MaxValue",
+        "dependsOn": [
+          {
+            "activity": "Organisation_Insert_Update",
+            "dependencyConditions": [
+              "Succeeded"
+            ]
+          }
+        ]
+      },
+      {
+        "type": "SetVariable",
+        "typeProperties": {
+          "variableName": "set_tgt_maxvalue",
+          "value": {
+            "value": "@formatDateTime(activity('Get_Tgt_MaxValue').output.firstRow.tgt_max_value, 'yyyy-MM-ddTHH:mm:ss+00:00')",
+            "type": "Expression"
+          }
+        },
+        "policy": {
+          "secureInput": false,
+          "secureOutput": false
+        },
+        "name": "Set_max_value_copy1",
+        "dependsOn": [
+          {
+            "activity": "Get_Tgt_MaxValue",
+            "dependencyConditions": [
+              "Succeeded"
+            ]
+          }
+        ]
+      }
+    ],
+    "variables": {
+      "set_max_value": {
+        "type": "String"
+      },
+      "set_datemax_value": {
+        "type": "String"
+      },
+      "accountname": {
+        "type": "String"
+      },
+      "firstname": {
+        "type": "String"
+      },
+      "lastname": {
+        "type": "String"
+      },
+      "set_batch_value": {
+        "type": "Integer"
+      },
+      "set_tgt_maxvalue": {
+        "type": "String"
+      }
+    }
+  }
+}
