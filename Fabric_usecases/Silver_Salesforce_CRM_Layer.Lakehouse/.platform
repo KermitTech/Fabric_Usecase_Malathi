@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "Lakehouse",
+    "displayName": "Silver_Salesforce_CRM_Layer"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "236ee0f3-2005-82de-48cb-b710f3562d77"
+  }
+}

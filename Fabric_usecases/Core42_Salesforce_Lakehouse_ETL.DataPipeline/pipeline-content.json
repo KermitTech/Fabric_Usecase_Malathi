@@ -655,7 +655,7 @@
         "name": "Office 365 Outlook1",
         "dependsOn": [
           {
-            "activity": "Set_max_value_copy1",
+            "activity": "Set_tgt_maxvalue",
             "dependencyConditions": [
               "Succeeded"
             ]
@@ -719,7 +719,7 @@
           "secureInput": false,
           "secureOutput": false
         },
-        "name": "Set_max_value_copy1",
+        "name": "Set_tgt_maxvalue",
         "dependsOn": [
           {
             "activity": "Get_Tgt_MaxValue",

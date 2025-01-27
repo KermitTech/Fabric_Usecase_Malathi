@@ -1383,6 +1383,147 @@
         ]
       },
       {
+        "name": "Reconciliation_Report",
+        "sourceLineageTag": "[salesforce_CRM].[Reconciliation_Report]",
+        "columns": [
+          {
+            "name": "TableName",
+            "dataType": "string",
+            "sourceColumn": "TableName",
+            "sourceProviderType": "varchar",
+            "sourceLineageTag": "TableName",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "MaxValue_Expected",
+            "dataType": "dateTime",
+            "sourceColumn": "MaxValue_Expected",
+            "formatString": "General Date",
+            "sourceProviderType": "datetime2",
+            "sourceLineageTag": "MaxValue_Expected",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "MaxValue_Actual",
+            "dataType": "dateTime",
+            "sourceColumn": "MaxValue_Actual",
+            "formatString": "General Date",
+            "sourceProviderType": "datetime2",
+            "sourceLineageTag": "MaxValue_Actual",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "BatchID_Expected",
+            "dataType": "int64",
+            "sourceColumn": "BatchID_Expected",
+            "formatString": "0",
+            "sourceProviderType": "int",
+            "sourceLineageTag": "BatchID_Expected",
+            "summarizeBy": "sum",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "BatchID_Actual",
+            "dataType": "int64",
+            "sourceColumn": "BatchID_Actual",
+            "formatString": "0",
+            "sourceProviderType": "int",
+            "sourceLineageTag": "BatchID_Actual",
+            "summarizeBy": "sum",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "MaxValue_Discrepancy",
+            "dataType": "string",
+            "sourceColumn": "MaxValue_Discrepancy",
+            "sourceProviderType": "varchar",
+            "sourceLineageTag": "MaxValue_Discrepancy",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "BatchID_Discrepancy",
+            "dataType": "string",
+            "sourceColumn": "BatchID_Discrepancy",
+            "sourceProviderType": "varchar",
+            "sourceLineageTag": "BatchID_Discrepancy",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "RunTimestamp",
+            "dataType": "dateTime",
+            "sourceColumn": "RunTimestamp",
+            "formatString": "General Date",
+            "sourceProviderType": "datetime2",
+            "sourceLineageTag": "RunTimestamp",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          }
+        ],
+        "partitions": [
+          {
+            "name": "{{Partition_Name}}",
+            "mode": "directLake",
+            "source": {
+              "type": "entity",
+              "entityName": "Reconciliation_Report",
+              "expressionSource": "DatabaseQuery",
+              "schemaName": "salesforce_CRM"
+            }
+          }
+        ],
+        "annotations": [
+          {
+            "name": "IsTableInBiModel",
+            "value": "False"
+          }
+        ]
+      },
+      {
         "name": "TempTable",
         "sourceLineageTag": "[salesforce_CRM].[TempTable]",
         "columns": [

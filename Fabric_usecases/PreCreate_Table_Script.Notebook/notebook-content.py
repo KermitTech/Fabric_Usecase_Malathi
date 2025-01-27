@@ -30,6 +30,7 @@ contact_table_path = "abfss://Malathi@onelake.dfs.fabric.microsoft.com/Campaign_
 Tmp_opportunities_table_path = "abfss://Malathi@onelake.dfs.fabric.microsoft.com/Campaign_Bronze_Layer.Lakehouse/Tables/salesforce/Tmp_Opportunities"
 opportunities_table_path = "abfss://Malathi@onelake.dfs.fabric.microsoft.com/Campaign_Bronze_Layer.Lakehouse/Tables/salesforce/Opportunities"
 control_table_path = "abfss://Malathi@onelake.dfs.fabric.microsoft.com/Campaign_Bronze_Layer.Lakehouse/Tables/salesforce/Control_Table"
+stg_org_table_path = "abfss://Malathi@onelake.dfs.fabric.microsoft.com/Silver_Layer.Lakehouse/Tables/Salesforce_CRM/staging_organisation"
 
 # Define function to create Delta table if it doesn't exist
 def create_delta_table_if_not_exists(table_path, schema):
@@ -62,6 +63,19 @@ organization_schema_sql = """
 #Temporary Organization table schema
 
 Tmp_organization_schema_sql = """
+    Account_Name STRING,
+    Phone STRING,
+    Account_Owner_Name STRING,
+    CreatedDate TIMESTAMP,
+    UpdatedDate TIMESTAMP,
+    UpdatedBy STRING,
+    Batch_id INT,
+    Load_Type STRING
+"""
+
+#Staging Organization table schema
+
+stg_organization_schema_sql = """
     Account_Name STRING,
     Phone STRING,
     Account_Owner_Name STRING,
@@ -158,6 +172,7 @@ control_table_schema_sql = """
 # Create the tables
 create_delta_table_if_not_exists(organization_table_path, organization_schema_sql)
 create_delta_table_if_not_exists(Tmp_organization_table_path, Tmp_organization_schema_sql)
+create_delta_table_if_not_exists(stg_org_table_path, stg_organization_schema_sql)
 create_delta_table_if_not_exists(Tmp_contact_table_path, Tmp_contact_schema_sql)
 create_delta_table_if_not_exists(contact_table_path, contact_schema_sql)
 create_delta_table_if_not_exists(Tmp_opportunities_table_path, Tmp_opportunities_schema_sql)

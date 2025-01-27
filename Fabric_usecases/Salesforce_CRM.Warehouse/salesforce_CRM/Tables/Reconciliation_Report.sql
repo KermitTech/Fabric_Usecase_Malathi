@@ -1,0 +1,12 @@
+CREATE TABLE [salesforce_CRM].[Reconciliation_Report] (
+
+	[TableName] varchar(100) NULL, 
+	[MaxValue_Expected] datetime2(3) NULL, 
+	[MaxValue_Actual] datetime2(3) NULL, 
+	[BatchID_Expected] int NULL, 
+	[BatchID_Actual] int NULL, 
+	[MaxValue_Discrepancy] varchar(500) NULL, 
+	[BatchID_Discrepancy] varchar(500) NULL, 
+	[RunTimestamp] datetime2(3) NULL
+);
+
