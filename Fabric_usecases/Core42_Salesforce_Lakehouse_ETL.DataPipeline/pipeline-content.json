@@ -644,7 +644,7 @@
             "body": {
               "To": "malathi.s@kermittech.no",
               "Subject": "Organisation Insert/Updarte Pipeline ran successfully",
-              "Body": "<p>Hi,</p>\n<p>Pipeline ran successfully. Please find the below details.</p>\n<p>Recent Batch ID : @{variables('set_max_value')}</p>\n<p>Entity Max Name : set_tgt_maxvalue @{activity('Get_Tgt_MaxValue').output}</p>\n<p>Number of Records Inserted :&nbsp;</p>\n<p>Number of Records Updated :&nbsp;</p>\n<p></p>",
+              "Body": "<p>Hi,</p>\n<p>Pipeline ran successfully. Please find the below details.</p>\n<p>Recent Batch ID : @{variables('set_batch_value')}</p>\n<p>Entity Max Name : set_tgt_maxvalue @{activity('Get_Tgt_MaxValue').output}</p>\n<p>Number of Records Inserted :&nbsp;</p>\n<p>Number of Records Updated :&nbsp;</p>",
               "Sensitivity": "",
               "Importance": "Normal"
             },

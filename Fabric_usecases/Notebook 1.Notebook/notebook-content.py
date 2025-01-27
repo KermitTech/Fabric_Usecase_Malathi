@@ -17,18 +17,21 @@ from pyspark.sql.functions import col, current_timestamp, lit, when
 org_temp_path = "abfss://Malathi@onelake.dfs.fabric.microsoft.com/Campaign_Bronze_Layer.Lakehouse/Tables/salesforce/Tmp_Organisation"
 
 # Read the temporary table
-organization_temp_df = spark.read.format("delta").load(org_temp_path)
+organization_tmp_df = spark.read.format("delta").load(org_temp_path)
 
 # Add the Batch_id and Load_Type columns to the temp DataFrame
-organization_temp_df = organization_temp_df \
+organization_temp = organization_tmp_df \
     .withColumn("Batch_id", lit(None).cast("int")) \
     .withColumn("Load_Type", lit(None).cast("string"))  # Default to None (null)
 
 # Overwrite the Tmp_Organisation table with the updated schema
-organization_temp_df.write.format("delta") \
+organization_temp.write.format("delta") \
     .option("mergeSchema", "true") \
     .mode("overwrite") \
     .save(org_temp_path)
+
+
+organization_temp.show()
 
 print(f"Tmp_Organisation table updated with additional columns: Batch_id and Load_Type.")
 
@@ -61,15 +64,18 @@ organization_temp_path = "abfss://Malathi@onelake.dfs.fabric.microsoft.com/Campa
 organization_table_path = "abfss://Malathi@onelake.dfs.fabric.microsoft.com/Campaign_Bronze_Layer.Lakehouse/Tables/salesforce/Organisation"
 control_table_path = "abfss://Malathi@onelake.dfs.fabric.microsoft.com/Campaign_Bronze_Layer.Lakehouse/Tables/salesforce/Control_Table"
 
-batch_id = get_batch_id
+batch_id = 1 #get_batch_id
 
 # Read the temporary table
 organization_temp_df = spark.read.format("delta").load(organization_temp_path)
 
+organization_temp_df.show()
 
 
 # Merge into the destination Delta table
 organization_table = DeltaTable.forPath(spark, organization_table_path)
+
+print(organization_table)
 
 # Perform the merge and capture the inserted rows count
 merge_result = organization_table.alias("target").merge(
@@ -96,7 +102,7 @@ inserted_rows_df = organization_temp_df.alias("source").join(
     organization_table.toDF().alias("target"), 
     col("source.Account_Name") == col("target.Account_Name"), 
     "inner"  # This will give us the rows that are now present in the target table
-).filter(col("source.Batch_id") == batch_id)  # Only select rows that were inserted in source
+).filter((col("target.Batch_id") == lit(batch_id))  & (col("target.Load_Type") == lit("Insert"))) # Only select rows that were inserted in source
 
 inserted_rows_count = inserted_rows_df.count()
 
@@ -105,7 +111,7 @@ print("Total records inserted:", inserted_rows_count)
 
 if inserted_rows_count > 0:
     # Calculate the max created date from the inserted rows
-    max_created_date = organization_table.agg({"CreatedDate": "max"}).collect()[0][0]
+    max_created_date = organization_table.toDF().agg({"CreatedDate": "max"}).collect()[0][0]
     
 
     # Explicitly define the schema for the control entry
