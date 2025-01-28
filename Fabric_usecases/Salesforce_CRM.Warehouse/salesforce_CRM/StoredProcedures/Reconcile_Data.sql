@@ -4,7 +4,7 @@ AS
 BEGIN
 
     --Truncate the table
-    --TRUNCATE TABLE [salesforce_CRM].[Reconciliation_Report];
+    TRUNCATE TABLE [salesforce_CRM].[Reconciliation_Report];
 
     -- Step 2: Check if the target reconciliation table exists
     IF NOT EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = 'Reconciliation_Report')
@@ -29,7 +29,7 @@ BEGIN
             MaxValue AS MaxValue_Expected,
             BatchValue AS BatchID_Expected
         FROM [Campaign_Bronze_Layer].[salesforce].[Control_Table]
-        WHERE TableName IN ('Organisation', 'Opportunities', 'Contact', 'Tmp_Organisation', 'Tmp_Opportunities', 'Tmp_Contact', 'Staging_Organisation', 'Staging_Opportunities', 'Staging_Contact')
+        WHERE TableName IN ('Organization', 'Opportunities', 'Contact', 'Tmp_Organisation', 'Tmp_Opportunities', 'Tmp_Contact', 'Staging_Organisation', 'Staging_Opportunities', 'Staging_Contact')
     )
     
     -- Step 4: Insert reconciliation data into the reconciliation table
@@ -51,19 +51,19 @@ BEGIN
         SYSDATETIME() AS RunTimestamp -- Insert the current timestamp during each run
     FROM (
         -- Combine the data from all tables with aggregation for Insert and Update counts
-        SELECT 'Organisation' AS TableName, CreatedDate, Batch_id
+        SELECT 'Organization' AS TableName, CreatedDate, Batch_id
         FROM [Campaign_Bronze_Layer].[salesforce].[Organisation]
         WHERE Batch_id = @BatchID
         
         UNION ALL
         
-        SELECT 'Tmp_Organisation' AS TableName, CreatedDate, Batch_id
+        SELECT 'Organization' AS TableName, CreatedDate, Batch_id
         FROM [Campaign_Bronze_Layer].[salesforce].[Tmp_Organisation]
         WHERE Batch_id = @BatchID
         
         UNION ALL
         
-        SELECT 'Staging_Organisation' AS TableName, CreatedDate, Batch_id
+        SELECT 'Organization' AS TableName, CreatedDate, Batch_id
         FROM [Silver_Layer].[Salesforce_CRM].[staging_organisation]
         WHERE Batch_id = @BatchID
         
@@ -93,8 +93,9 @@ BEGIN
         
     ) t
     LEFT JOIN ExpectedValues ev
-        ON t.TableName = ev.TableName
-    GROUP BY t.TableName, coalesce(ev.MaxValue_Expected,CAST('1991-01-01' AS DATETIME)),
+        ON 
+        t.TableName = ev.TableName
+        GROUP BY t.TableName, coalesce(ev.MaxValue_Expected,CAST('1991-01-01' AS DATETIME)),
         coalesce(ev.BatchID_Expected, 0)
 
 END;

@@ -126,7 +126,7 @@ if inserted_rows_count > 0:
     # Prepare the new control entry with correct schema
     new_control_entry = [
         {
-            "TableName": "Organization",
+            "TableName": "Organisation",
             "MaxValue": max_created_date,
             "Batch_id": batch_id,  # Ensure batch_id is passed earlier
             "LastUpdated": None,  # Will be replaced by current_timestamp
@@ -180,6 +180,7 @@ from delta.tables import DeltaTable
 
 raw_org_path = "abfss://Malathi@onelake.dfs.fabric.microsoft.com/Campaign_Bronze_Layer.Lakehouse/Tables/salesforce/Organisation"
 stg_org_path = "abfss://Malathi@onelake.dfs.fabric.microsoft.com/Silver_Layer.Lakehouse/Tables/Salesforce_CRM/staging_organisation"
+stg_control_path = "abfss://Malathi@onelake.dfs.fabric.microsoft.com/Campaign_Bronze_Layer.Lakehouse/Tables/salesforce/Control_Table"
 
 if DeltaTable.isDeltaTable(spark, stg_org_path):
     print(f"Delta table exists ")
@@ -202,14 +203,14 @@ merge_result = stg_organization_table.alias("stg_target").merge(
     "stg_target.Account_Owner_Name": col("stg_source.Account_Owner_Name"),
     "stg_target.CreatedDate": col("stg_source.CreatedDate"),
     "stg_target.UpdatedDate": current_timestamp(),
-    "stg_target.Load_Type": lit("UPDATE"),
+    "stg_target.Load_Type": lit("Update"),
     "stg_target.Batch_id": col("stg_source.Batch_id")
 }).whenNotMatchedInsert(values={
     "stg_target.Account_Name": col("stg_source.Account_Name"),
     "stg_target.Phone": col("stg_source.Phone"),
     "stg_target.Account_Owner_Name": col("stg_source.Account_Owner_Name"),
     "stg_target.CreatedDate": col("stg_source.CreatedDate"),
-    "stg_target.Load_Type": lit("INSERT"),
+    "stg_target.Load_Type": lit("Insert"),
     "stg_target.Batch_id": col("stg_source.Batch_id")
 }).execute()
 
@@ -217,11 +218,67 @@ stg_inserted_rows_df = raw_organisation_df.alias("stg_source").join(
     stg_organization_table.toDF().alias("stg_target"), 
     col("stg_source.Account_Name") == col("stg_target.Account_Name"), 
     "inner"  # This will give us the rows that are now present in the target table
-).filter(col("stg_source.Batch_id") == col("stg_target.Batch_id"))  # Only select rows that were inserted in source
+).filter((col("stg_source.Batch_id") == col("stg_target.Batch_id")) & (col("stg_target.Load_Type") == lit("Insert")))  # Only select rows that were inserted in source
+
+#stg_inserted_rows_df.show()
 
 stg_inserted_rows_count = stg_inserted_rows_df.count()
 
 print("Total records inserted:", stg_inserted_rows_count)
+
+if stg_inserted_rows_count > 0:
+    # Calculate the max created date from the inserted rows
+    stg_max_created_date = organization_table.toDF().agg({"CreatedDate": "max"}).collect()[0][0]
+    stg_max_batchid = organization_table.toDF().agg({"Batch_id": "max"}).collect()[0][0]
+
+    # Explicitly define the schema for the control entry
+    control_stg_schema = StructType([
+        StructField("TableName", StringType(), True),
+        StructField("MaxValue", TimestampType(), True),
+        StructField("Batch_id", StringType(), True),
+        StructField("LastUpdated", TimestampType(), True),
+        StructField("LastUpdatedBy", StringType(), True),
+    ])
+
+    # Prepare the new control entry with correct schema
+    stg_control_entry = [
+        {
+            "TableName": "Stg_Organisation",
+            "MaxValue": stg_max_created_date,
+            "Batch_id": stg_max_batchid,  # Ensure batch_id is passed earlier
+            "LastUpdated": None,  # Will be replaced by current_timestamp
+            "LastUpdatedBy": ""  # Adjust based on your logic
+        }
+    ]
+
+    # Convert the new control entry to a DataFrame
+    stg_control_entry_df = spark.createDataFrame(stg_control_entry, schema=control_stg_schema) \
+        .withColumn("LastUpdated", current_timestamp())
+
+
+    
+    # Check if the control table already exists
+    stg_control_table = DeltaTable.forPath(spark, stg_control_path)
+    
+    # Merge into the control table
+    stg_control_table.alias("target_control").merge(
+        stg_control_entry_df.alias("source_control"),
+        "target_control.TableName = source_control.TableName"
+    ).whenMatchedUpdate(set={
+        "target_control.MaxValue": col("source_control.MaxValue"),
+        "target_control.BatchValue": col("source_control.Batch_id"),
+        "target_control.LastUpdated": col("source_control.LastUpdated")
+    }).whenNotMatchedInsert(values={
+        "target_control.TableName": col("source_control.TableName"),
+        "target_control.BatchValue": col("source_control.Batch_id"),
+        "target_control.MaxValue": col("source_control.MaxValue"),
+        "target_control.LastUpdated": col("source_control.LastUpdated")
+    }).execute()
+
+    print(f"Control table updated for 'Organization' with MaxValue: {stg_max_created_date}.")
+else:
+    print("No new inserts in Organization. Control table not updated.")
+
 
 # METADATA ********************
 

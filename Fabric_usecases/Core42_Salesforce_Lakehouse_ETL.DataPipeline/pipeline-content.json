@@ -667,7 +667,7 @@
         "typeProperties": {
           "source": {
             "type": "DataWarehouseSource",
-            "sqlReaderQuery": " SELECT \n    'Organization' AS tgt_TableName,\n    COALESCE(MaxValue, '1990-01-01 00:00:00') AS tgt_max_value,\n    COALESCE(BatchValue, 0)  AS batchvalue\nFROM [Campaign_Bronze_Layer].[salesforce].[Control_Table]\nWHERE TableName = 'Organization'",
+            "sqlReaderQuery": " SELECT \n    'Organization' AS tgt_TableName,\n    COALESCE(MaxValue, '1990-01-01 00:00:00') AS tgt_max_value,\n    COALESCE(BatchValue, 0)  AS batchvalue\nFROM [Campaign_Bronze_Layer].[salesforce].[Control_Table]\nWHERE TableName = 'Organization')\n\nUNION ALL\n\nSELECT \n    'Organisation' AS TableName,\n    null AS max_value,\n    null AS batchvalue\nWHERE NOT EXISTS (\n    SELECT 1 \n    FROM [Campaign_Bronze_Layer].[salesforce].[Control_Table]\n    WHERE TableName = 'Organization'",
             "partitionOption": "None",
             "queryTimeout": "02:00:00"
           },
