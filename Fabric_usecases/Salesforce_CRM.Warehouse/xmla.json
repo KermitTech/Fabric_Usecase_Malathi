@@ -1489,6 +1489,36 @@
             ]
           },
           {
+            "name": "Rows_Inserted",
+            "dataType": "int64",
+            "sourceColumn": "Rows_Inserted",
+            "formatString": "0",
+            "sourceProviderType": "int",
+            "sourceLineageTag": "Rows_Inserted",
+            "summarizeBy": "sum",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "Rows_Updated",
+            "dataType": "int64",
+            "sourceColumn": "Rows_Updated",
+            "formatString": "0",
+            "sourceProviderType": "int",
+            "sourceLineageTag": "Rows_Updated",
+            "summarizeBy": "sum",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
             "name": "RunTimestamp",
             "dataType": "dateTime",
             "sourceColumn": "RunTimestamp",

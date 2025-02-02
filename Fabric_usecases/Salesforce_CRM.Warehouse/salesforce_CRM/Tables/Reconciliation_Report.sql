@@ -7,6 +7,8 @@ CREATE TABLE [salesforce_CRM].[Reconciliation_Report] (
 	[BatchID_Actual] int NULL, 
 	[MaxValue_Discrepancy] varchar(500) NULL, 
 	[BatchID_Discrepancy] varchar(500) NULL, 
+	[Rows_Inserted] int NULL, 
+	[Rows_Updated] int NULL, 
 	[RunTimestamp] datetime2(3) NULL
 );
 

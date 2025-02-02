@@ -32,6 +32,9 @@ opportunities_table_path = "abfss://Malathi@onelake.dfs.fabric.microsoft.com/Cam
 control_table_path = "abfss://Malathi@onelake.dfs.fabric.microsoft.com/Campaign_Bronze_Layer.Lakehouse/Tables/salesforce/Control_Table"
 stg_org_table_path = "abfss://Malathi@onelake.dfs.fabric.microsoft.com/Silver_Layer.Lakehouse/Tables/Salesforce_CRM/staging_organisation"
 
+error_log_table_path = "abfss://Malathi@onelake.dfs.fabric.microsoft.com/Silver_Layer.Lakehouse/Tables/Salesforce_CRM/pipeline_audit_logs"
+
+
 # Define function to create Delta table if it doesn't exist
 def create_delta_table_if_not_exists(table_path, schema):
     # Check if the table already exists by trying to read from the location
@@ -169,6 +172,19 @@ control_table_schema_sql = """
     LastUpdatedBy STRING
 """
 
+
+# pipeline audit logs table schema
+pipelinelogs_table_schema_sql = """
+    PipelineRunId STRING,
+    PipelineId STRING,
+    PipelineName STRING,
+    StartTime TIMESTAMP,
+    EndTime STRING,
+    WorkspaceId STRING,
+    PipelineStatus STRING,
+    ErrorDescription STRING
+"""
+
 # Create the tables
 create_delta_table_if_not_exists(organization_table_path, organization_schema_sql)
 create_delta_table_if_not_exists(Tmp_organization_table_path, Tmp_organization_schema_sql)
@@ -178,6 +194,7 @@ create_delta_table_if_not_exists(contact_table_path, contact_schema_sql)
 create_delta_table_if_not_exists(Tmp_opportunities_table_path, Tmp_opportunities_schema_sql)
 create_delta_table_if_not_exists(opportunities_table_path, opportunities_schema_sql)
 create_delta_table_if_not_exists(control_table_path, control_table_schema_sql)
+create_delta_table_if_not_exists(error_log_table_path, pipelinelogs_table_schema_sql)
 
 # METADATA ********************
 

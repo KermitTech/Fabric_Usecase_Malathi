@@ -2,10 +2,10 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
   "metadata": {
     "type": "DataPipeline",
-    "displayName": "Core42_Salesforce_Lakehouse_ETL_V0"
+    "displayName": "Core42_IncrementalUpdate_Lakehouse_V1"
   },
   "config": {
     "version": "2.0",
-    "logicalId": "e2dd97f0-0890-8bc2-4180-8113e3c202fc"
+    "logicalId": "9e29961d-ec9f-a2d1-45b7-efb2f2844954"
   }
 }

@@ -1,11 +1,12 @@
 {
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
   "metadata": {
-    "type": "DataPipeline",
-    "displayName": "Core42_Salesforce_Lakehouse_ETL_V0"
+    "type": "Notebook",
+    "displayName": "Pipeline_Audit_Logs_Script",
+    "description": "New notebook"
   },
   "config": {
     "version": "2.0",
-    "logicalId": "e2dd97f0-0890-8bc2-4180-8113e3c202fc"
+    "logicalId": "514f5565-ada4-a975-46fb-cc1038df2a97"
   }
 }

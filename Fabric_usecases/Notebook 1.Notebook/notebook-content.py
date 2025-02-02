@@ -9,7 +9,7 @@
 # META   "dependencies": {}
 # META }
 
-# CELL ********************
+# PARAMETERS CELL ********************
 
 get_batch_id = 1
 
@@ -20,7 +20,7 @@ get_batch_id = 1
 # META   "language_group": "synapse_pyspark"
 # META }
 
-# PARAMETERS CELL ********************
+# CELL ********************
 
 from delta.tables import DeltaTable
 from datetime import datetime
@@ -29,17 +29,53 @@ from pyspark.sql.functions import col, current_timestamp, lit, when
 
 org_temp_path = "abfss://Malathi@onelake.dfs.fabric.microsoft.com/Campaign_Bronze_Layer.Lakehouse/Tables/salesforce/Tmp_Organisation"
 tmp_control_path = "abfss://Malathi@onelake.dfs.fabric.microsoft.com/Campaign_Bronze_Layer.Lakehouse/Tables/salesforce/Control_Table"
+org_raw_path = "abfss://Malathi@onelake.dfs.fabric.microsoft.com/Campaign_Bronze_Layer.Lakehouse/Tables/salesforce/Organisation"
 
 
 batch_id = get_batch_id
 
+#  Load the raw table
+organization_raw_df = spark.read.format("delta").load(org_raw_path)
+
 # Read the temporary table
 organization_tmp_df = spark.read.format("delta").load(org_temp_path)
 
+
 # Add the Batch_id and Load_Type columns to the temp DataFrame
-organization_temp = organization_tmp_df \
+organization_tmp_df = organization_tmp_df \
     .withColumn("Batch_id", lit(batch_id)) \
     .withColumn("Load_Type", lit(None).cast("string"))  # Default to None (null)
+
+
+
+# Step 2: Rename conflicting columns in the raw data to avoid duplicates
+organization_raw_df_renamed = organization_raw_df.select(
+    [col(c).alias(f"raw_{c}") if c != "id" else col(c) for c in organization_raw_df.columns]
+)
+
+organization_raw_df_renamed.show()
+
+# Step 3: Perform a left join to identify existing records
+organization_tmp = organization_tmp_df.join(
+    organization_raw_df_renamed, 
+    organization_tmp_df["Account_Name"] == organization_raw_df_renamed["raw_Account_Name"],  
+    "left_outer"  # Keep all records from temp table
+)
+
+
+
+# Step 4: Set the Load_Type column based on whether the record exists
+organization_tmp = organization_tmp.withColumn(
+    "Load_Type",
+    when(organization_tmp["raw_Account_Name"].isNotNull(), "Update")  # If it exists, it's an Update
+    .otherwise("Insert")  # If it does not exist, it's an Insert
+)
+
+
+
+# Step 5: Drop the extra columns that were renamed
+organization_temp = organization_tmp.drop(*[col for col in organization_tmp.columns if col.startswith("raw_")])
+
 
 # Overwrite the Tmp_Organisation table with the updated schema
 organization_temp.write.format("delta") \

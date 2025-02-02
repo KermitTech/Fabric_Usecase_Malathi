@@ -1,10 +1,11 @@
 -- Step 1: Create the stored procedure with a parameter for batch_id
+
 CREATE PROCEDURE [salesforce_CRM].[Reconcile_Data] (@BatchID INT)
 AS
 BEGIN
 
     --Truncate the table
-    TRUNCATE TABLE [salesforce_CRM].[Reconciliation_Report];
+    --TRUNCATE TABLE [salesforce_CRM].[Reconciliation_Report];
 
     -- Step 2: Check if the target reconciliation table exists
     IF NOT EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = 'Reconciliation_Report')
@@ -18,6 +19,8 @@ BEGIN
             BatchID_Actual INT,
             MaxValue_Discrepancy VARCHAR(500),
             BatchID_Discrepancy VARCHAR(500),
+            Rows_Inserted INT,
+            Rows_Updated INT,
             RunTimestamp DATETIME2(3) -- This will be populated during insert
         );
     END
@@ -29,73 +32,75 @@ BEGIN
             MaxValue AS MaxValue_Expected,
             BatchValue AS BatchID_Expected
         FROM [Campaign_Bronze_Layer].[salesforce].[Control_Table]
-        WHERE TableName IN ('Organization', 'Opportunities', 'Contact', 'Tmp_Organisation', 'Tmp_Opportunities', 'Tmp_Contact', 'Staging_Organisation', 'Staging_Opportunities', 'Staging_Contact')
+        WHERE TableName IN ('Organisation', 'Opportunities', 'Contact', 'Tmp_Organisation', 'Stg_Organisation','Tmp_Opportunities', 'Tmp_Contact', 'Staging_Organisation', 'Staging_Opportunities', 'Staging_Contact')
     )
     
     -- Step 4: Insert reconciliation data into the reconciliation table
-    INSERT INTO [salesforce_CRM].[Reconciliation_Report] (TableName, MaxValue_Expected, MaxValue_Actual, BatchID_Expected, BatchID_Actual, MaxValue_Discrepancy, BatchID_Discrepancy, RunTimestamp)
+    INSERT INTO [salesforce_CRM].[Reconciliation_Report] (TableName, MaxValue_Expected, MaxValue_Actual, BatchID_Expected, BatchID_Actual, MaxValue_Discrepancy, BatchID_Discrepancy, Rows_Inserted, Rows_Updated, RunTimestamp)
     SELECT 
-        t.TableName,
-        coalesce(ev.MaxValue_Expected,CAST('1991-01-01' AS DATETIME)) as MaxValue_Expected,
-        COALESCE(CAST(MAX([CreatedDate]) AS DATETIME), CAST('1991-01-01' AS DATETIME)) AS MaxValue_Actual,
+        ev.TableName,
+        coalesce(ev.MaxValue_Expected,CAST('1990-01-01' AS DATETIME)) as MaxValue_Expected,
+        COALESCE(CAST(MAX([CreatedDate]) AS DATETIME), CAST('1990-01-01' AS DATETIME)) AS MaxValue_Actual,
         coalesce(ev.BatchID_Expected, 0) as BatchID_Expected,
         coalesce(MAX(t.Batch_id), 0) AS BatchID_Actual,
         CASE
-            WHEN coalesce(ev.MaxValue_Expected,CAST('1991-01-01' AS DATETIME)) <> COALESCE(CAST(MAX([CreatedDate]) AS DATETIME), CAST('1991-01-01' AS DATETIME)) THEN 'Mismatch in MaxValue'
+            WHEN coalesce(ev.MaxValue_Expected,CAST('1990-01-01' AS DATETIME)) <> COALESCE(CAST(MAX([CreatedDate]) AS DATETIME), CAST('1990-01-01' AS DATETIME)) THEN 'Mismatch in MaxValue'
             ELSE 'No Discrepancy'
         END AS MaxValue_Discrepancy,
         CASE
             WHEN coalesce(ev.BatchID_Expected, 0) <> coalesce(MAX(t.Batch_id), 0) THEN 'Mismatch in BatchID'
             ELSE 'No Discrepancy'
         END AS BatchID_Discrepancy,
+        SUM(CASE WHEN t.Load_Type = 'Insert' THEN 1 ELSE 0 END) AS Rows_Inserted,
+        SUM(CASE WHEN t.Load_Type = 'Update' THEN 1 ELSE 0 END) AS Rows_Updated,
         SYSDATETIME() AS RunTimestamp -- Insert the current timestamp during each run
     FROM (
         -- Combine the data from all tables with aggregation for Insert and Update counts
-        SELECT 'Organization' AS TableName, CreatedDate, Batch_id
+        SELECT 'Organisation' AS TableName, CreatedDate, Batch_id, Load_Type
         FROM [Campaign_Bronze_Layer].[salesforce].[Organisation]
         WHERE Batch_id = @BatchID
         
         UNION ALL
         
-        SELECT 'Organization' AS TableName, CreatedDate, Batch_id
+        SELECT 'Tmp_Organisation' AS TableName, CreatedDate, Batch_id as Batch_id, Load_Type
         FROM [Campaign_Bronze_Layer].[salesforce].[Tmp_Organisation]
         WHERE Batch_id = @BatchID
         
         UNION ALL
         
-        SELECT 'Organization' AS TableName, CreatedDate, Batch_id
+        SELECT 'Stg_Organisation' AS TableName, CreatedDate, Batch_id, Load_Type
         FROM [Silver_Layer].[Salesforce_CRM].[staging_organisation]
         WHERE Batch_id = @BatchID
         
         UNION ALL
         
-        SELECT 'Opportunities' AS TableName, CreatedDate, Batch_id
+        SELECT 'Opportunities' AS TableName, CreatedDate, Batch_id, Load_Type
         FROM [Campaign_Bronze_Layer].[salesforce].[Opportunities]
         WHERE Batch_id = @BatchID
         
         UNION ALL
         
-        SELECT 'Tmp_Opportunities' AS TableName, CreatedDate, null as Batch_id
+        SELECT 'Tmp_Opportunities' AS TableName, CreatedDate, 0 as Batch_id, null as Load_Type
         FROM [Campaign_Bronze_Layer].[salesforce].[Tmp_Opportunities]
-        --WHERE Batch_id = @BatchID
+       -- WHERE Batch_id = @BatchID
         
         UNION ALL
         
-        SELECT 'Contact' AS TableName, CreatedDate, Batch_id
+        SELECT 'Contact' AS TableName, CreatedDate, Batch_id, Load_Type
         FROM [Campaign_Bronze_Layer].[salesforce].[Contact]
         WHERE Batch_id = @BatchID
         
         UNION ALL
         
-        SELECT 'Tmp_Contact' AS TableName, CreatedDate, null as Batch_id
+        SELECT 'Tmp_Contact' AS TableName, CreatedDate, 0 as Batch_id, null as Load_Type
         FROM [Campaign_Bronze_Layer].[salesforce].[Tmp_Contact]
        -- WHERE Batch_id = @BatchID
         
     ) t
-    LEFT JOIN ExpectedValues ev
+    RIGHT JOIN ExpectedValues ev
         ON 
         t.TableName = ev.TableName
-        GROUP BY t.TableName, coalesce(ev.MaxValue_Expected,CAST('1991-01-01' AS DATETIME)),
+    GROUP BY ev.TableName, coalesce(ev.MaxValue_Expected,CAST('1990-01-01' AS DATETIME)),
         coalesce(ev.BatchID_Expected, 0)
 
 END;
