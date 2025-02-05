@@ -332,7 +332,7 @@
         "name": "Get_Tgt_MaxValue",
         "dependsOn": [
           {
-            "activity": "Organisation_Insert_Update",
+            "activity": "Invoke pipeline1",
             "dependencyConditions": [
               "Succeeded"
             ]
@@ -684,6 +684,37 @@
         "dependsOn": [
           {
             "activity": "Office 365 Outlook1",
+            "dependencyConditions": [
+              "Succeeded"
+            ]
+          }
+        ]
+      },
+      {
+        "type": "InvokePipeline",
+        "typeProperties": {
+          "parameters": {
+            "contact_max_value": "@{variables('set_max_value')}"
+          },
+          "waitOnCompletion": true,
+          "workspaceId": "00000000-0000-0000-0000-000000000000",
+          "pipelineId": "645ac90c-01d9-a532-45ed-0d478421924f",
+          "operationType": "InvokeFabricPipeline"
+        },
+        "externalReferences": {
+          "connection": "e44e2819-7516-4f77-a04c-0570aca02701"
+        },
+        "policy": {
+          "timeout": "0.12:00:00",
+          "retry": 0,
+          "retryIntervalInSeconds": 30,
+          "secureInput": false,
+          "secureOutput": false
+        },
+        "name": "Invoke pipeline1",
+        "dependsOn": [
+          {
+            "activity": "Organisation_Insert_Update",
             "dependencyConditions": [
               "Succeeded"
             ]

@@ -1,0 +1,242 @@
+{
+  "properties": {
+    "activities": [
+      {
+        "type": "TridentNotebook",
+        "typeProperties": {
+          "notebookId": "fd578424-f5a7-82fe-47ba-af28d0bdba5b",
+          "workspaceId": "00000000-0000-0000-0000-000000000000",
+          "parameters": {
+            "get_batch_id": {
+              "value": "1",
+              "type": "int"
+            }
+          }
+        },
+        "policy": {
+          "timeout": "0.12:00:00",
+          "retry": 0,
+          "retryIntervalInSeconds": 30,
+          "secureInput": false,
+          "secureOutput": false
+        },
+        "name": "Contact_Insert_Update_Script",
+        "dependsOn": [
+          {
+            "activity": "Copy Contact",
+            "dependencyConditions": [
+              "Succeeded"
+            ]
+          }
+        ]
+      },
+      {
+        "type": "Copy",
+        "typeProperties": {
+          "source": {
+            "type": "SalesforceSource",
+            "query": {
+              "value": "SELECT \n    FirstName, \n    LastName, \n    Account.Name, \n    Title, \n    LastActivityDate, \n    Email, \n    Phone, \n    MobilePhone, \n    MailingState, \n    MailingCountry, \n    Account.Owner.Name, \n    CreatedDate\nFROM Contact \nWHERE CreatedDate > @{pipeline().parameters.contact_max_value}",
+              "type": "Expression"
+            },
+            "includeDeletedObjects": false,
+            "datasetSettings": {
+              "type": "SalesforceObject",
+              "typeProperties": {
+                "objectApiName": "00Od1000000Ze7REAS"
+              },
+              "schema": [],
+              "externalReferences": {
+                "connection": "dfcc8c00-c3f1-489d-81cb-68d3c4b016ef"
+              },
+              "annotations": []
+            }
+          },
+          "sink": {
+            "type": "LakehouseTableSink",
+            "tableActionOption": "OverwriteSchema",
+            "partitionOption": "None",
+            "datasetSettings": {
+              "type": "LakehouseTable",
+              "typeProperties": {
+                "schema": "salesforce",
+                "table": "Tmp_Contact"
+              },
+              "schema": [],
+              "linkedService": {
+                "name": "Campaign_Bronze_Layer",
+                "properties": {
+                  "type": "Lakehouse",
+                  "typeProperties": {
+                    "artifactId": "880f9bc4-7f7e-4049-95b2-53e7bd965f00",
+                    "workspaceId": "00000000-0000-0000-0000-000000000000",
+                    "rootFolder": "Tables"
+                  },
+                  "annotations": []
+                }
+              },
+              "annotations": []
+            }
+          },
+          "translator": {
+            "type": "TabularTranslator",
+            "mappings": [
+              {
+                "source": {
+                  "name": "FirstName",
+                  "type": "String",
+                  "physicalType": "string"
+                },
+                "sink": {
+                  "name": "FirstName",
+                  "physicalType": "string"
+                }
+              },
+              {
+                "source": {
+                  "name": "LastName",
+                  "type": "String",
+                  "physicalType": "string"
+                },
+                "sink": {
+                  "name": "LastName",
+                  "physicalType": "string"
+                }
+              },
+              {
+                "source": {
+                  "name": "Account.Name",
+                  "type": "String",
+                  "physicalType": "string"
+                },
+                "sink": {
+                  "name": "Account_Name",
+                  "physicalType": "string"
+                }
+              },
+              {
+                "source": {
+                  "name": "Account.Owner.Name",
+                  "type": "String",
+                  "physicalType": "string"
+                },
+                "sink": {
+                  "name": "Account_Owner_Name",
+                  "physicalType": "string"
+                }
+              },
+              {
+                "source": {
+                  "name": "Title",
+                  "type": "String",
+                  "physicalType": "string"
+                },
+                "sink": {
+                  "name": "Title",
+                  "physicalType": "string"
+                }
+              },
+              {
+                "source": {
+                  "name": "LastActivityDate",
+                  "type": "DateTime",
+                  "physicalType": "date"
+                },
+                "sink": {
+                  "name": "LastActivityDate",
+                  "physicalType": "timestamp"
+                }
+              },
+              {
+                "source": {
+                  "name": "Email",
+                  "type": "String",
+                  "physicalType": "email"
+                },
+                "sink": {
+                  "name": "Email",
+                  "physicalType": "string"
+                }
+              },
+              {
+                "source": {
+                  "name": "Phone",
+                  "type": "String",
+                  "physicalType": "phone"
+                },
+                "sink": {
+                  "name": "Phone",
+                  "physicalType": "string"
+                }
+              },
+              {
+                "source": {
+                  "name": "MobilePhone",
+                  "type": "String",
+                  "physicalType": "phone"
+                },
+                "sink": {
+                  "name": "MobilePhone",
+                  "physicalType": "string"
+                }
+              },
+              {
+                "source": {
+                  "name": "MailingState",
+                  "type": "String",
+                  "physicalType": "string"
+                },
+                "sink": {
+                  "name": "MailingState",
+                  "physicalType": "string"
+                }
+              },
+              {
+                "source": {
+                  "name": "MailingCountry",
+                  "type": "String",
+                  "physicalType": "string"
+                },
+                "sink": {
+                  "name": "MailingCountry",
+                  "physicalType": "string"
+                }
+              },
+              {
+                "source": {
+                  "name": "CreatedDate",
+                  "type": "DateTime",
+                  "physicalType": "datetime"
+                },
+                "sink": {
+                  "name": "CreatedDate",
+                  "physicalType": "timestamp"
+                }
+              }
+            ],
+            "typeConversion": true,
+            "typeConversionSettings": {
+              "allowDataTruncation": true,
+              "treatBooleanAsNumber": false
+            }
+          },
+          "enableStaging": false
+        },
+        "policy": {
+          "timeout": "0.12:00:00",
+          "retry": 0,
+          "retryIntervalInSeconds": 30,
+          "secureInput": false,
+          "secureOutput": false
+        },
+        "name": "Copy Contact",
+        "dependsOn": []
+      }
+    ],
+    "parameters": {
+      "contact_max_value": {
+        "type": "string"
+      }
+    }
+  }
+}
