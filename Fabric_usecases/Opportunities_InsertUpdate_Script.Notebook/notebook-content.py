@@ -171,3 +171,127 @@ print(f"Tmp_Opportunities table updated with additional columns: Batch_id and Lo
 # META   "language": "python",
 # META   "language_group": "synapse_pyspark"
 # META }
+
+# CELL ********************
+
+from pyspark.sql.functions import col, current_timestamp, lit, when
+from pyspark.sql.types import StructType, StructField, StringType, TimestampType
+from delta.tables import DeltaTable
+
+# Define paths
+oppr_temp_path = "abfss://Malathi@onelake.dfs.fabric.microsoft.com/Campaign_Bronze_Layer.Lakehouse/Tables/salesforce/Tmp_Opportunities"
+oppr_table_path = "abfss://Malathi@onelake.dfs.fabric.microsoft.com/Campaign_Bronze_Layer.Lakehouse/Tables/salesforce/Opportunities"
+control_table_path = "abfss://Malathi@onelake.dfs.fabric.microsoft.com/Campaign_Bronze_Layer.Lakehouse/Tables/salesforce/Control_Table"
+
+batch_id = get_batch_id
+
+# Read the temporary table
+oppr_temp_df = spark.read.format("delta").load(oppr_temp_path)
+
+oppr_temp_df.show()
+
+
+# Merge into the destination Delta table
+oppr_table = DeltaTable.forPath(spark, oppr_table_path)
+
+
+# Perform the merge and capture the inserted rows count
+merge_result = oppr_table.alias("target").merge(
+    oppr_temp_df.alias("source"),
+    "target.Account_Name = source.Account_Name"
+).whenMatchedUpdate(set={
+    "target.Opportunity_Name": col("source.Opportunity_Name"),
+    "target.Amount": col("source.Amount"),
+    "target.Probability": col("source.Probability"),
+    "target.LastModifiedBy_Name": col("source.LastModifiedBy_Name"),
+    "target.Owner_Name": "source.Owner_Name",
+    "target.Load_Type": lit("Update"),
+    "target.UpdatedDate": current_timestamp(),
+    "target.Batch_id": lit(batch_id)
+}).whenNotMatchedInsert(values={
+    "target.Opportunity_Name": col("source.Opportunity_Name"),
+    "target.Amount": col("source.Amount"),
+    "target.Probability": col("source.Probability"),
+    "target.Account_Name": col("source.Account_Name"),
+    "target.LastModifiedBy_Name": col("source.LastModifiedBy_Name"),
+    "target.Owner_Name": "source.Owner_Name",
+    "target.Load_Type": lit("Update"),
+    "target.CreatedDate": "source.CreatedDate",
+    "target.UpdatedDate": current_timestamp(),
+    "target.Batch_id": lit(batch_id)
+}).execute()
+
+
+inserted_rows_df = oppr_temp_df.alias("source").join(
+    oppr_table.toDF().alias("target"), 
+    col("source.Account_Name") == col("target.Account_Name"), 
+    "inner"  # This will give us the rows that are now present in the target table
+).filter((col("target.Batch_id") == lit(batch_id))  & (col("target.Load_Type") == lit("Insert"))) # Only select rows that were inserted in source
+
+inserted_rows_count = inserted_rows_df.count()
+
+print("Total records inserted:", inserted_rows_count)
+
+
+if inserted_rows_count > 0:
+    # Calculate the max created date from the inserted rows
+    max_created_date = oppr_table.toDF().agg({"CreatedDate": "max"}).collect()[0][0]
+    
+
+    # Explicitly define the schema for the control entry
+    control_entry_schema = StructType([
+        StructField("TableName", StringType(), True),
+        StructField("MaxValue", TimestampType(), True),
+        StructField("Batch_id", StringType(), True),
+        StructField("LastUpdated", TimestampType(), True),
+        StructField("LastUpdatedBy", StringType(), True),
+    ])
+
+    # Prepare the new control entry with correct schema
+    new_control_entry = [
+        {
+            "TableName": "Opportunities",
+            "MaxValue": max_created_date,
+            "Batch_id": batch_id,  # Ensure batch_id is passed earlier
+            "LastUpdated": None,  # Will be replaced by current_timestamp
+            "LastUpdatedBy": ""  # Adjust based on your logic
+        }
+    ]
+
+    # Convert the new control entry to a DataFrame
+    new_control_entry_df = spark.createDataFrame(new_control_entry, schema=control_entry_schema) \
+        .withColumn("LastUpdated", current_timestamp())
+
+
+    
+    # Check if the control table already exists
+    control_table = DeltaTable.forPath(spark, control_table_path)
+    
+    # Merge into the control table
+    control_table.alias("target_control").merge(
+        new_control_entry_df.alias("source_control"),
+        "target_control.TableName = source_control.TableName"
+    ).whenMatchedUpdate(set={
+        "target_control.MaxValue": col("source_control.MaxValue"),
+        "target_control.BatchValue": col("source_control.Batch_id"),
+        "target_control.LastUpdated": col("source_control.LastUpdated")
+    }).whenNotMatchedInsert(values={
+        "target_control.TableName": col("source_control.TableName"),
+        "target_control.BatchValue": col("source_control.Batch_id"),
+        "target_control.MaxValue": col("source_control.MaxValue"),
+        "target_control.LastUpdated": col("source_control.LastUpdated")
+    }).execute()
+
+    print(f"Control table updated for 'Opportunities' with MaxValue: {max_created_date}.")
+else:
+    print("No new inserts in Opportunities. Control table not updated.")
+
+
+
+
+# METADATA ********************
+
+# META {
+# META   "language": "python",
+# META   "language_group": "synapse_pyspark"
+# META }
