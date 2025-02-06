@@ -9,7 +9,7 @@
 # META   "dependencies": {}
 # META }
 
-# CELL ********************
+# PARAMETERS CELL ********************
 
 get_batch_id = 1
 

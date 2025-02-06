@@ -2,44 +2,12 @@
   "properties": {
     "activities": [
       {
-        "type": "TridentNotebook",
-        "typeProperties": {
-          "notebookId": "fd578424-f5a7-82fe-47ba-af28d0bdba5b",
-          "workspaceId": "00000000-0000-0000-0000-000000000000",
-          "parameters": {
-            "get_batch_id": {
-              "value": {
-                "value": "@{variables('contact_batch_value')}",
-                "type": "Expression"
-              },
-              "type": "int"
-            }
-          }
-        },
-        "policy": {
-          "timeout": "0.12:00:00",
-          "retry": 0,
-          "retryIntervalInSeconds": 30,
-          "secureInput": false,
-          "secureOutput": false
-        },
-        "name": "Contact_Insert_Update_Script",
-        "dependsOn": [
-          {
-            "activity": "Copy Contact",
-            "dependencyConditions": [
-              "Succeeded"
-            ]
-          }
-        ]
-      },
-      {
         "type": "Copy",
         "typeProperties": {
           "source": {
             "type": "SalesforceSource",
             "query": {
-              "value": "SELECT \n    FirstName, \n    LastName, \n    Account.Name, \n    Title, \n    LastActivityDate, \n    Email, \n    Phone, \n    MobilePhone, \n    MailingState, \n    MailingCountry, \n    Account.Owner.Name, \n    CreatedDate\nFROM Contact \nWHERE CreatedDate > @{variables('contact_max_value')}",
+              "value": "SELECT \n    Account.Name, \n    Phone, \n    Account.Owner.Name,\n    CreatedDate\nFROM Account\nwhere \nCreatedDate > \n@{variables('org_max_value')}",
               "type": "Expression"
             },
             "includeDeletedObjects": false,
@@ -63,7 +31,7 @@
               "type": "LakehouseTable",
               "typeProperties": {
                 "schema": "salesforce",
-                "table": "Tmp_Contact"
+                "table": "Tmp_Organisation"
               },
               "schema": [],
               "linkedService": {
@@ -86,29 +54,7 @@
             "mappings": [
               {
                 "source": {
-                  "name": "FirstName",
-                  "type": "String",
-                  "physicalType": "string"
-                },
-                "sink": {
-                  "name": "FirstName",
-                  "physicalType": "string"
-                }
-              },
-              {
-                "source": {
-                  "name": "LastName",
-                  "type": "String",
-                  "physicalType": "string"
-                },
-                "sink": {
-                  "name": "LastName",
-                  "physicalType": "string"
-                }
-              },
-              {
-                "source": {
-                  "name": "Account.Name",
+                  "name": "Name",
                   "type": "String",
                   "physicalType": "string"
                 },
@@ -119,89 +65,23 @@
               },
               {
                 "source": {
-                  "name": "Account.Owner.Name",
+                  "name": "Phone",
+                  "type": "String",
+                  "physicalType": "phone"
+                },
+                "sink": {
+                  "name": "Phone",
+                  "physicalType": "string"
+                }
+              },
+              {
+                "source": {
+                  "name": "Owner.Name",
                   "type": "String",
                   "physicalType": "string"
                 },
                 "sink": {
                   "name": "Account_Owner_Name",
-                  "physicalType": "string"
-                }
-              },
-              {
-                "source": {
-                  "name": "Title",
-                  "type": "String",
-                  "physicalType": "string"
-                },
-                "sink": {
-                  "name": "Title",
-                  "physicalType": "string"
-                }
-              },
-              {
-                "source": {
-                  "name": "LastActivityDate",
-                  "type": "DateTime",
-                  "physicalType": "date"
-                },
-                "sink": {
-                  "name": "LastActivityDate",
-                  "physicalType": "timestamp"
-                }
-              },
-              {
-                "source": {
-                  "name": "Email",
-                  "type": "String",
-                  "physicalType": "email"
-                },
-                "sink": {
-                  "name": "Email",
-                  "physicalType": "string"
-                }
-              },
-              {
-                "source": {
-                  "name": "Phone",
-                  "type": "String",
-                  "physicalType": "phone"
-                },
-                "sink": {
-                  "name": "Phone",
-                  "physicalType": "string"
-                }
-              },
-              {
-                "source": {
-                  "name": "MobilePhone",
-                  "type": "String",
-                  "physicalType": "phone"
-                },
-                "sink": {
-                  "name": "MobilePhone",
-                  "physicalType": "string"
-                }
-              },
-              {
-                "source": {
-                  "name": "MailingState",
-                  "type": "String",
-                  "physicalType": "string"
-                },
-                "sink": {
-                  "name": "MailingState",
-                  "physicalType": "string"
-                }
-              },
-              {
-                "source": {
-                  "name": "MailingCountry",
-                  "type": "String",
-                  "physicalType": "string"
-                },
-                "sink": {
-                  "name": "MailingCountry",
                   "physicalType": "string"
                 }
               },
@@ -232,10 +112,42 @@
           "secureInput": false,
           "secureOutput": false
         },
-        "name": "Copy Contact",
+        "name": "Copy Account",
         "dependsOn": [
           {
             "activity": "Set_max_batchvalue",
+            "dependencyConditions": [
+              "Succeeded"
+            ]
+          }
+        ]
+      },
+      {
+        "type": "TridentNotebook",
+        "typeProperties": {
+          "notebookId": "a054da8d-fbd0-bea0-4de8-59b206467f1d",
+          "workspaceId": "00000000-0000-0000-0000-000000000000",
+          "parameters": {
+            "get_batch_id": {
+              "value": {
+                "value": "@{variables('org_batch_value')}",
+                "type": "Expression"
+              },
+              "type": "int"
+            }
+          }
+        },
+        "policy": {
+          "timeout": "0.12:00:00",
+          "retry": 0,
+          "retryIntervalInSeconds": 30,
+          "secureInput": false,
+          "secureOutput": false
+        },
+        "name": "Organisation_Insert_Update",
+        "dependsOn": [
+          {
+            "activity": "Copy Account",
             "dependencyConditions": [
               "Succeeded"
             ]
@@ -248,8 +160,8 @@
           "inputs": {
             "body": {
               "To": "malathi.s@kermittech.no",
-              "Subject": "Contact Insert/Updarte Pipeline ran successfully",
-              "Body": "<p>Hi,</p>\n<p>Pipeline ran with error. Please find the below error details.</p>\n<p><br></p>\n<p>Pipeline Name : @{pipeline().PipelineName}</p>\n<p>@{pipeline()?.TriggeredByPipelineName}</p>\n<p>Recent Batch ID : @{pipeline()?.TriggeredByPipelineName}</p>\n<p>@{variables('contact_err_msg')}</p>\n<p>@{variables('contact_activity_name')}</p>\n<p><br></p>\n<p></p>",
+              "Subject": "Organisation Insert/Updarte Pipeline Status",
+              "Body": "<p>Hi,</p>\n<p>Pipeline ran with error. Please find the below error details.</p>\n<p><br></p>\n<p>Pipeline Name : @{pipeline().PipelineName}</p>\n<p>@{pipeline()?.TriggeredByPipelineName}</p>\n<p>Recent Batch ID : @{variables('org_batch_value')}</p>\n<p><br></p>\n<p>@{variables('org_err_msg')}</p>\n<p><br></p>\n<p>@{variables('org_activity_name')}</p>",
               "Sensitivity": "",
               "Importance": "Normal"
             },
@@ -321,7 +233,7 @@
             },
             "ErrorDescription": {
               "value": {
-                "value": "@replace(concat(\n    activity('Pipeline_Audit_Logs')?.Error?.Message, '|',\n    activity('Copy Contact')?.Error?.Message, '|', \n    activity('Contact_Insert_Update_Script')?.Error?.Message\n), '|', '')\n\n",
+                "value": "@replace(concat(\n    activity('Copy Account')?.Error?.Message, '|', \n    activity('Organisation_Insert_Update')?.Error?.Message\n), '|', '')",
                 "type": "Expression"
               },
               "type": "string"
@@ -338,7 +250,7 @@
         "name": "Pipeline_Audit_Logs_copy1",
         "dependsOn": [
           {
-            "activity": "Contact_Insert_Update_Script",
+            "activity": "Organisation_Insert_Update",
             "dependencyConditions": [
               "Completed"
             ]
@@ -348,9 +260,9 @@
       {
         "type": "SetVariable",
         "typeProperties": {
-          "variableName": "contact_activity_name",
+          "variableName": "org_activity_name",
           "value": {
-            "value": "@if(\n    not(empty(activity('Copy Contact')?.Error?.Message)), \n    concat('Error in Pre Create Tables: ', activity('Copy Contact')?.Error?.Message), \n    if(\n        not(empty(activity('Contact_Insert_Update_Script')?.Error?.Message)), \n        concat('Error in Contact_InsertUpdate_Script: ', activity('Contact_Insert_Update_Script')?.Error?.Message), \n                'Successfully Ran'\n            )\n        )\n",
+            "value": "@if(\n    not(empty(activity('Copy Account')?.Error?.Message)), \n    concat('Error in Pre Create Tables: ', activity('Copy Account')?.Error?.Message), \n    if(\n        not(empty(activity('Organisation_Insert_Update')?.Error?.Message)), \n        concat('Error in Get_Max_Value: ', activity('Organisation_Insert_Update')?.Error?.Message), \n                'Successfully Ran'\n            )\n        )\n",
             "type": "Expression"
           }
         },
@@ -376,7 +288,7 @@
         "name": "Wait1",
         "dependsOn": [
           {
-            "activity": "Contact_Insert_Update_Script",
+            "activity": "Organisation_Insert_Update",
             "dependencyConditions": [
               "Succeeded"
             ]
@@ -386,9 +298,9 @@
       {
         "type": "SetVariable",
         "typeProperties": {
-          "variableName": "contact_err_msg",
+          "variableName": "org_err_msg",
           "value": {
-            "value": "@replace(concat(\n    activity('Copy Contact')?.Error?.Message, '|', \n    activity('Contact_Insert_Update_Script')?.Error?.Message\n), '|', '')",
+            "value": "@replace(concat(\n    activity('Copy Account')?.Error?.Message, '|', \n    activity('Organisation_Insert_Update')?.Error?.Message\n), '|', '')",
             "type": "Expression"
           }
         },
@@ -460,7 +372,7 @@
             },
             "ErrorDescription": {
               "value": {
-                "value": "@replace(concat(\n    activity('Pipeline_Audit_Logs')?.Error?.Message, '|',\n    activity('Copy Contact')?.Error?.Message, '|', \n    activity('Contact_Insert_Update_Script')?.Error?.Message\n), '|', '')",
+                "value": "@replace(concat(\n    activity('Copy Account')?.Error?.Message, '|', \n    activity('Organisation_Insert_Update')?.Error?.Message\n), '|', '')",
                 "type": "Expression"
               },
               "type": "string"
@@ -557,7 +469,7 @@
         "typeProperties": {
           "source": {
             "type": "DataWarehouseSource",
-            "sqlReaderQuery": " SELECT \n    'Contact' AS TableName,\n    COALESCE(MaxValue, '1990-01-01 00:00:00') AS max_value,\n    COALESCE(BatchValue, 0) + 1 AS batchvalue\nFROM [Campaign_Bronze_Layer].[salesforce].[Control_Table]\nWHERE TableName = 'Contact'\n\nUNION ALL\n\nSELECT \n    'Contact' AS TableName,\n    '1990-01-01 00:00:00' AS max_value,\n    1 AS batchvalue\nWHERE NOT EXISTS (\n    SELECT 1 \n    FROM [Campaign_Bronze_Layer].[salesforce].[Control_Table]\n    WHERE TableName = 'Contact'\n)",
+            "sqlReaderQuery": " SELECT \n    'Organisation' AS TableName,\n    COALESCE(MaxValue, '1990-01-01 00:00:00') AS max_value,\n    COALESCE(BatchValue, 0) + 1 AS batchvalue\nFROM [Campaign_Bronze_Layer].[salesforce].[Control_Table]\nWHERE TableName = 'Organisation'\n\nUNION ALL\n\nSELECT \n    'Organisation' AS TableName,\n    '1990-01-01 00:00:00' AS max_value,\n    1 AS batchvalue\nWHERE NOT EXISTS (\n    SELECT 1 \n    FROM [Campaign_Bronze_Layer].[salesforce].[Control_Table]\n    WHERE TableName = 'Organisation'\n)",
             "partitionOption": "None",
             "queryTimeout": "02:00:00"
           },
@@ -599,7 +511,7 @@
       {
         "type": "SetVariable",
         "typeProperties": {
-          "variableName": "contact_max_value",
+          "variableName": "org_max_value",
           "value": {
             "value": "@formatDateTime(activity('Get_Max_Value').output.firstRow.max_value, 'yyyy-MM-ddTHH:mm:ss+00:00')",
             "type": "Expression"
@@ -622,7 +534,7 @@
       {
         "type": "SetVariable",
         "typeProperties": {
-          "variableName": "contact_batch_value",
+          "variableName": "org_batch_value",
           "value": {
             "value": "@activity('Get_Max_Value').output.firstRow.batchvalue",
             "type": "Expression"

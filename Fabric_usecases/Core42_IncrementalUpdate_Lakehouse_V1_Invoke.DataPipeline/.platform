@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "DataPipeline",
+    "displayName": "Core42_IncrementalUpdate_Lakehouse_V1_Invoke"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "04682622-91bc-a6cf-434e-ce7878f7c377"
+  }
+}

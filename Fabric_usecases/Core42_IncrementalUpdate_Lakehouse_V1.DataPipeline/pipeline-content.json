@@ -219,7 +219,10 @@
           "workspaceId": "00000000-0000-0000-0000-000000000000",
           "parameters": {
             "get_batch_id": {
-              "value": "1",
+              "value": {
+                "value": "@{variables('set_batch_value')}",
+                "type": "Expression"
+              },
               "type": "int"
             }
           }
@@ -694,7 +697,11 @@
         "type": "InvokePipeline",
         "typeProperties": {
           "parameters": {
-            "contact_max_value": "@{variables('set_max_value')}"
+            "contact_max_value": "@{variables('set_max_value')}",
+            "contact_batch_value": {
+              "value": "@{variables('set_batch_value')}",
+              "type": "Expression"
+            }
           },
           "waitOnCompletion": true,
           "workspaceId": "00000000-0000-0000-0000-000000000000",
