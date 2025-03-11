@@ -1,0 +1,70 @@
+{
+  "formatVersion": "202409",
+  "lastModified": null,
+  "editingSession": {
+    "computeEngineSettings": {},
+    "editingSessionMashup": {
+      "mashupName": "Dataflow_test",
+      "queryGroups": [],
+      "documentLocale": "en-GB",
+      "queriesMetadata": {
+        "Account": {
+          "queryId": "43bbc8bc-f14e-4ebf-83f7-398cb90bbb03",
+          "queryName": "Account",
+          "queryGroupId": null,
+          "entityName": null,
+          "lastKnownIsCalculatedEntity": null,
+          "lastKnownIsLinkedEntity": null,
+          "lastKnownIsParameter": null,
+          "isHidden": false,
+          "lastKnownResultTypeName": null,
+          "loadEnabled": false,
+          "fieldsMetadata": {},
+          "deleteExistingDataOnLoad": false,
+          "hostProperties": {},
+          "jsonOutputDestinations": "{\"Destinations\":[{\"UpdateMethod\":{\"Kind\":\"Replace\"},\"ColumnMappings\":{\"Kind\":\"Automatic\"},\"Destination\":{\"Kind\":\"Script\",\"Script\":\"let\\r\\n  Pattern = Lakehouse.Contents([CreateNavigationProperties = false]),\\r\\n  Navigation_1 = Pattern{[workspaceId = \\\"c6ff84ef-9490-4ae1-b7c6-be106bd4cb8c\\\"]}[Data],\\r\\n  Navigation_2 = Navigation_1{[lakehouseId = \\\"a996a5ec-3d06-46cf-a50b-45a77716c300\\\"]}[Data],\\r\\n  TableNavigation = Navigation_2{[Id = \\\"Account\\\", ItemKind = \\\"Table\\\"]}?[Data]?\\r\\nin\\r\\n  TableNavigation\",\"IsNewTarget\":true}}]}",
+          "bindToDefaultOutputDestination": null,
+          "jsonIncrementalRefreshSettings": null
+        }
+      },
+      "connectionOverrides": [
+        {
+          "path": "https://login.salesforce.com/",
+          "kind": "Salesforce",
+          "provider": "DmtsFabric",
+          "connectionName": "{\"ClusterId\":\"1ea2a874-811a-42a0-8dae-9975856a50b8\",\"DatasourceId\":\"dfcc8c00-c3f1-489d-81cb-68d3c4b016ef\"}",
+          "credentialDetails": {},
+          "connectionParameters": {},
+          "privacyGroup": "None"
+        },
+        {
+          "path": "Lakehouse",
+          "kind": "Lakehouse",
+          "provider": "DmtsFabric",
+          "connectionName": "{\"ClusterId\":\"1ea2a874-811a-42a0-8dae-9975856a50b8\",\"DatasourceId\":\"587366c4-8cce-4d1c-a22c-41eacc8480ff\"}",
+          "credentialDetails": {},
+          "connectionParameters": {}
+        }
+      ],
+      "trustedConnections": [
+        {
+          "path": "Lakehouse",
+          "kind": "Lakehouse",
+          "provider": "DmtsFabric",
+          "connectionName": "{\"ClusterId\":\"1ea2a874-811a-42a0-8dae-9975856a50b8\",\"DatasourceId\":\"587366c4-8cce-4d1c-a22c-41eacc8480ff\"}",
+          "credentialDetails": {},
+          "connectionParameters": {}
+        }
+      ],
+      "useHostConnectionProvider": false,
+      "fastCombine": false,
+      "allowNativeQueries": true,
+      "skipAutomaticTypeAndHeaderDetection": false,
+      "hostProperties": {
+        "dataflowRefreshOutputFileFormat": "Parquet",
+        "enableDateTimeFieldsForStaging": "true",
+        "enablePublishWithoutLoadedQueries": "true"
+      }
+    }
+  }
+}

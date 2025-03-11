@@ -1,0 +1,15 @@
+[
+  {
+    "name": "gold_layer_campaign",
+    "path": "/Tables",
+    "target": {
+      "type": "OneLake",
+      "oneLake": {
+        "path": "Tables/gold_layer_campaign",
+        "itemId": "9c8c726e-5195-460a-8910-ba8f04efd881",
+        "workspaceId": "00000000-0000-0000-0000-000000000000",
+        "artifactType": "Lakehouse"
+      }
+    }
+  }
+]

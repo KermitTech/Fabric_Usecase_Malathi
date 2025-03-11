@@ -279,8 +279,8 @@
           "inputs": {
             "body": {
               "To": "malathi.s@kermittech.no",
-              "Subject": "Organisation Insert/Updarte Pipeline ran successfully",
-              "Body": "<p>Hi,</p>\n<p>Pipeline ran successfully. Please find the below details.</p>\n<p>Recent Batch ID : @{variables('set_batch_value')}</p>\n<p><br></p>\n<p>@{variables('Error_msg')}@{variables('Activity_Name')}</p>",
+              "Subject": "Fabric Incremental Load / Update pipeline Failed",
+              "Body": "<p>Hi,</p>\n<p>Please find the below error details.</p>\n<p>Recent Batch ID : @{variables('set_batch_value')}</p>\n<p><br></p>\n<p>@{variables('Error_msg')}@{variables('Activity_Name')}</p>",
               "Sensitivity": "",
               "Importance": "Normal"
             },
@@ -697,7 +697,10 @@
         "type": "InvokePipeline",
         "typeProperties": {
           "parameters": {
-            "contact_max_value": "@{variables('set_max_value')}",
+            "contact_max_value": {
+              "value": "@{variables('set_max_value')}",
+              "type": "Expression"
+            },
             "contact_batch_value": {
               "value": "@{variables('set_batch_value')}",
               "type": "Expression"
