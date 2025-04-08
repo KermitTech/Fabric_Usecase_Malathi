@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "Eventstream",
+    "displayName": "Kafka_IoT_Streaming"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "87c6d2ac-a653-a537-4d62-14e985e86e44"
+  }
+}

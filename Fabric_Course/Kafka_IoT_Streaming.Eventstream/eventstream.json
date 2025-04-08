@@ -1,0 +1,57 @@
+{
+  "sources": [
+    {
+      "id": "ba15e790-0850-4112-8b35-97964f1f46b2",
+      "name": "new-source",
+      "type": "ApacheKafka",
+      "properties": {
+        "dataConnectionId": "0eeee26a-0000-4407-8bfb-ad9db46792c8",
+        "topic": "productNewTopic",
+        "consumerGroupName": "streamsetsDataCollector",
+        "autoOffsetReset": "Earliest",
+        "saslMechanism": "PLAIN",
+        "securityProtocol": "PLAINTEXT"
+      }
+    }
+  ],
+  "destinations": [
+    {
+      "id": "299d6b0c-e594-4865-8fe4-47f1d05dffc2",
+      "name": "kafka-IoT-Streaming",
+      "type": "Lakehouse",
+      "properties": {
+        "workspaceId": "00000000-0000-0000-0000-000000000000",
+        "itemId": "058e36bd-f06f-a6d4-4802-27659c3d1e3c",
+        "schema": "Supply_Chain",
+        "deltaTable": "kafka_IoT_Streaming",
+        "inputSerialization": {
+          "type": "Json",
+          "properties": {
+            "encoding": "UTF8"
+          }
+        }
+      },
+      "inputNodes": [
+        {
+          "name": "Kafka_IoT_Streaming-stream"
+        }
+      ],
+      "inputSchemas": []
+    }
+  ],
+  "streams": [
+    {
+      "id": "015add5b-08d5-4e61-9577-953412da1bb3",
+      "name": "Kafka_IoT_Streaming-stream",
+      "type": "DefaultStream",
+      "properties": {},
+      "inputNodes": [
+        {
+          "name": "new-source"
+        }
+      ]
+    }
+  ],
+  "operators": [],
+  "compatibilityLevel": "1.0"
+}

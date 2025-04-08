@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "DataPipeline",
+    "displayName": "Course01_Sales_Automation_Pipeline_V1"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "db5a5d3f-3db6-87fd-4951-92067aea2f9e"
+  }
+}
