@@ -235,7 +235,7 @@ spark = SparkSession.builder.appName("FutureDataExample").getOrCreate()
 # Define the schema
 schema = StructType([
     StructField("ProductID", IntegerType(), True),
-    StructField("StoreID", IntegerType(), True),
+    StructField("StoreID", StringType(), True),
     StructField("Date", DateType(), True),
     StructField("StockLevel", IntegerType(), True),
     StructField("TotalQuantitySold", IntegerType(), True),
@@ -296,32 +296,6 @@ table_name = "abfss://Malathi@onelake.dfs.fabric.microsoft.com/Silver.Lakehouse/
 
 # Step 4: Save Cleaned Inventory Data to the Lakehouse as a Delta Table
 final_forecast.write.format("delta").mode("overwrite").save(table_name)
-
-# METADATA ********************
-
-# META {
-# META   "language": "python",
-# META   "language_group": "synapse_pyspark"
-# META }
-
-# CELL ********************
-
-# Linear Regression
-
-# Initialize the Linear Regression model
-lr = LinearRegression(featuresCol="features", labelCol="TotalQuantitySold")
-
-# Train the model
-lr_model = lr.fit(train_data)
-
-# Make predictions
-predictions = lr_model.transform(test_data)
-
-# Evaluate the model
-evaluator = RegressionEvaluator(labelCol="TotalQuantitySold", predictionCol="prediction", metricName="rmse")
-rmse = evaluator.evaluate(predictions)
-print(f"Root Mean Squared Error (RMSE): {rmse}")
-
 
 # METADATA ********************
 

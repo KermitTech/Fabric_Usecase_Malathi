@@ -16,9 +16,9 @@
               "typeProperties": {
                 "location": {
                   "type": "AmazonS3Location",
-                  "bucketName": "myfabriccoursebucket",
+                  "bucketName": "mycoursefabricbucket",
                   "folderPath": "store",
-                  "fileName": "store_data.xlsx"
+                  "fileName": "store.xlsx"
                 },
                 "sheetName": "Sheet1",
                 "firstRowAsHeader": true
@@ -155,9 +155,15 @@
             },
             "datasetSettings": {
               "type": "MySqlTable",
+              "typeProperties": {
+                "tableName": {
+                  "value": "select * from demo.sales where transaction_id > @{variables('Set_max_value')}",
+                  "type": "Expression"
+                }
+              },
               "schema": [],
               "externalReferences": {
-                "connection": "1b358fc0-a556-4160-b5c4-55fd1e8448a6"
+                "connection": "afeed15f-1612-46e3-b308-d0f01939a9af"
               },
               "annotations": []
             }
@@ -334,9 +340,9 @@
               "typeProperties": {
                 "location": {
                   "type": "AmazonS3Location",
-                  "bucketName": "myfabriccoursebucket",
+                  "bucketName": "mycoursefabricbucket",
                   "folderPath": "product",
-                  "fileName": "raw_product.csv"
+                  "fileName": "product.csv"
                 },
                 "columnDelimiter": ",",
                 "quoteChar": "\"",
@@ -513,9 +519,9 @@
               "typeProperties": {
                 "location": {
                   "type": "AmazonS3Location",
-                  "bucketName": "myfabriccoursebucket",
+                  "bucketName": "mycoursefabricbucket",
                   "folderPath": "shipping",
-                  "fileName": "shipping_data.parquet"
+                  "fileName": "shipping.parquet"
                 },
                 "compressionCodec": "snappy"
               },
@@ -529,6 +535,7 @@
           "sink": {
             "type": "LakehouseTableSink",
             "tableActionOption": "Append",
+            "partitionOption": "None",
             "datasetSettings": {
               "type": "LakehouseTable",
               "typeProperties": {
@@ -581,7 +588,7 @@
       {
         "type": "SqlServerStoredProcedure",
         "typeProperties": {
-          "storedProcedureName": "[dbo].[UpsertFactSales]"
+          "storedProcedureName": "[dbo].[CreateFactTables]"
         },
         "linkedService": {
           "name": "Gold",
@@ -605,19 +612,7 @@
         "name": "Fact_Sales_Procedure",
         "dependsOn": [
           {
-            "activity": "Dim_Product_Procedure",
-            "dependencyConditions": [
-              "Succeeded"
-            ]
-          },
-          {
             "activity": "Dim_Store_Procedure",
-            "dependencyConditions": [
-              "Succeeded"
-            ]
-          },
-          {
-            "activity": "Dim_Date_Procedure",
             "dependencyConditions": [
               "Succeeded"
             ]
@@ -627,7 +622,7 @@
       {
         "type": "SqlServerStoredProcedure",
         "typeProperties": {
-          "storedProcedureName": "[dbo].[UpsertDimStore]"
+          "storedProcedureName": "[dbo].[CreateDimTables]"
         },
         "linkedService": {
           "name": "Gold",
@@ -651,75 +646,7 @@
         "name": "Dim_Store_Procedure",
         "dependsOn": [
           {
-            "activity": "Cleansing_store_data",
-            "dependencyConditions": [
-              "Succeeded"
-            ]
-          }
-        ]
-      },
-      {
-        "type": "SqlServerStoredProcedure",
-        "typeProperties": {
-          "storedProcedureName": "[dbo].[UpsertDimProduct]"
-        },
-        "linkedService": {
-          "name": "Gold",
-          "properties": {
-            "type": "DataWarehouse",
-            "typeProperties": {
-              "artifactId": "5aed95e5-3a2c-497b-ac98-82c55dc7b36d",
-              "endpoint": "a5kotaldwscevlccuy24crmqsy-56cp7ruqstquvn6gxyigxvglrq.datawarehouse.fabric.microsoft.com",
-              "workspaceId": "c6ff84ef-9490-4ae1-b7c6-be106bd4cb8c"
-            },
-            "annotations": []
-          }
-        },
-        "policy": {
-          "timeout": "0.12:00:00",
-          "retry": 0,
-          "retryIntervalInSeconds": 30,
-          "secureInput": false,
-          "secureOutput": false
-        },
-        "name": "Dim_Product_Procedure",
-        "dependsOn": [
-          {
-            "activity": "Cleansing_product_data",
-            "dependencyConditions": [
-              "Succeeded"
-            ]
-          }
-        ]
-      },
-      {
-        "type": "SqlServerStoredProcedure",
-        "typeProperties": {
-          "storedProcedureName": "[dbo].[UpsertDimDate]"
-        },
-        "linkedService": {
-          "name": "Gold",
-          "properties": {
-            "type": "DataWarehouse",
-            "typeProperties": {
-              "artifactId": "5aed95e5-3a2c-497b-ac98-82c55dc7b36d",
-              "endpoint": "a5kotaldwscevlccuy24crmqsy-56cp7ruqstquvn6gxyigxvglrq.datawarehouse.fabric.microsoft.com",
-              "workspaceId": "c6ff84ef-9490-4ae1-b7c6-be106bd4cb8c"
-            },
-            "annotations": []
-          }
-        },
-        "policy": {
-          "timeout": "0.12:00:00",
-          "retry": 0,
-          "retryIntervalInSeconds": 30,
-          "secureInput": false,
-          "secureOutput": false
-        },
-        "name": "Dim_Date_Procedure",
-        "dependsOn": [
-          {
-            "activity": "Cleansing_sales_data",
+            "activity": "Demand_Forecasting_Inventory_Script",
             "dependencyConditions": [
               "Succeeded"
             ]
@@ -767,9 +694,9 @@
               "typeProperties": {
                 "location": {
                   "type": "AmazonS3Location",
-                  "bucketName": "myfabriccoursebucket",
+                  "bucketName": "mycoursefabricbucket",
                   "folderPath": "customer",
-                  "fileName": "customer_data.csv"
+                  "fileName": "customer.csv"
                 },
                 "columnDelimiter": ",",
                 "quoteChar": "\"",
@@ -830,6 +757,124 @@
         "dependsOn": [
           {
             "activity": "Copy Shipping",
+            "dependencyConditions": [
+              "Succeeded"
+            ]
+          }
+        ]
+      },
+      {
+        "type": "TridentNotebook",
+        "typeProperties": {
+          "notebookId": "2ebd391e-c9f2-9fdb-4312-582bc33a5623",
+          "workspaceId": "00000000-0000-0000-0000-000000000000"
+        },
+        "policy": {
+          "timeout": "0.12:00:00",
+          "retry": 0,
+          "retryIntervalInSeconds": 30,
+          "secureInput": false,
+          "secureOutput": false
+        },
+        "name": "Cleansing_Customer_data",
+        "dependsOn": [
+          {
+            "activity": "Copy Sales data",
+            "dependencyConditions": [
+              "Succeeded"
+            ]
+          }
+        ]
+      },
+      {
+        "type": "TridentNotebook",
+        "typeProperties": {
+          "notebookId": "0a0ff0bf-e8c8-9ea9-4f3b-8326b680b89d",
+          "workspaceId": "00000000-0000-0000-0000-000000000000"
+        },
+        "policy": {
+          "timeout": "0.12:00:00",
+          "retry": 0,
+          "retryIntervalInSeconds": 30,
+          "secureInput": false,
+          "secureOutput": false
+        },
+        "name": "Cleansing_Inventory_Shipping",
+        "dependsOn": [
+          {
+            "activity": "Copy Sales data",
+            "dependencyConditions": [
+              "Succeeded"
+            ]
+          }
+        ]
+      },
+      {
+        "type": "RefreshDataflow",
+        "typeProperties": {
+          "dataflowId": "042bb11b-fa7d-42c0-80e5-eedc230ffa33",
+          "workspaceId": "c6ff84ef-9490-4ae1-b7c6-be106bd4cb8c",
+          "notifyOption": "NoNotification",
+          "dataflowType": "DataflowFabric"
+        },
+        "policy": {
+          "timeout": "0.12:00:00",
+          "retry": 0,
+          "retryIntervalInSeconds": 30,
+          "secureInput": false,
+          "secureOutput": false
+        },
+        "name": "Fact_Inventory_Shipping",
+        "dependsOn": [
+          {
+            "activity": "Fact_Sales_Procedure",
+            "dependencyConditions": [
+              "Succeeded"
+            ]
+          }
+        ]
+      },
+      {
+        "type": "TridentNotebook",
+        "typeProperties": {
+          "notebookId": "3f12720e-31aa-b6bc-48bb-7ecfbb88aa52",
+          "workspaceId": "00000000-0000-0000-0000-000000000000"
+        },
+        "policy": {
+          "timeout": "0.12:00:00",
+          "retry": 0,
+          "retryIntervalInSeconds": 30,
+          "secureInput": false,
+          "secureOutput": false
+        },
+        "name": "Demand_Forecasting_Inventory_Script",
+        "dependsOn": [
+          {
+            "activity": "Cleansing_sales_data",
+            "dependencyConditions": [
+              "Succeeded"
+            ]
+          },
+          {
+            "activity": "Cleansing_store_data",
+            "dependencyConditions": [
+              "Succeeded"
+            ]
+          },
+          {
+            "activity": "Cleansing_product_data",
+            "dependencyConditions": [
+              "Succeeded"
+            ]
+          },
+          {
+            "activity": "Cleansing_Customer_data",
+            "dependencyConditions": [
+              "Succeeded"
+            ]
+          },
+          {
+            "activity": "Cleansing_Inventory_Shipping",
             "dependencyConditions": [
               "Succeeded"
             ]

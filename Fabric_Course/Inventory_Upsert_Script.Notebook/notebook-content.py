@@ -32,7 +32,7 @@ spark = SparkSession.builder \
     .getOrCreate()
 
 # MySQL connection details
-host = "34.51.128.134"
+host = "34.51.141.170"
 user = "root"
 password = "StreamTra1ningSets!"
 database = "demo"
@@ -63,7 +63,7 @@ new_inventory_spark_df.show()
 # CELL ********************
 
 from delta.tables import DeltaTable
-from pyspark.sql.types import StructType, StructField, IntegerType, TimestampType, DateType
+from pyspark.sql.types import StructType, StructField, StringType, IntegerType, TimestampType, DateType
 
 # Define the Delta table path
 lakehouse_table_path = "abfss://Malathi@onelake.dfs.fabric.microsoft.com/Bronze.Lakehouse/Tables/Supply_Chain/raw_inventory"
@@ -76,7 +76,7 @@ if not DeltaTable.isDeltaTable(spark, lakehouse_table_path):
     schema = StructType([
         StructField("inventory_id", IntegerType(), True),
         StructField("product_id", IntegerType(), True),
-        StructField("store_id", IntegerType(), True),
+        StructField("store_id", StringType(), True),
         StructField("quantity_in_stock", IntegerType(), True),
         StructField("inventory_date", DateType(), True)
     ])
