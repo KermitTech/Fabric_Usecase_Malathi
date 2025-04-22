@@ -87,7 +87,7 @@ if not DeltaTable.isDeltaTable(spark, lakehouse_table_path):
     # Write as Delta table
     empty_df.write.format("delta").mode("overwrite").save(lakehouse_table_path)
 
-    print("Empty Shipping table created successfully.")
+    print("Empty Inventory table created successfully.")
 
 else:
 
