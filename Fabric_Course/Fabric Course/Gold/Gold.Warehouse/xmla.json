@@ -13,6 +13,92 @@
     "sourceQueryCulture": "en-US",
     "tables": [
       {
+        "name": "Demand_Product_Report",
+        "sourceLineageTag": "[dbo].[Demand_Product_Report]",
+        "columns": [
+          {
+            "name": "year",
+            "dataType": "int64",
+            "sourceColumn": "year",
+            "formatString": "0",
+            "sourceProviderType": "int",
+            "sourceLineageTag": "year",
+            "summarizeBy": "sum",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "month",
+            "dataType": "int64",
+            "sourceColumn": "month",
+            "formatString": "0",
+            "sourceProviderType": "int",
+            "sourceLineageTag": "month",
+            "summarizeBy": "sum",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "Total_prediction",
+            "dataType": "double",
+            "sourceColumn": "Total_prediction",
+            "sourceProviderType": "float",
+            "sourceLineageTag": "Total_prediction",
+            "summarizeBy": "sum",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              },
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isGeneralNumber\":true}"
+              }
+            ]
+          },
+          {
+            "name": "product_name",
+            "dataType": "string",
+            "sourceColumn": "product_name",
+            "sourceProviderType": "varchar",
+            "sourceLineageTag": "product_name",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          }
+        ],
+        "partitions": [
+          {
+            "name": "{{Partition_Name}}",
+            "mode": "directLake",
+            "source": {
+              "type": "entity",
+              "entityName": "Demand_Product_Report",
+              "expressionSource": "DatabaseQuery",
+              "schemaName": "dbo"
+            }
+          }
+        ],
+        "annotations": [
+          {
+            "name": "IsTableInBiModel",
+            "value": "False"
+          }
+        ]
+      },
+      {
         "name": "Dim_Customer",
         "sourceLineageTag": "[dbo].[Dim_Customer]",
         "columns": [
@@ -160,7 +246,7 @@
         "annotations": [
           {
             "name": "IsTableInBiModel",
-            "value": "False"
+            "value": "True"
           }
         ]
       },
@@ -288,7 +374,7 @@
         "annotations": [
           {
             "name": "IsTableInBiModel",
-            "value": "False"
+            "value": "True"
           }
         ]
       },
@@ -382,7 +468,7 @@
         "annotations": [
           {
             "name": "IsTableInBiModel",
-            "value": "False"
+            "value": "True"
           }
         ]
       },
@@ -518,7 +604,7 @@
         "annotations": [
           {
             "name": "IsTableInBiModel",
-            "value": "False"
+            "value": "True"
           }
         ]
       },
@@ -689,7 +775,7 @@
         "annotations": [
           {
             "name": "IsTableInBiModel",
-            "value": "False"
+            "value": "True"
           }
         ]
       },
@@ -819,7 +905,7 @@
         "annotations": [
           {
             "name": "IsTableInBiModel",
-            "value": "False"
+            "value": "True"
           }
         ]
       },
@@ -1015,7 +1101,7 @@
         "annotations": [
           {
             "name": "IsTableInBiModel",
-            "value": "False"
+            "value": "True"
           }
         ]
       },
@@ -1113,7 +1199,7 @@
         "annotations": [
           {
             "name": "IsTableInBiModel",
-            "value": "False"
+            "value": "True"
           }
         ]
       },
@@ -1203,6 +1289,149 @@
             "source": {
               "type": "entity",
               "entityName": "Fact_shipping",
+              "expressionSource": "DatabaseQuery",
+              "schemaName": "dbo"
+            }
+          }
+        ],
+        "annotations": [
+          {
+            "name": "IsTableInBiModel",
+            "value": "True"
+          }
+        ]
+      },
+      {
+        "name": "Sales_Report",
+        "sourceLineageTag": "[dbo].[Sales_Report]",
+        "columns": [
+          {
+            "name": "month_key",
+            "dataType": "int64",
+            "sourceColumn": "month_key",
+            "formatString": "0",
+            "sourceProviderType": "int",
+            "sourceLineageTag": "month_key",
+            "summarizeBy": "sum",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "year_key",
+            "dataType": "int64",
+            "sourceColumn": "year_key",
+            "formatString": "0",
+            "sourceProviderType": "int",
+            "sourceLineageTag": "year_key",
+            "summarizeBy": "sum",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "date_key",
+            "dataType": "dateTime",
+            "sourceColumn": "date_key",
+            "formatString": "General Date",
+            "sourceProviderType": "date",
+            "sourceLineageTag": "date_key",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "category",
+            "dataType": "string",
+            "sourceColumn": "category",
+            "sourceProviderType": "varchar",
+            "sourceLineageTag": "category",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "product_name",
+            "dataType": "string",
+            "sourceColumn": "product_name",
+            "sourceProviderType": "varchar",
+            "sourceLineageTag": "product_name",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "store_id",
+            "dataType": "string",
+            "sourceColumn": "store_id",
+            "sourceProviderType": "varchar",
+            "sourceLineageTag": "store_id",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "city",
+            "dataType": "string",
+            "sourceColumn": "city",
+            "sourceProviderType": "varchar",
+            "sourceLineageTag": "city",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "revenue",
+            "dataType": "double",
+            "sourceColumn": "revenue",
+            "sourceProviderType": "decimal",
+            "sourceLineageTag": "revenue",
+            "summarizeBy": "sum",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              },
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isGeneralNumber\":true}"
+              }
+            ]
+          }
+        ],
+        "partitions": [
+          {
+            "name": "{{Partition_Name}}",
+            "mode": "directLake",
+            "source": {
+              "type": "entity",
+              "entityName": "Sales_Report",
               "expressionSource": "DatabaseQuery",
               "schemaName": "dbo"
             }
