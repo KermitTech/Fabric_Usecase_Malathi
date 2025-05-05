@@ -1,0 +1,271 @@
+{
+  "properties": {
+    "activities": [
+      {
+        "name": "Copy Contacts",
+        "type": "Copy",
+        "dependsOn": [
+          {
+            "activity": "set_max_value",
+            "dependencyConditions": [
+              "Succeeded"
+            ]
+          }
+        ],
+        "policy": {
+          "timeout": "0.12:00:00",
+          "retry": 0,
+          "retryIntervalInSeconds": 30,
+          "secureOutput": false,
+          "secureInput": false
+        },
+        "typeProperties": {
+          "source": {
+            "type": "SalesforceSource",
+            "query": {
+              "value": "SELECT \n   FirstName, \n    LastName, \n    Account.Name, \n    Title, \n    LastActivityDate, \n    Email, \n    Phone, \n    MobilePhone, \n    MailingState, \n    MailingCountry, \n    Account.Owner.Name, \n    CreatedDate\nFROM Contact where \nCreatedDate > 2025-01-15T13:15:57+05:30",
+              "type": "Expression"
+            },
+            "includeDeletedObjects": false,
+            "datasetSettings": {
+              "annotations": [],
+              "type": "SalesforceObject",
+              "schema": [],
+              "typeProperties": {
+                "objectApiName": "00Od1000000Ze7REAS"
+              },
+              "externalReferences": {
+                "connection": "dfcc8c00-c3f1-489d-81cb-68d3c4b016ef"
+              }
+            }
+          },
+          "sink": {
+            "type": "AzureMySqlSink",
+            "writeBatchSize": 10000,
+            "writeBatchTimeout": "00:00:30",
+            "datasetSettings": {
+              "annotations": [],
+              "type": "AzureMySqlTable",
+              "schema": [],
+              "typeProperties": {
+                "tableName": "contacts"
+              },
+              "externalReferences": {
+                "connection": "04e0ecd3-3287-4972-b325-34b4c418e320"
+              }
+            }
+          },
+          "enableStaging": false,
+          "translator": {
+            "type": "TabularTranslator",
+            "mappings": [
+              {
+                "source": {
+                  "name": "First Name",
+                  "type": "String",
+                  "physicalType": "string"
+                },
+                "sink": {
+                  "name": "FirstName",
+                  "physicalType": "string"
+                }
+              },
+              {
+                "source": {
+                  "name": "Last Name",
+                  "type": "String",
+                  "physicalType": "string"
+                },
+                "sink": {
+                  "name": "LastName",
+                  "physicalType": "string"
+                }
+              },
+              {
+                "source": {
+                  "name": "Account Name",
+                  "type": "String",
+                  "physicalType": "string"
+                },
+                "sink": {
+                  "name": "AccountName",
+                  "physicalType": "string"
+                }
+              },
+              {
+                "source": {
+                  "name": "Title",
+                  "type": "String",
+                  "physicalType": "string"
+                },
+                "sink": {
+                  "name": "Title",
+                  "physicalType": "string"
+                }
+              },
+              {
+                "source": {
+                  "name": "Last Activity",
+                  "type": "DateTime",
+                  "physicalType": "date"
+                },
+                "sink": {
+                  "name": "LastActivity",
+                  "physicalType": "timestamp"
+                }
+              },
+              {
+                "source": {
+                  "name": "Email",
+                  "type": "String",
+                  "physicalType": "email"
+                },
+                "sink": {
+                  "name": "Email",
+                  "physicalType": "string"
+                }
+              },
+              {
+                "source": {
+                  "name": "Phone",
+                  "type": "String",
+                  "physicalType": "phone"
+                },
+                "sink": {
+                  "name": "Phone",
+                  "physicalType": "string"
+                }
+              },
+              {
+                "source": {
+                  "name": "Mobile",
+                  "type": "String",
+                  "physicalType": "phone"
+                },
+                "sink": {
+                  "name": "Mobile",
+                  "physicalType": "string"
+                }
+              },
+              {
+                "source": {
+                  "name": "Mailing State/Province",
+                  "type": "String",
+                  "physicalType": "string"
+                },
+                "sink": {
+                  "name": "MailingState",
+                  "physicalType": "string"
+                }
+              },
+              {
+                "source": {
+                  "name": "Mailing Country",
+                  "type": "String",
+                  "physicalType": "string"
+                },
+                "sink": {
+                  "name": "MailingCountry",
+                  "physicalType": "string"
+                }
+              },
+              {
+                "source": {
+                  "name": "Account Owner",
+                  "type": "String",
+                  "physicalType": "string"
+                },
+                "sink": {
+                  "name": "AccountOwner",
+                  "physicalType": "string"
+                }
+              },
+              {
+                "source": {
+                  "name": "Created Date",
+                  "type": "DateTime",
+                  "physicalType": "date"
+                },
+                "sink": {
+                  "name": "CreatedDate",
+                  "physicalType": "timestamp"
+                }
+              }
+            ],
+            "typeConversion": true,
+            "typeConversionSettings": {
+              "allowDataTruncation": true,
+              "treatBooleanAsNumber": false
+            }
+          }
+        }
+      },
+      {
+        "name": "Get_Max_Value",
+        "type": "Lookup",
+        "dependsOn": [],
+        "policy": {
+          "timeout": "0.12:00:00",
+          "retry": 0,
+          "retryIntervalInSeconds": 30,
+          "secureOutput": false,
+          "secureInput": false
+        },
+        "typeProperties": {
+          "source": {
+            "type": "DataWarehouseSource",
+            "sqlReaderQuery": "SELECT \nCOALESCE(CAST(MAX([Created Date]) AS DATETIME), CAST('1991-01-01' AS DATETIME)) AS max_value\n from [Salesforce_CRM].[salesforce_CRM].[Contact]",
+            "queryTimeout": "02:00:00",
+            "partitionOption": "None"
+          },
+          "datasetSettings": {
+            "annotations": [],
+            "linkedService": {
+              "name": "Salesforce_CRM",
+              "properties": {
+                "annotations": [],
+                "type": "DataWarehouse",
+                "typeProperties": {
+                  "endpoint": "a5kotaldwscevlccuy24crmqsy-56cp7ruqstquvn6gxyigxvglrq.datawarehouse.fabric.microsoft.com",
+                  "artifactId": "efb7127e-7522-47d9-a937-6b9d085d9d80",
+                  "workspaceId": "c6ff84ef-9490-4ae1-b7c6-be106bd4cb8c"
+                }
+              }
+            },
+            "type": "DataWarehouseTable",
+            "schema": [],
+            "typeProperties": {}
+          }
+        }
+      },
+      {
+        "name": "set_max_value",
+        "type": "SetVariable",
+        "dependsOn": [
+          {
+            "activity": "Get_Max_Value",
+            "dependencyConditions": [
+              "Succeeded"
+            ]
+          }
+        ],
+        "policy": {
+          "secureOutput": false,
+          "secureInput": false
+        },
+        "typeProperties": {
+          "variableName": "Set_max_value",
+          "value": {
+            "value": "@activity('Get_Max_Value').output.firstRow.max_value",
+            "type": "Expression"
+          }
+        }
+      }
+    ],
+    "variables": {
+      "set_max_value": {
+        "type": "String"
+      }
+    }
+  }
+}

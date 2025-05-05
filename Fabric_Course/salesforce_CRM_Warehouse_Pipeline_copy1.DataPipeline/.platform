@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "DataPipeline",
+    "displayName": "salesforce_CRM_Warehouse_Pipeline_copy1"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "3312536f-c205-8149-49f8-697747f02eda"
+  }
+}

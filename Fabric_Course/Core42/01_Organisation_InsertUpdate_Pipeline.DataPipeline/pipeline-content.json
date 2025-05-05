@@ -1,0 +1,585 @@
+{
+  "properties": {
+    "activities": [
+      {
+        "type": "Copy",
+        "typeProperties": {
+          "source": {
+            "type": "SalesforceSource",
+            "query": {
+              "value": "SELECT \n    Account.Name, \n    Phone, \n    Account.Owner.Name,\n    CreatedDate\nFROM Account\nwhere \nCreatedDate > \n@{variables('org_max_value')}",
+              "type": "Expression"
+            },
+            "includeDeletedObjects": false,
+            "datasetSettings": {
+              "type": "SalesforceObject",
+              "typeProperties": {
+                "objectApiName": "00Od1000000Ze7REAS"
+              },
+              "schema": [],
+              "externalReferences": {
+                "connection": "dfcc8c00-c3f1-489d-81cb-68d3c4b016ef"
+              },
+              "annotations": []
+            }
+          },
+          "sink": {
+            "type": "LakehouseTableSink",
+            "tableActionOption": "OverwriteSchema",
+            "partitionOption": "None",
+            "datasetSettings": {
+              "type": "LakehouseTable",
+              "typeProperties": {
+                "schema": "salesforce",
+                "table": "Tmp_Organisation"
+              },
+              "schema": [],
+              "linkedService": {
+                "name": "Campaign_Bronze_Layer",
+                "properties": {
+                  "type": "Lakehouse",
+                  "typeProperties": {
+                    "artifactId": "7716c300-45a7-a50b-46cf-3d06a996a5ec",
+                    "workspaceId": "00000000-0000-0000-0000-000000000000",
+                    "rootFolder": "Tables"
+                  },
+                  "annotations": []
+                }
+              },
+              "annotations": []
+            }
+          },
+          "translator": {
+            "type": "TabularTranslator",
+            "mappings": [
+              {
+                "source": {
+                  "name": "Name",
+                  "type": "String",
+                  "physicalType": "string"
+                },
+                "sink": {
+                  "name": "Account_Name",
+                  "physicalType": "string"
+                }
+              },
+              {
+                "source": {
+                  "name": "Phone",
+                  "type": "String",
+                  "physicalType": "phone"
+                },
+                "sink": {
+                  "name": "Phone",
+                  "physicalType": "string"
+                }
+              },
+              {
+                "source": {
+                  "name": "Owner.Name",
+                  "type": "String",
+                  "physicalType": "string"
+                },
+                "sink": {
+                  "name": "Account_Owner_Name",
+                  "physicalType": "string"
+                }
+              },
+              {
+                "source": {
+                  "name": "CreatedDate",
+                  "type": "DateTime",
+                  "physicalType": "datetime"
+                },
+                "sink": {
+                  "name": "CreatedDate",
+                  "physicalType": "timestamp"
+                }
+              }
+            ],
+            "typeConversion": true,
+            "typeConversionSettings": {
+              "allowDataTruncation": true,
+              "treatBooleanAsNumber": false
+            }
+          },
+          "enableStaging": false
+        },
+        "policy": {
+          "timeout": "0.12:00:00",
+          "retry": 0,
+          "retryIntervalInSeconds": 30,
+          "secureInput": false,
+          "secureOutput": false
+        },
+        "name": "Copy Account",
+        "dependsOn": [
+          {
+            "activity": "Set_max_batchvalue",
+            "dependencyConditions": [
+              "Succeeded"
+            ]
+          }
+        ]
+      },
+      {
+        "type": "TridentNotebook",
+        "typeProperties": {
+          "notebookId": "a054da8d-fbd0-bea0-4de8-59b206467f1d",
+          "workspaceId": "00000000-0000-0000-0000-000000000000",
+          "parameters": {
+            "get_batch_id": {
+              "value": {
+                "value": "@{variables('org_batch_value')}",
+                "type": "Expression"
+              },
+              "type": "int"
+            }
+          }
+        },
+        "policy": {
+          "timeout": "0.12:00:00",
+          "retry": 0,
+          "retryIntervalInSeconds": 30,
+          "secureInput": false,
+          "secureOutput": false
+        },
+        "name": "Organisation_Insert_Update",
+        "dependsOn": [
+          {
+            "activity": "Copy Account",
+            "dependencyConditions": [
+              "Succeeded"
+            ]
+          }
+        ]
+      },
+      {
+        "type": "Office365Outlook",
+        "typeProperties": {
+          "inputs": {
+            "body": {
+              "To": "malathi.s@kermittech.no",
+              "Subject": "Organisation Insert/Updarte Pipeline Status",
+              "Body": "<p>Hi,</p>\n<p>Pipeline ran with error. Please find the below error details.</p>\n<p><br></p>\n<p>Pipeline Name : @{pipeline().PipelineName}</p>\n<p>@{pipeline()?.TriggeredByPipelineName}</p>\n<p>Recent Batch ID : @{variables('org_batch_value')}</p>\n<p><br></p>\n<p>@{variables('org_err_msg')}</p>\n<p><br></p>\n<p>@{variables('org_activity_name')}</p>",
+              "Sensitivity": "",
+              "Importance": "Normal"
+            },
+            "method": "post",
+            "path": "/v2/Mail"
+          }
+        },
+        "name": "Office 365 Outlook1",
+        "dependsOn": [
+          {
+            "activity": "ActivityName",
+            "dependencyConditions": [
+              "Succeeded"
+            ]
+          }
+        ]
+      },
+      {
+        "type": "TridentNotebook",
+        "typeProperties": {
+          "notebookId": "514f5565-ada4-a975-46fb-cc1038df2a97",
+          "workspaceId": "00000000-0000-0000-0000-000000000000",
+          "parameters": {
+            "PipelineRunId": {
+              "value": {
+                "value": "@pipeline().RunId",
+                "type": "Expression"
+              },
+              "type": "string"
+            },
+            "PipelineId": {
+              "value": {
+                "value": "@pipeline().Pipeline",
+                "type": "Expression"
+              },
+              "type": "string"
+            },
+            "PipelineName": {
+              "value": {
+                "value": "@pipeline().PipelineName",
+                "type": "Expression"
+              },
+              "type": "string"
+            },
+            "StartTime": {
+              "value": {
+                "value": "@utcNow()",
+                "type": "Expression"
+              },
+              "type": "string"
+            },
+            "EndTime": {
+              "value": {
+                "value": "@utcNow()",
+                "type": "Expression"
+              },
+              "type": "string"
+            },
+            "WorkspaceId": {
+              "value": {
+                "value": "@pipeline().DataFactory",
+                "type": "Expression"
+              },
+              "type": "string"
+            },
+            "PipelineStatus": {
+              "value": "Completed",
+              "type": "string"
+            },
+            "ErrorDescription": {
+              "value": {
+                "value": "@replace(concat(\n    activity('Copy Account')?.Error?.Message, '|', \n    activity('Organisation_Insert_Update')?.Error?.Message\n), '|', '')",
+                "type": "Expression"
+              },
+              "type": "string"
+            }
+          }
+        },
+        "policy": {
+          "timeout": "0.12:00:00",
+          "retry": 0,
+          "retryIntervalInSeconds": 30,
+          "secureInput": false,
+          "secureOutput": false
+        },
+        "name": "Pipeline_Audit_Logs_copy1",
+        "dependsOn": [
+          {
+            "activity": "Organisation_Insert_Update",
+            "dependencyConditions": [
+              "Completed"
+            ]
+          }
+        ]
+      },
+      {
+        "type": "SetVariable",
+        "typeProperties": {
+          "variableName": "org_activity_name",
+          "value": {
+            "value": "@if(\n    not(empty(activity('Copy Account')?.Error?.Message)), \n    concat('Error in Pre Create Tables: ', activity('Copy Account')?.Error?.Message), \n    if(\n        not(empty(activity('Organisation_Insert_Update')?.Error?.Message)), \n        concat('Error in Get_Max_Value: ', activity('Organisation_Insert_Update')?.Error?.Message), \n                'Successfully Ran'\n            )\n        )\n",
+            "type": "Expression"
+          }
+        },
+        "policy": {
+          "secureInput": false,
+          "secureOutput": false
+        },
+        "name": "ActivityName",
+        "dependsOn": [
+          {
+            "activity": "Error_Msg",
+            "dependencyConditions": [
+              "Succeeded"
+            ]
+          }
+        ]
+      },
+      {
+        "type": "Wait",
+        "typeProperties": {
+          "waitTimeInSeconds": 2
+        },
+        "name": "Wait1",
+        "dependsOn": [
+          {
+            "activity": "Organisation_Insert_Update",
+            "dependencyConditions": [
+              "Succeeded"
+            ]
+          }
+        ]
+      },
+      {
+        "type": "SetVariable",
+        "typeProperties": {
+          "variableName": "org_err_msg",
+          "value": {
+            "value": "@replace(concat(\n    activity('Copy Account')?.Error?.Message, '|', \n    activity('Organisation_Insert_Update')?.Error?.Message\n), '|', '')",
+            "type": "Expression"
+          }
+        },
+        "policy": {
+          "secureInput": false,
+          "secureOutput": false
+        },
+        "name": "Error_Msg",
+        "dependsOn": [
+          {
+            "activity": "Wait1",
+            "dependencyConditions": [
+              "Skipped"
+            ]
+          }
+        ]
+      },
+      {
+        "type": "TridentNotebook",
+        "typeProperties": {
+          "notebookId": "514f5565-ada4-a975-46fb-cc1038df2a97",
+          "workspaceId": "00000000-0000-0000-0000-000000000000",
+          "parameters": {
+            "PipelineRunId": {
+              "value": {
+                "value": "@pipeline().RunId",
+                "type": "Expression"
+              },
+              "type": "string"
+            },
+            "PipelineId": {
+              "value": {
+                "value": "@pipeline().Pipeline",
+                "type": "Expression"
+              },
+              "type": "string"
+            },
+            "PipelineName": {
+              "value": {
+                "value": "@pipeline().PipelineName",
+                "type": "Expression"
+              },
+              "type": "string"
+            },
+            "StartTime": {
+              "value": {
+                "value": "@utcNow()",
+                "type": "Expression"
+              },
+              "type": "string"
+            },
+            "EndTime": {
+              "value": {
+                "value": "@utcNow()",
+                "type": "Expression"
+              },
+              "type": "string"
+            },
+            "WorkspaceId": {
+              "value": {
+                "value": "@pipeline().DataFactory",
+                "type": "Expression"
+              },
+              "type": "string"
+            },
+            "PipelineStatus": {
+              "value": "Errored",
+              "type": "string"
+            },
+            "ErrorDescription": {
+              "value": {
+                "value": "@replace(concat(\n    activity('Copy Account')?.Error?.Message, '|', \n    activity('Organisation_Insert_Update')?.Error?.Message\n), '|', '')",
+                "type": "Expression"
+              },
+              "type": "string"
+            }
+          }
+        },
+        "policy": {
+          "timeout": "0.12:00:00",
+          "retry": 0,
+          "retryIntervalInSeconds": 30,
+          "secureInput": false,
+          "secureOutput": false
+        },
+        "name": "Error_Audit_Log",
+        "dependsOn": [
+          {
+            "activity": "Office 365 Outlook1",
+            "dependencyConditions": [
+              "Succeeded"
+            ]
+          }
+        ]
+      },
+      {
+        "type": "TridentNotebook",
+        "typeProperties": {
+          "notebookId": "514f5565-ada4-a975-46fb-cc1038df2a97",
+          "workspaceId": "00000000-0000-0000-0000-000000000000",
+          "parameters": {
+            "PipelineRunId": {
+              "value": {
+                "value": "@pipeline().RunId",
+                "type": "Expression"
+              },
+              "type": "string"
+            },
+            "PipelineId": {
+              "value": {
+                "value": "@pipeline().Pipeline",
+                "type": "Expression"
+              },
+              "type": "string"
+            },
+            "PipelineName": {
+              "value": {
+                "value": "@pipeline().PipelineName",
+                "type": "Expression"
+              },
+              "type": "string"
+            },
+            "StartTime": {
+              "value": {
+                "value": "@utcNow()",
+                "type": "Expression"
+              },
+              "type": "string"
+            },
+            "EndTime": {
+              "value": {
+                "value": "@utcNow()",
+                "type": "Expression"
+              },
+              "type": "string"
+            },
+            "WorkspaceId": {
+              "value": {
+                "value": "@pipeline().DataFactory",
+                "type": "Expression"
+              },
+              "type": "string"
+            },
+            "PipelineStatus": {
+              "value": "Started",
+              "type": "string"
+            },
+            "ErrorDescription": {
+              "value": "",
+              "type": "string"
+            }
+          }
+        },
+        "policy": {
+          "timeout": "0.12:00:00",
+          "retry": 0,
+          "retryIntervalInSeconds": 30,
+          "secureInput": false,
+          "secureOutput": false
+        },
+        "name": "Pipeline_Audit_Logs",
+        "dependsOn": []
+      },
+      {
+        "type": "Lookup",
+        "typeProperties": {
+          "source": {
+            "type": "DataWarehouseSource",
+            "sqlReaderQuery": " SELECT \n    'Organisation' AS TableName,\n    COALESCE(MaxValue, '1990-01-01 00:00:00') AS max_value,\n    COALESCE(BatchValue, 0) + 1 AS batchvalue\nFROM [Campaign_Bronze_Layer].[salesforce].[Control_Table]\nWHERE TableName = 'Organisation'\n\nUNION ALL\n\nSELECT \n    'Organisation' AS TableName,\n    '1990-01-01 00:00:00' AS max_value,\n    1 AS batchvalue\nWHERE NOT EXISTS (\n    SELECT 1 \n    FROM [Campaign_Bronze_Layer].[salesforce].[Control_Table]\n    WHERE TableName = 'Organisation'\n)",
+            "partitionOption": "None",
+            "queryTimeout": "02:00:00"
+          },
+          "datasetSettings": {
+            "type": "DataWarehouseTable",
+            "schema": [],
+            "linkedService": {
+              "name": "Salesforce_CRM",
+              "properties": {
+                "type": "DataWarehouse",
+                "typeProperties": {
+                  "artifactId": "efb7127e-7522-47d9-a937-6b9d085d9d80",
+                  "endpoint": "a5kotaldwscevlccuy24crmqsy-56cp7ruqstquvn6gxyigxvglrq.datawarehouse.fabric.microsoft.com",
+                  "workspaceId": "c6ff84ef-9490-4ae1-b7c6-be106bd4cb8c"
+                },
+                "annotations": []
+              }
+            },
+            "annotations": []
+          }
+        },
+        "policy": {
+          "timeout": "0.12:00:00",
+          "retry": 0,
+          "retryIntervalInSeconds": 30,
+          "secureInput": false,
+          "secureOutput": false
+        },
+        "name": "Get_Max_Value",
+        "dependsOn": [
+          {
+            "activity": "Pipeline_Audit_Logs",
+            "dependencyConditions": [
+              "Succeeded"
+            ]
+          }
+        ]
+      },
+      {
+        "type": "SetVariable",
+        "typeProperties": {
+          "variableName": "org_max_value",
+          "value": {
+            "value": "@formatDateTime(activity('Get_Max_Value').output.firstRow.max_value, 'yyyy-MM-ddTHH:mm:ss+00:00')",
+            "type": "Expression"
+          }
+        },
+        "policy": {
+          "secureInput": false,
+          "secureOutput": false
+        },
+        "name": "Set_max_value",
+        "dependsOn": [
+          {
+            "activity": "Get_Max_Value",
+            "dependencyConditions": [
+              "Succeeded"
+            ]
+          }
+        ]
+      },
+      {
+        "type": "SetVariable",
+        "typeProperties": {
+          "variableName": "org_batch_value",
+          "value": {
+            "value": "@activity('Get_Max_Value').output.firstRow.batchvalue",
+            "type": "Expression"
+          }
+        },
+        "policy": {
+          "secureInput": false,
+          "secureOutput": false
+        },
+        "name": "Set_max_batchvalue",
+        "dependsOn": [
+          {
+            "activity": "Set_max_value",
+            "dependencyConditions": [
+              "Succeeded"
+            ]
+          }
+        ]
+      }
+    ],
+    "variables": {
+      "org_err_msg": {
+        "type": "String"
+      },
+      "org_activity_name": {
+        "type": "String"
+      },
+      "contact_err_msg": {
+        "type": "String"
+      },
+      "contact_activity_name": {
+        "type": "String"
+      },
+      "contact_max_value": {
+        "type": "String"
+      },
+      "contact_batch_value": {
+        "type": "Integer"
+      },
+      "org_max_value": {
+        "type": "String"
+      },
+      "org_batch_value": {
+        "type": "Integer"
+      }
+    }
+  }
+}

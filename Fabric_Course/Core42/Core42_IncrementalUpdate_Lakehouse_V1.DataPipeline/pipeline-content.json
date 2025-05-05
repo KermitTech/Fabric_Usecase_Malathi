@@ -1,0 +1,768 @@
+{
+  "properties": {
+    "activities": [
+      {
+        "type": "Lookup",
+        "typeProperties": {
+          "source": {
+            "type": "DataWarehouseSource",
+            "sqlReaderQuery": " SELECT \n    'Organisation' AS TableName,\n    COALESCE(MaxValue, '1990-01-01 00:00:00') AS max_value,\n    COALESCE(BatchValue, 0) + 1 AS batchvalue\nFROM [Campaign_Bronze_Layer].[salesforce].[Control_Table]\nWHERE TableName = 'Organisation'\n\nUNION ALL\n\nSELECT \n    'Organisation' AS TableName,\n    '1990-01-01 00:00:00' AS max_value,\n    1 AS batchvalue\nWHERE NOT EXISTS (\n    SELECT 1 \n    FROM [Campaign_Bronze_Layer].[salesforce].[Control_Table]\n    WHERE TableName = 'Organisation'\n)",
+            "partitionOption": "None",
+            "queryTimeout": "02:00:00"
+          },
+          "datasetSettings": {
+            "type": "DataWarehouseTable",
+            "schema": [],
+            "linkedService": {
+              "name": "Salesforce_CRM",
+              "properties": {
+                "type": "DataWarehouse",
+                "typeProperties": {
+                  "artifactId": "efb7127e-7522-47d9-a937-6b9d085d9d80",
+                  "endpoint": "a5kotaldwscevlccuy24crmqsy-56cp7ruqstquvn6gxyigxvglrq.datawarehouse.fabric.microsoft.com",
+                  "workspaceId": "c6ff84ef-9490-4ae1-b7c6-be106bd4cb8c"
+                },
+                "annotations": []
+              }
+            },
+            "annotations": []
+          }
+        },
+        "policy": {
+          "timeout": "0.12:00:00",
+          "retry": 0,
+          "retryIntervalInSeconds": 30,
+          "secureInput": false,
+          "secureOutput": false
+        },
+        "name": "Get_Max_Value",
+        "dependsOn": [
+          {
+            "activity": "Pre Create Tables",
+            "dependencyConditions": [
+              "Succeeded"
+            ]
+          }
+        ]
+      },
+      {
+        "type": "SetVariable",
+        "typeProperties": {
+          "variableName": "set_max_value",
+          "value": {
+            "value": "@formatDateTime(activity('Get_Max_Value').output.firstRow.max_value, 'yyyy-MM-ddTHH:mm:ss+00:00')",
+            "type": "Expression"
+          }
+        },
+        "policy": {
+          "secureInput": false,
+          "secureOutput": false
+        },
+        "name": "Set_max_value",
+        "dependsOn": [
+          {
+            "activity": "Get_Max_Value",
+            "dependencyConditions": [
+              "Succeeded"
+            ]
+          }
+        ]
+      },
+      {
+        "type": "SetVariable",
+        "typeProperties": {
+          "variableName": "set_batch_value",
+          "value": {
+            "value": "@activity('Get_Max_Value').output.firstRow.batchvalue",
+            "type": "Expression"
+          }
+        },
+        "policy": {
+          "secureInput": false,
+          "secureOutput": false
+        },
+        "name": "Set_max_batchvalue",
+        "dependsOn": [
+          {
+            "activity": "Set_max_value",
+            "dependencyConditions": [
+              "Succeeded"
+            ]
+          }
+        ]
+      },
+      {
+        "type": "Copy",
+        "typeProperties": {
+          "source": {
+            "type": "SalesforceSource",
+            "query": {
+              "value": "SELECT \n    Account.Name, \n    Phone, \n    Account.Owner.Name,\n    CreatedDate\nFROM Account\nwhere \nCreatedDate > \n@{variables('set_max_value')}",
+              "type": "Expression"
+            },
+            "includeDeletedObjects": false,
+            "datasetSettings": {
+              "type": "SalesforceObject",
+              "typeProperties": {
+                "objectApiName": "00Od1000000Ze7REAS"
+              },
+              "schema": [],
+              "externalReferences": {
+                "connection": "dfcc8c00-c3f1-489d-81cb-68d3c4b016ef"
+              },
+              "annotations": []
+            }
+          },
+          "sink": {
+            "type": "LakehouseTableSink",
+            "tableActionOption": "OverwriteSchema",
+            "partitionOption": "None",
+            "datasetSettings": {
+              "type": "LakehouseTable",
+              "typeProperties": {
+                "schema": "salesforce",
+                "table": "Tmp_Organisation"
+              },
+              "schema": [],
+              "linkedService": {
+                "name": "Campaign_Bronze_Layer",
+                "properties": {
+                  "type": "Lakehouse",
+                  "typeProperties": {
+                    "artifactId": "7716c300-45a7-a50b-46cf-3d06a996a5ec",
+                    "workspaceId": "00000000-0000-0000-0000-000000000000",
+                    "rootFolder": "Tables"
+                  },
+                  "annotations": []
+                }
+              },
+              "annotations": []
+            }
+          },
+          "translator": {
+            "type": "TabularTranslator",
+            "mappings": [
+              {
+                "source": {
+                  "name": "Name",
+                  "type": "String",
+                  "physicalType": "string"
+                },
+                "sink": {
+                  "name": "Account_Name",
+                  "physicalType": "string"
+                }
+              },
+              {
+                "source": {
+                  "name": "Phone",
+                  "type": "String",
+                  "physicalType": "phone"
+                },
+                "sink": {
+                  "name": "Phone",
+                  "physicalType": "string"
+                }
+              },
+              {
+                "source": {
+                  "name": "Owner.Name",
+                  "type": "String",
+                  "physicalType": "string"
+                },
+                "sink": {
+                  "name": "Account_Owner_Name",
+                  "physicalType": "string"
+                }
+              },
+              {
+                "source": {
+                  "name": "CreatedDate",
+                  "type": "DateTime",
+                  "physicalType": "datetime"
+                },
+                "sink": {
+                  "name": "CreatedDate",
+                  "physicalType": "timestamp"
+                }
+              }
+            ],
+            "typeConversion": true,
+            "typeConversionSettings": {
+              "allowDataTruncation": true,
+              "treatBooleanAsNumber": false
+            }
+          },
+          "enableStaging": false
+        },
+        "policy": {
+          "timeout": "0.12:00:00",
+          "retry": 0,
+          "retryIntervalInSeconds": 30,
+          "secureInput": false,
+          "secureOutput": false
+        },
+        "name": "Copy Account",
+        "dependsOn": [
+          {
+            "activity": "Set_max_batchvalue",
+            "dependencyConditions": [
+              "Succeeded"
+            ]
+          }
+        ]
+      },
+      {
+        "type": "TridentNotebook",
+        "typeProperties": {
+          "notebookId": "a054da8d-fbd0-bea0-4de8-59b206467f1d",
+          "workspaceId": "00000000-0000-0000-0000-000000000000",
+          "parameters": {
+            "get_batch_id": {
+              "value": {
+                "value": "@{variables('set_batch_value')}",
+                "type": "Expression"
+              },
+              "type": "int"
+            }
+          }
+        },
+        "policy": {
+          "timeout": "0.12:00:00",
+          "retry": 0,
+          "retryIntervalInSeconds": 30,
+          "secureInput": false,
+          "secureOutput": false
+        },
+        "name": "Organisation_Insert_Update",
+        "dependsOn": [
+          {
+            "activity": "Copy Account",
+            "dependencyConditions": [
+              "Succeeded"
+            ]
+          }
+        ]
+      },
+      {
+        "type": "TridentNotebook",
+        "typeProperties": {
+          "notebookId": "6a4fb413-d00b-9377-4300-53972160cd88",
+          "workspaceId": "00000000-0000-0000-0000-000000000000",
+          "parameters": {
+            "batch_id": {
+              "value": "1",
+              "type": "int"
+            }
+          }
+        },
+        "policy": {
+          "timeout": "0.12:00:00",
+          "retry": 0,
+          "retryIntervalInSeconds": 30,
+          "secureInput": false,
+          "secureOutput": false
+        },
+        "name": "Pre Create Tables",
+        "dependsOn": [
+          {
+            "activity": "Pipeline_Audit_Logs",
+            "dependencyConditions": [
+              "Completed"
+            ]
+          }
+        ]
+      },
+      {
+        "type": "Office365Outlook",
+        "typeProperties": {
+          "inputs": {
+            "body": {
+              "To": "malathi.s@kermittech.no",
+              "Subject": "Fabric Incremental Load / Update pipeline Failed",
+              "Body": "<p>Hi,</p>\n<p>Please find the below error details.</p>\n<p>Recent Batch ID : @{variables('set_batch_value')}</p>\n<p><br></p>\n<p>@{variables('Error_msg')}@{variables('Activity_Name')}</p>",
+              "Sensitivity": "",
+              "Importance": "Normal"
+            },
+            "method": "post",
+            "path": "/v2/Mail"
+          }
+        },
+        "name": "Office 365 Outlook1",
+        "dependsOn": [
+          {
+            "activity": "ActivityName",
+            "dependencyConditions": [
+              "Succeeded"
+            ]
+          }
+        ]
+      },
+      {
+        "type": "Lookup",
+        "typeProperties": {
+          "source": {
+            "type": "DataWarehouseSource",
+            "sqlReaderQuery": " SELECT \n    'Organisation' AS tgt_TableName,\n    COALESCE(MaxValue, '1990-01-01 00:00:00') AS tgt_max_value,\n    COALESCE(BatchValue, 0)  AS batchvalue\nFROM [Campaign_Bronze_Layer].[salesforce].[Control_Table]\nWHERE TableName = 'Organisation'\n\nUNION ALL\n\nSELECT \n    'Organisation' AS TableName,\n    '1990-01-01 00:00:00' AS max_value,\n    0 AS batchvalue\nWHERE NOT EXISTS (\n    SELECT 1 \n    FROM [Campaign_Bronze_Layer].[salesforce].[Control_Table]\n    WHERE TableName = 'Organisation')",
+            "partitionOption": "None",
+            "queryTimeout": "02:00:00"
+          },
+          "datasetSettings": {
+            "type": "DataWarehouseTable",
+            "schema": [],
+            "linkedService": {
+              "name": "Salesforce_CRM",
+              "properties": {
+                "type": "DataWarehouse",
+                "typeProperties": {
+                  "artifactId": "efb7127e-7522-47d9-a937-6b9d085d9d80",
+                  "endpoint": "a5kotaldwscevlccuy24crmqsy-56cp7ruqstquvn6gxyigxvglrq.datawarehouse.fabric.microsoft.com",
+                  "workspaceId": "c6ff84ef-9490-4ae1-b7c6-be106bd4cb8c"
+                },
+                "annotations": []
+              }
+            },
+            "annotations": []
+          }
+        },
+        "policy": {
+          "timeout": "0.12:00:00",
+          "retry": 0,
+          "retryIntervalInSeconds": 30,
+          "secureInput": false,
+          "secureOutput": false
+        },
+        "name": "Get_Tgt_MaxValue",
+        "dependsOn": [
+          {
+            "activity": "Invoke pipeline1",
+            "dependencyConditions": [
+              "Succeeded"
+            ]
+          }
+        ]
+      },
+      {
+        "type": "SetVariable",
+        "typeProperties": {
+          "variableName": "set_tgt_maxvalue",
+          "value": {
+            "value": "@formatDateTime(activity('Get_Tgt_MaxValue').output.firstRow.tgt_max_value, 'yyyy-MM-ddTHH:mm:ss+00:00')",
+            "type": "Expression"
+          }
+        },
+        "policy": {
+          "secureInput": false,
+          "secureOutput": false
+        },
+        "name": "Set_tgt_maxvalue",
+        "dependsOn": [
+          {
+            "activity": "Get_Tgt_MaxValue",
+            "dependencyConditions": [
+              "Succeeded"
+            ]
+          }
+        ]
+      },
+      {
+        "type": "SqlServerStoredProcedure",
+        "typeProperties": {
+          "storedProcedureName": "[salesforce_CRM].[Reconcile_Data]",
+          "storedProcedureParameters": {
+            "BatchID": {
+              "value": {
+                "value": "@variables('set_batch_value')",
+                "type": "Expression"
+              },
+              "type": "Int16"
+            }
+          }
+        },
+        "linkedService": {
+          "name": "Salesforce_CRM",
+          "properties": {
+            "type": "DataWarehouse",
+            "typeProperties": {
+              "artifactId": "efb7127e-7522-47d9-a937-6b9d085d9d80",
+              "endpoint": "a5kotaldwscevlccuy24crmqsy-56cp7ruqstquvn6gxyigxvglrq.datawarehouse.fabric.microsoft.com",
+              "workspaceId": "c6ff84ef-9490-4ae1-b7c6-be106bd4cb8c"
+            },
+            "annotations": []
+          }
+        },
+        "policy": {
+          "timeout": "0.12:00:00",
+          "retry": 0,
+          "retryIntervalInSeconds": 30,
+          "secureInput": false,
+          "secureOutput": false
+        },
+        "name": "Gen_Reconciliation_Report",
+        "dependsOn": [
+          {
+            "activity": "Set_tgt_maxvalue",
+            "dependencyConditions": [
+              "Succeeded"
+            ]
+          }
+        ]
+      },
+      {
+        "type": "TridentNotebook",
+        "typeProperties": {
+          "notebookId": "514f5565-ada4-a975-46fb-cc1038df2a97",
+          "workspaceId": "00000000-0000-0000-0000-000000000000",
+          "parameters": {
+            "PipelineRunId": {
+              "value": {
+                "value": "@pipeline().RunId",
+                "type": "Expression"
+              },
+              "type": "string"
+            },
+            "PipelineId": {
+              "value": {
+                "value": "@pipeline().Pipeline",
+                "type": "Expression"
+              },
+              "type": "string"
+            },
+            "PipelineName": {
+              "value": {
+                "value": "@pipeline().PipelineName",
+                "type": "Expression"
+              },
+              "type": "string"
+            },
+            "StartTime": {
+              "value": {
+                "value": "@utcNow()",
+                "type": "Expression"
+              },
+              "type": "string"
+            },
+            "EndTime": {
+              "value": {
+                "value": "@utcNow()",
+                "type": "Expression"
+              },
+              "type": "string"
+            },
+            "WorkspaceId": {
+              "value": {
+                "value": "@pipeline().DataFactory",
+                "type": "Expression"
+              },
+              "type": "string"
+            },
+            "PipelineStatus": {
+              "value": "Started",
+              "type": "string"
+            },
+            "ErrorDescription": {
+              "value": "",
+              "type": "string"
+            }
+          }
+        },
+        "policy": {
+          "timeout": "0.12:00:00",
+          "retry": 0,
+          "retryIntervalInSeconds": 30,
+          "secureInput": false,
+          "secureOutput": false
+        },
+        "name": "Pipeline_Audit_Logs",
+        "dependsOn": []
+      },
+      {
+        "type": "TridentNotebook",
+        "typeProperties": {
+          "notebookId": "514f5565-ada4-a975-46fb-cc1038df2a97",
+          "workspaceId": "00000000-0000-0000-0000-000000000000",
+          "parameters": {
+            "PipelineRunId": {
+              "value": {
+                "value": "@pipeline().RunId",
+                "type": "Expression"
+              },
+              "type": "string"
+            },
+            "PipelineId": {
+              "value": {
+                "value": "@pipeline().Pipeline",
+                "type": "Expression"
+              },
+              "type": "string"
+            },
+            "PipelineName": {
+              "value": {
+                "value": "@pipeline().PipelineName",
+                "type": "Expression"
+              },
+              "type": "string"
+            },
+            "StartTime": {
+              "value": {
+                "value": "@utcNow()",
+                "type": "Expression"
+              },
+              "type": "string"
+            },
+            "EndTime": {
+              "value": {
+                "value": "@utcNow()",
+                "type": "Expression"
+              },
+              "type": "string"
+            },
+            "WorkspaceId": {
+              "value": {
+                "value": "@pipeline().DataFactory",
+                "type": "Expression"
+              },
+              "type": "string"
+            },
+            "PipelineStatus": {
+              "value": "Completed",
+              "type": "string"
+            },
+            "ErrorDescription": {
+              "value": {
+                "value": "@replace(concat(\n    activity('Pre Create Tables')?.Error?.Message, '|', \n    activity('Get_Max_Value')?.Error?.Message, '|', \n    activity('Copy Account')?.Error?.Message, '|', \n    activity('Organisation_Insert_Update')?.Error?.Message\n), '|', '')",
+                "type": "Expression"
+              },
+              "type": "string"
+            }
+          }
+        },
+        "policy": {
+          "timeout": "0.12:00:00",
+          "retry": 0,
+          "retryIntervalInSeconds": 30,
+          "secureInput": false,
+          "secureOutput": false
+        },
+        "name": "Pipeline_Audit_Logs_copy1",
+        "dependsOn": [
+          {
+            "activity": "Gen_Reconciliation_Report",
+            "dependencyConditions": [
+              "Completed"
+            ]
+          }
+        ]
+      },
+      {
+        "type": "SetVariable",
+        "typeProperties": {
+          "variableName": "Activity_Name",
+          "value": {
+            "value": "@if(\n    not(empty(activity('Pre Create Tables')?.Error?.Message)), \n    concat('Error in Pre Create Tables: ', activity('Pre Create Tables')?.Error?.Message), \n    if(\n        not(empty(activity('Get_Max_Value')?.Error?.Message)), \n        concat('Error in Get_Max_Value: ', activity('Get_Max_Value')?.Error?.Message), \n        if(\n            not(empty(activity('Copy Account')?.Error?.Message)), \n            concat('Error in Copy Account: ', activity('Copy Account')?.Error?.Message), \n            if(\n                not(empty(activity('Organisation_Insert_Update')?.Error?.Message)), \n                concat('Error in Organisation_Insert_Update: ', activity('Organisation_Insert_Update')?.Error?.Message), \n                'Successfully Ran'\n            )\n        )\n    )\n)\n",
+            "type": "Expression"
+          }
+        },
+        "policy": {
+          "secureInput": false,
+          "secureOutput": false
+        },
+        "name": "ActivityName",
+        "dependsOn": [
+          {
+            "activity": "Error_Msg",
+            "dependencyConditions": [
+              "Succeeded"
+            ]
+          }
+        ]
+      },
+      {
+        "type": "Wait",
+        "typeProperties": {
+          "waitTimeInSeconds": 2
+        },
+        "name": "Wait1",
+        "dependsOn": [
+          {
+            "activity": "Gen_Reconciliation_Report",
+            "dependencyConditions": [
+              "Succeeded"
+            ]
+          }
+        ]
+      },
+      {
+        "type": "SetVariable",
+        "typeProperties": {
+          "variableName": "Error_msg",
+          "value": {
+            "value": "@replace(concat(\n    activity('Pre Create Tables')?.Error?.Message, '|', \n    activity('Get_Max_Value')?.Error?.Message, '|', \n    activity('Copy Account')?.Error?.Message, '|', \n    activity('Organisation_Insert_Update')?.Error?.Message\n), '|', '')",
+            "type": "Expression"
+          }
+        },
+        "policy": {
+          "secureInput": false,
+          "secureOutput": false
+        },
+        "name": "Error_Msg",
+        "dependsOn": [
+          {
+            "activity": "Wait1",
+            "dependencyConditions": [
+              "Skipped"
+            ]
+          }
+        ]
+      },
+      {
+        "type": "TridentNotebook",
+        "typeProperties": {
+          "notebookId": "514f5565-ada4-a975-46fb-cc1038df2a97",
+          "workspaceId": "00000000-0000-0000-0000-000000000000",
+          "parameters": {
+            "PipelineRunId": {
+              "value": {
+                "value": "@pipeline().RunId",
+                "type": "Expression"
+              },
+              "type": "string"
+            },
+            "PipelineId": {
+              "value": {
+                "value": "@pipeline().Pipeline",
+                "type": "Expression"
+              },
+              "type": "string"
+            },
+            "PipelineName": {
+              "value": {
+                "value": "@pipeline().PipelineName",
+                "type": "Expression"
+              },
+              "type": "string"
+            },
+            "StartTime": {
+              "value": {
+                "value": "@utcNow()",
+                "type": "Expression"
+              },
+              "type": "string"
+            },
+            "EndTime": {
+              "value": {
+                "value": "@utcNow()",
+                "type": "Expression"
+              },
+              "type": "string"
+            },
+            "WorkspaceId": {
+              "value": {
+                "value": "@pipeline().DataFactory",
+                "type": "Expression"
+              },
+              "type": "string"
+            },
+            "PipelineStatus": {
+              "value": "Errored",
+              "type": "string"
+            },
+            "ErrorDescription": {
+              "value": {
+                "value": "@replace(concat(\n    activity('Pre Create Tables')?.Error?.Message, '|', \n    activity('Get_Max_Value')?.Error?.Message, '|', \n    activity('Copy Account')?.Error?.Message, '|', \n    activity('Organisation_Insert_Update')?.Error?.Message\n), '|', '')",
+                "type": "Expression"
+              },
+              "type": "string"
+            }
+          }
+        },
+        "policy": {
+          "timeout": "0.12:00:00",
+          "retry": 0,
+          "retryIntervalInSeconds": 30,
+          "secureInput": false,
+          "secureOutput": false
+        },
+        "name": "Error_Audit_Log",
+        "dependsOn": [
+          {
+            "activity": "Office 365 Outlook1",
+            "dependencyConditions": [
+              "Succeeded"
+            ]
+          }
+        ]
+      },
+      {
+        "type": "InvokePipeline",
+        "typeProperties": {
+          "parameters": {
+            "contact_max_value": {
+              "value": "@{variables('set_max_value')}",
+              "type": "Expression"
+            },
+            "contact_batch_value": {
+              "value": "@{variables('set_batch_value')}",
+              "type": "Expression"
+            }
+          },
+          "waitOnCompletion": true,
+          "workspaceId": "00000000-0000-0000-0000-000000000000",
+          "pipelineId": "645ac90c-01d9-a532-45ed-0d478421924f",
+          "operationType": "InvokeFabricPipeline"
+        },
+        "externalReferences": {
+          "connection": "e44e2819-7516-4f77-a04c-0570aca02701"
+        },
+        "policy": {
+          "timeout": "0.12:00:00",
+          "retry": 0,
+          "retryIntervalInSeconds": 30,
+          "secureInput": false,
+          "secureOutput": false
+        },
+        "name": "Invoke pipeline1",
+        "dependsOn": [
+          {
+            "activity": "Organisation_Insert_Update",
+            "dependencyConditions": [
+              "Succeeded"
+            ]
+          }
+        ]
+      }
+    ],
+    "variables": {
+      "set_max_value": {
+        "type": "String"
+      },
+      "set_datemax_value": {
+        "type": "String"
+      },
+      "accountname": {
+        "type": "String"
+      },
+      "firstname": {
+        "type": "String"
+      },
+      "lastname": {
+        "type": "String"
+      },
+      "set_batch_value": {
+        "type": "Integer"
+      },
+      "set_tgt_maxvalue": {
+        "type": "String"
+      },
+      "Error_msg": {
+        "type": "String"
+      },
+      "Activity_Name": {
+        "type": "String"
+      },
+      "Err_msg": {
+        "type": "String"
+      }
+    }
+  }
+}

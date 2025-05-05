@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "DataPipeline",
+    "displayName": "Core42_Salesforce_Incremental_Upd_UsingSpark"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "760e347a-31c4-b52b-416a-8cbe0010b9ed"
+  }
+}

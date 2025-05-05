@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "DataPipeline",
+    "displayName": "02_Contact_InsertUpdate_Pipeline"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "645ac90c-01d9-a532-45ed-0d478421924f"
+  }
+}
