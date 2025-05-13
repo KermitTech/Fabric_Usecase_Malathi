@@ -1,0 +1,23 @@
+model Model
+	culture: en-US
+	collation: Latin1_General_100_BIN2_UTF8
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	sourceQueryCulture: en-US
+	dataAccessOptions
+		legacyRedirects
+		returnErrorValuesAsNull
+
+annotation __PBI_TimeIntelligenceEnabled = 0
+
+annotation PBIDesktopVersion = 2.139.7496.1 (Main)+061188de2d27b556d0c15d8f70c4426f68783390
+
+annotation PBI_QueryOrder = ["DatabaseQuery"]
+
+ref table Dim_customer_interaction
+ref table Fact_CampaignPerformance
+ref table Dim_Channel_Attribution
+ref table Fact_Customer_Engagement_Campaigns
+ref table Fact_WinningCampaigns
+
+ref cultureInfo en-US
+

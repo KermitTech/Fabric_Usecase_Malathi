@@ -1,0 +1,65 @@
+table Fact_CampaignPerformance
+	lineageTag: bf24aa62-5551-47f2-a0ad-2e3b84e2552d
+	sourceLineageTag: [gold_layer_campaign].[Fact_CampaignPerformance]
+
+	column campaign_name
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: e99b9141-cdf4-4119-b3ec-7ae39029be38
+		sourceLineageTag: campaign_name
+		summarizeBy: none
+		sourceColumn: campaign_name
+
+		annotation SummarizationSetBy = Automatic
+
+	column source
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 2028ab94-4e21-44b8-8bd6-60f15fc642d4
+		sourceLineageTag: source
+		summarizeBy: none
+		sourceColumn: source
+
+		annotation SummarizationSetBy = Automatic
+
+	column campaign_type
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: b73ebec3-5647-4737-a674-30c7dbcb8f40
+		sourceLineageTag: campaign_type
+		summarizeBy: none
+		sourceColumn: campaign_type
+
+		annotation SummarizationSetBy = Automatic
+
+	column medium
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 56eb3c2c-8945-429c-aaae-00b09edf7671
+		sourceLineageTag: medium
+		summarizeBy: none
+		sourceColumn: medium
+
+		annotation SummarizationSetBy = Automatic
+
+	column campaign_total
+		dataType: double
+		sourceProviderType: float
+		lineageTag: feb1f084-553f-4028-9b3d-a24b704fb9d1
+		sourceLineageTag: campaign_total
+		summarizeBy: sum
+		sourceColumn: campaign_total
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition Fact_CampaignPerformance = entity
+		mode: directLake
+		source
+			entityName: Fact_CampaignPerformance
+			schemaName: gold_layer_campaign
+			expressionSource: DatabaseQuery
+
+	annotation PBI_ResultType = Table
+

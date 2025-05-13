@@ -1,0 +1,267 @@
+table Dim_Campaign
+	lineageTag: e6a3f40d-4619-412b-bc2a-b6e258dd86f6
+	sourceLineageTag: [gold_layer_campaign].[Dim_Campaign]
+
+	column campaign_id
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 10e37ad7-ecbd-41c9-9a76-07632eb7f394
+		sourceLineageTag: campaign_id
+		summarizeBy: none
+		sourceColumn: campaign_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column campaign_name
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: a845d2b2-6064-4a51-998a-a5929d77e233
+		sourceLineageTag: campaign_name
+		summarizeBy: none
+		sourceColumn: campaign_name
+
+		annotation SummarizationSetBy = Automatic
+
+	column source
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 58703fc1-cbe1-4c78-ac75-788e6ebcc09c
+		sourceLineageTag: source
+		summarizeBy: none
+		sourceColumn: source
+
+		annotation SummarizationSetBy = Automatic
+
+	column medium
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: da5c9270-fb4e-4b57-b61b-669d7acd0938
+		sourceLineageTag: medium
+		summarizeBy: none
+		sourceColumn: medium
+
+		annotation SummarizationSetBy = Automatic
+
+	column start_date
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 7efa52b9-adf4-4c7d-91f1-fd6f8a808da4
+		sourceLineageTag: start_date
+		summarizeBy: none
+		sourceColumn: start_date
+
+		annotation SummarizationSetBy = Automatic
+
+	column end_date
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 5ddfb024-05f6-474f-b7aa-174e64e781aa
+		sourceLineageTag: end_date
+		summarizeBy: none
+		sourceColumn: end_date
+
+		annotation SummarizationSetBy = Automatic
+
+	column clicks
+		dataType: int64
+		formatString: 0
+		sourceProviderType: bigint
+		lineageTag: a3f4a4a0-4d3a-47b9-94f0-ac483692f634
+		sourceLineageTag: clicks
+		summarizeBy: sum
+		sourceColumn: clicks
+
+		annotation SummarizationSetBy = Automatic
+
+	column impressions
+		dataType: int64
+		formatString: 0
+		sourceProviderType: bigint
+		lineageTag: f5869381-e59d-4d9a-929e-fee3c1af742f
+		sourceLineageTag: impressions
+		summarizeBy: sum
+		sourceColumn: impressions
+
+		annotation SummarizationSetBy = Automatic
+
+	column conversions
+		dataType: int64
+		formatString: 0
+		sourceProviderType: bigint
+		lineageTag: 23e26684-8020-4b47-93ad-13d5851e0b4b
+		sourceLineageTag: conversions
+		summarizeBy: sum
+		sourceColumn: conversions
+
+		annotation SummarizationSetBy = Automatic
+
+	column revenue
+		dataType: double
+		sourceProviderType: float
+		lineageTag: 94599b86-393a-4553-82e8-5deeb7e20e53
+		sourceLineageTag: revenue
+		summarizeBy: sum
+		sourceColumn: revenue
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column campaign_cost
+		dataType: double
+		sourceProviderType: float
+		lineageTag: 920e1d9c-05a7-4907-afc1-4d229ee93bb2
+		sourceLineageTag: campaign_cost
+		summarizeBy: sum
+		sourceColumn: campaign_cost
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column source_id
+		dataType: int64
+		formatString: 0
+		sourceProviderType: bigint
+		lineageTag: 6e20f3b0-b835-43ca-bc18-2a9464cce641
+		sourceLineageTag: source_id
+		summarizeBy: sum
+		sourceColumn: source_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column medium_id
+		dataType: int64
+		formatString: 0
+		sourceProviderType: bigint
+		lineageTag: fbf89fba-c365-4749-9b78-8030a3372ad3
+		sourceLineageTag: medium_id
+		summarizeBy: sum
+		sourceColumn: medium_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column campaign_type
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: e1c31e62-c9a4-4392-bc9b-efbef7503271
+		sourceLineageTag: campaign_type
+		summarizeBy: none
+		sourceColumn: campaign_type
+
+		annotation SummarizationSetBy = Automatic
+
+	column campaign_type_id
+		dataType: int64
+		formatString: 0
+		sourceProviderType: bigint
+		lineageTag: d4907b20-583e-4670-9b10-900be95db9ac
+		sourceLineageTag: campaign_type_id
+		summarizeBy: sum
+		sourceColumn: campaign_type_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column variant
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: aaf14489-3ea0-4aca-92cf-62f8b1b4623d
+		sourceLineageTag: variant
+		summarizeBy: none
+		sourceColumn: variant
+
+		annotation SummarizationSetBy = Automatic
+
+	column conversion_rate
+		dataType: double
+		sourceProviderType: float
+		lineageTag: 6bbf7593-fe53-4ed2-a954-1e5ea8e070cb
+		sourceLineageTag: conversion_rate
+		summarizeBy: sum
+		sourceColumn: conversion_rate
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column CTR
+		dataType: double
+		sourceProviderType: float
+		lineageTag: 7a8c9141-403d-4972-a539-7041689a9b66
+		sourceLineageTag: CTR
+		summarizeBy: sum
+		sourceColumn: CTR
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column CPC
+		dataType: double
+		sourceProviderType: float
+		lineageTag: d29a7440-c740-4044-aa04-90562e08275f
+		sourceLineageTag: CPC
+		summarizeBy: sum
+		sourceColumn: CPC
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column CPA
+		dataType: double
+		sourceProviderType: float
+		lineageTag: 51dfe290-f959-471f-a6e0-1a2309520530
+		sourceLineageTag: CPA
+		summarizeBy: sum
+		sourceColumn: CPA
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column ROAS
+		dataType: double
+		sourceProviderType: float
+		lineageTag: aaee31d6-7495-4a78-8d54-5c2a84119279
+		sourceLineageTag: ROAS
+		summarizeBy: sum
+		sourceColumn: ROAS
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column ROI
+		dataType: double
+		sourceProviderType: float
+		lineageTag: 0e942fae-82a9-4447-b496-0fb9d4923046
+		sourceLineageTag: ROI
+		summarizeBy: sum
+		sourceColumn: ROI
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column CES
+		dataType: double
+		sourceProviderType: float
+		lineageTag: 4f55b860-4158-4c55-9369-bc31599c8f26
+		sourceLineageTag: CES
+		summarizeBy: sum
+		sourceColumn: CES
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition Dim_Campaign = entity
+		mode: directLake
+		source
+			entityName: Dim_Campaign
+			schemaName: gold_layer_campaign
+			expressionSource: DatabaseQuery
+
+	annotation PBI_ResultType = Table
+

@@ -1,0 +1,54 @@
+table Fact_Customer_Engagement_Campaigns
+	lineageTag: eea37ef9-95f5-4fae-b69c-d3b0b8a4b981
+	sourceLineageTag: [gold_layer_campaign].[Fact_Customer_Engagement_Campaigns]
+
+	column campaign_id
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: addc34f5-edd3-484b-8416-185fb90dd2fa
+		sourceLineageTag: campaign_id
+		summarizeBy: none
+		sourceColumn: campaign_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column campaign_name
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 92f6513d-a22c-459b-aff2-94a3078dec51
+		sourceLineageTag: campaign_name
+		summarizeBy: none
+		sourceColumn: campaign_name
+
+		annotation SummarizationSetBy = Automatic
+
+	column source
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 485fcd0d-99cd-4284-af7f-c75484ecc234
+		sourceLineageTag: source
+		summarizeBy: none
+		sourceColumn: source
+
+		annotation SummarizationSetBy = Automatic
+
+	column first_touch_count
+		dataType: int64
+		formatString: 0
+		sourceProviderType: bigint
+		lineageTag: dca75832-2eed-4749-af96-aa24de21c34d
+		sourceLineageTag: first_touch_count
+		summarizeBy: sum
+		sourceColumn: first_touch_count
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Fact_Customer_Engagement_Campaigns = entity
+		mode: directLake
+		source
+			entityName: Fact_Customer_Engagement_Campaigns
+			schemaName: gold_layer_campaign
+			expressionSource: DatabaseQuery
+
+	annotation PBI_ResultType = Table
+

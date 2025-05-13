@@ -1,0 +1,68 @@
+table Fact_CampaignPerformance
+	lineageTag: 6b89b406-6b92-4134-8cc0-da9e857f09f6
+	sourceLineageTag: [gold_layer_campaign].[Fact_CampaignPerformance]
+
+	column campaign_id
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 7ff2a2f2-3aa7-4175-900c-3093167c5194
+		sourceLineageTag: campaign_id
+		summarizeBy: none
+		sourceColumn: campaign_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column source_id
+		dataType: int64
+		formatString: 0
+		sourceProviderType: bigint
+		lineageTag: f4251f60-d6b0-4775-9f29-5efa37187183
+		sourceLineageTag: source_id
+		summarizeBy: sum
+		sourceColumn: source_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column medium_id
+		dataType: int64
+		formatString: 0
+		sourceProviderType: bigint
+		lineageTag: 2cffd5f3-a8d4-46ac-958f-fed2bee0a294
+		sourceLineageTag: medium_id
+		summarizeBy: sum
+		sourceColumn: medium_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column campaign_type_id
+		dataType: int64
+		formatString: 0
+		sourceProviderType: bigint
+		lineageTag: f2e20b9d-dbda-4f0d-8590-0fa0b1537c15
+		sourceLineageTag: campaign_type_id
+		summarizeBy: sum
+		sourceColumn: campaign_type_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column total_spend
+		dataType: double
+		sourceProviderType: float
+		lineageTag: 3c91ebc2-d013-428b-8910-c5e8039773af
+		sourceLineageTag: total_spend
+		summarizeBy: sum
+		sourceColumn: total_spend
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition Fact_CampaignPerformance = entity
+		mode: directLake
+		source
+			entityName: Fact_CampaignPerformance
+			schemaName: gold_layer_campaign
+			expressionSource: DatabaseQuery
+
+	annotation PBI_ResultType = Table
+

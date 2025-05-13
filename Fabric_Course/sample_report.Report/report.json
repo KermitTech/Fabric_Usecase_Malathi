@@ -1,0 +1,60 @@
+{
+  "config": "{\"version\":\"5.59\",\"themeCollection\":{\"baseTheme\":{\"name\":\"CY24SU10\",\"version\":\"5.60\",\"type\":2}},\"activeSectionIndex\":0,\"defaultDrillFilterOtherVisuals\":true,\"settings\":{\"useNewFilterPaneExperience\":true,\"allowChangeFilterTypes\":true,\"useStylableVisualContainerHeader\":true,\"queryLimitOption\":6,\"useEnhancedTooltips\":true,\"exportDataMode\":1,\"useDefaultAggregateDisplayName\":true},\"objects\":{\"section\":[{\"properties\":{\"verticalAlignment\":{\"expr\":{\"Literal\":{\"Value\":\"'Top'\"}}}}}]}}",
+  "layoutOptimization": 0,
+  "pods": [
+    {
+      "boundSection": "bc807d7a61a5f269db10",
+      "config": "{}",
+      "name": "254e76035d006642685e",
+      "parameters": "[{\"name\":\"a6090c6e203b43ba15a0\",\"boundFilter\":\"9a009a288001d9b80573\",\"fieldExpr\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Entity\":\"fact_sales\"}},\"Property\":\"category\"}}}]",
+      "type": 1
+    }
+  ],
+  "resourcePackages": [
+    {
+      "resourcePackage": {
+        "disabled": false,
+        "items": [
+          {
+            "name": "CY24SU10",
+            "path": "BaseThemes/CY24SU10.json",
+            "type": 202
+          }
+        ],
+        "name": "SharedResources",
+        "type": 2
+      }
+    }
+  ],
+  "sections": [
+    {
+      "config": "{}",
+      "displayName": "Page 1",
+      "displayOption": 1,
+      "filters": "[{\"name\":\"9a009a288001d9b80573\",\"expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Entity\":\"fact_sales\"}},\"Property\":\"category\"}},\"type\":\"Categorical\",\"howCreated\":5,\"objects\":{}}]",
+      "height": 720.00,
+      "name": "bc807d7a61a5f269db10",
+      "visualContainers": [
+        {
+          "config": "{\"name\":\"0acd713071ec31d26587\",\"layouts\":[{\"id\":0,\"position\":{\"x\":0,\"y\":0,\"width\":100,\"height\":40,\"z\":1}}],\"singleVisual\":{\"visualType\":\"actionButton\",\"drillFilterOtherVisuals\":true,\"objects\":{\"icon\":[{\"properties\":{\"shapeType\":{\"expr\":{\"Literal\":{\"Value\":\"'back'\"}}}},\"selector\":{\"id\":\"default\"}}]},\"vcObjects\":{\"visualLink\":[{\"properties\":{\"show\":{\"expr\":{\"Literal\":{\"Value\":\"true\"}}},\"type\":{\"expr\":{\"Literal\":{\"Value\":\"'Back'\"}}}}}]}},\"howCreated\":\"InsertVisualButton\"}",
+          "filters": "[]",
+          "height": 40.00,
+          "width": 100.00,
+          "x": 0.00,
+          "y": 0.00,
+          "z": 1.00
+        },
+        {
+          "config": "{\"name\":\"a26fc9a54406cbf35640\",\"layouts\":[{\"id\":0,\"position\":{\"x\":9.493201483312731,\"y\":0,\"z\":0,\"width\":575.920889987639,\"height\":360.7416563658838,\"tabOrder\":0}}],\"singleVisual\":{\"visualType\":\"clusteredColumnChart\",\"projections\":{\"Category\":[{\"queryRef\":\"fact_sales.product_key\",\"active\":true},{\"queryRef\":\"fact_sales.category\",\"active\":true}],\"Y\":[{\"queryRef\":\"Sum(fact_sales.total_amount)\"}],\"Series\":[{\"queryRef\":\"fact_sales.product_key\"}]},\"prototypeQuery\":{\"Version\":2,\"From\":[{\"Name\":\"f\",\"Entity\":\"fact_sales\",\"Type\":0}],\"Select\":[{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"f\"}},\"Property\":\"product_key\"},\"Name\":\"fact_sales.product_key\",\"NativeReferenceName\":\"product_key\"},{\"Aggregation\":{\"Expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"f\"}},\"Property\":\"total_amount\"}},\"Function\":0},\"Name\":\"Sum(fact_sales.total_amount)\",\"NativeReferenceName\":\"Sum of total_amount\"},{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"f\"}},\"Property\":\"category\"},\"Name\":\"fact_sales.category\",\"NativeReferenceName\":\"category\"}],\"OrderBy\":[{\"Direction\":1,\"Expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"f\"}},\"Property\":\"product_key\"}}},{\"Direction\":1,\"Expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"f\"}},\"Property\":\"category\"}}}]},\"drillFilterOtherVisuals\":true,\"hasDefaultSort\":true}}",
+          "filters": "[]",
+          "height": 360.74,
+          "width": 575.92,
+          "x": 9.49,
+          "y": 0.00,
+          "z": 0.00
+        }
+      ],
+      "width": 1280.00
+    }
+  ]
+}

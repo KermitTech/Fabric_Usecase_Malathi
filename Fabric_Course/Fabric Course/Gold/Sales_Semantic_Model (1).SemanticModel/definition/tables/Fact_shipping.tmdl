@@ -1,0 +1,67 @@
+table Fact_shipping
+	lineageTag: 3645895c-e43c-4baf-910d-e8cfbae8ceee
+	sourceLineageTag: [dbo].[Fact_shipping]
+
+	column product_id
+		dataType: int64
+		formatString: 0
+		sourceProviderType: bigint
+		lineageTag: aa87e330-af8f-44bd-b6a3-94dcc4d91910
+		sourceLineageTag: product_id
+		summarizeBy: sum
+		sourceColumn: product_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column shipping_id
+		dataType: int64
+		formatString: 0
+		sourceProviderType: bigint
+		lineageTag: 6cc7c5bf-d69c-4b08-a67e-c0e2b471da82
+		sourceLineageTag: shipping_id
+		summarizeBy: sum
+		sourceColumn: shipping_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column quantity_shipped
+		dataType: int64
+		formatString: 0
+		sourceProviderType: bigint
+		lineageTag: 019bc0f6-ec7a-48de-afb1-b774aef94723
+		sourceLineageTag: quantity_shipped
+		summarizeBy: sum
+		sourceColumn: quantity_shipped
+
+		annotation SummarizationSetBy = Automatic
+
+	column store_id
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: fca45ea4-8de6-4de8-8615-3a213bf2ecbd
+		sourceLineageTag: store_id
+		summarizeBy: none
+		sourceColumn: store_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column shipping_date
+		dataType: dateTime
+		formatString: General Date
+		sourceProviderType: datetime2
+		lineageTag: 2de4eada-2d0a-4242-85ee-bb2eb7c6b76e
+		sourceLineageTag: shipping_date
+		summarizeBy: none
+		sourceColumn: shipping_date
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Fact_shipping = entity
+		mode: directLake
+		source
+			entityName: Fact_shipping
+			schemaName: dbo
+			expressionSource: DatabaseQuery
+
+	annotation PBI_ResultType = Table
+

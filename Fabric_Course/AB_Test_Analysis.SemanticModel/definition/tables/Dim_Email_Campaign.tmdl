@@ -1,0 +1,204 @@
+table Dim_Email_Campaign
+	lineageTag: 3a0bf498-64f3-4700-84fc-649862d20ec7
+	sourceLineageTag: [gold_layer_campaign].[Dim_Email_Campaign]
+
+	column campaign_id
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 632902bc-dce2-4eaf-8ee8-c06e9b777b7e
+		sourceLineageTag: campaign_id
+		summarizeBy: none
+		sourceColumn: campaign_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column email_subject
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 629985c3-6450-4fbc-81bb-8b7907702d12
+		sourceLineageTag: email_subject
+		summarizeBy: none
+		sourceColumn: email_subject
+
+		annotation SummarizationSetBy = Automatic
+
+	column discount_code
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 5f5d7eb6-3e68-459d-9239-870c2d521a45
+		sourceLineageTag: discount_code
+		summarizeBy: none
+		sourceColumn: discount_code
+
+		annotation SummarizationSetBy = Automatic
+
+	column start_date
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 63b619c4-5dc2-4bd4-ba2c-9a424ae2141c
+		sourceLineageTag: start_date
+		summarizeBy: none
+		sourceColumn: start_date
+
+		annotation SummarizationSetBy = Automatic
+
+	column end_date
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 117a3715-82c7-4d7c-9f5f-2ada336a3130
+		sourceLineageTag: end_date
+		summarizeBy: none
+		sourceColumn: end_date
+
+		annotation SummarizationSetBy = Automatic
+
+	column send_date
+		dataType: dateTime
+		formatString: General Date
+		sourceProviderType: date
+		lineageTag: 53fcbbe1-499d-4770-8aea-794b07223b2a
+		sourceLineageTag: send_date
+		summarizeBy: none
+		sourceColumn: send_date
+
+		annotation SummarizationSetBy = Automatic
+
+	column open_rate
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: ecb16346-9739-4e96-8f15-5a107da45e5c
+		sourceLineageTag: open_rate
+		summarizeBy: none
+		sourceColumn: open_rate
+
+		annotation SummarizationSetBy = Automatic
+
+	column click_rate
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 90e3c9b2-ebab-41a7-981e-382ad906e277
+		sourceLineageTag: click_rate
+		summarizeBy: none
+		sourceColumn: click_rate
+
+		annotation SummarizationSetBy = Automatic
+
+	column revenue
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: a0297a54-d1fe-443d-8c97-ab5dd526d828
+		sourceLineageTag: revenue
+		summarizeBy: none
+		sourceColumn: revenue
+
+		annotation SummarizationSetBy = Automatic
+
+	column email_cost
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 2ae58532-0e66-4153-bdb2-5bd40d028598
+		sourceLineageTag: email_cost
+		summarizeBy: none
+		sourceColumn: email_cost
+
+		annotation SummarizationSetBy = Automatic
+
+	column campaign_type
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 6f75dfa1-d765-4c9c-9e6d-aaf9c42a9686
+		sourceLineageTag: campaign_type
+		summarizeBy: none
+		sourceColumn: campaign_type
+
+		annotation SummarizationSetBy = Automatic
+
+	column campaign_type_id
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 4ccf8500-31c4-4146-bc2a-917f101435b9
+		sourceLineageTag: campaign_type_id
+		summarizeBy: none
+		sourceColumn: campaign_type_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column valid_campaign
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 45490b57-2b13-451e-b558-9ee02c3e65eb
+		sourceLineageTag: valid_campaign
+		summarizeBy: none
+		sourceColumn: valid_campaign
+
+		annotation SummarizationSetBy = Automatic
+
+	column CTOR
+		dataType: double
+		sourceProviderType: float
+		lineageTag: 9e365f6f-5e96-4216-8e06-86343bd499a4
+		sourceLineageTag: CTOR
+		summarizeBy: sum
+		sourceColumn: CTOR
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column ROI
+		dataType: double
+		sourceProviderType: float
+		lineageTag: 811e1e08-e707-491b-8671-8197f2bd0c0c
+		sourceLineageTag: ROI
+		summarizeBy: sum
+		sourceColumn: ROI
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Revenue_to_Cost_Ratio
+		dataType: double
+		sourceProviderType: float
+		lineageTag: 17e5a715-0f8a-4818-b1fd-66ee7c12c538
+		sourceLineageTag: Revenue_to_Cost_Ratio
+		summarizeBy: sum
+		sourceColumn: Revenue_to_Cost_Ratio
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column CPE
+		dataType: double
+		sourceProviderType: float
+		lineageTag: c7f4f6b2-dbc1-43a9-a22f-a9e1d4a1f323
+		sourceLineageTag: CPE
+		summarizeBy: sum
+		sourceColumn: CPE
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column RPE
+		dataType: double
+		sourceProviderType: float
+		lineageTag: 0f7f3dd0-5c3b-4dae-b794-02ad47930a6a
+		sourceLineageTag: RPE
+		summarizeBy: sum
+		sourceColumn: RPE
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition Dim_Email_Campaign = entity
+		mode: directLake
+		source
+			entityName: Dim_Email_Campaign
+			schemaName: gold_layer_campaign
+			expressionSource: DatabaseQuery
+
+	annotation PBI_ResultType = Table
+

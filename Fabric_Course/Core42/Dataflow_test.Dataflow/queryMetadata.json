@@ -1,0 +1,28 @@
+{
+  "formatVersion": "202502",
+  "computeEngineSettings": {
+    "allowFastCopy": false
+  },
+  "name": "Dataflow_test",
+  "queryGroups": [],
+  "documentLocale": "en-GB",
+  "queriesMetadata": {
+    "Account": {
+      "queryId": "43bbc8bc-f14e-4ebf-83f7-398cb90bbb03",
+      "queryName": "Account",
+      "loadEnabled": false
+    }
+  },
+  "connections": [
+    {
+      "path": "https://login.salesforce.com/",
+      "kind": "Salesforce",
+      "connectionId": "{\"ClusterId\":\"1ea2a874-811a-42a0-8dae-9975856a50b8\",\"DatasourceId\":\"dfcc8c00-c3f1-489d-81cb-68d3c4b016ef\"}"
+    },
+    {
+      "path": "Lakehouse",
+      "kind": "Lakehouse",
+      "connectionId": "{\"ClusterId\":\"1ea2a874-811a-42a0-8dae-9975856a50b8\",\"DatasourceId\":\"587366c4-8cce-4d1c-a22c-41eacc8480ff\"}"
+    }
+  ]
+}

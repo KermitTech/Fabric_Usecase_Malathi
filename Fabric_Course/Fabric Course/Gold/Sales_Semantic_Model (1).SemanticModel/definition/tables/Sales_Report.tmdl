@@ -1,0 +1,98 @@
+table Sales_Report
+	lineageTag: 46e5efcc-11f4-41db-8cea-75486a05af12
+	sourceLineageTag: [dbo].[Sales_Report]
+
+	column month_key
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 5bf88ee8-fda9-4d61-a7ca-6e59b71d626e
+		sourceLineageTag: month_key
+		summarizeBy: sum
+		sourceColumn: month_key
+
+		annotation SummarizationSetBy = Automatic
+
+	column year_key
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 9eac7fe9-a9e1-42f3-8527-44a5500709aa
+		sourceLineageTag: year_key
+		summarizeBy: sum
+		sourceColumn: year_key
+
+		annotation SummarizationSetBy = Automatic
+
+	column date_key
+		dataType: dateTime
+		formatString: General Date
+		sourceProviderType: date
+		lineageTag: 44e5bd90-59cb-4c16-a20f-814e7056ff12
+		sourceLineageTag: date_key
+		summarizeBy: none
+		sourceColumn: date_key
+
+		annotation SummarizationSetBy = Automatic
+
+	column category
+		dataType: string
+		sourceProviderType: varchar(100)
+		lineageTag: e303f18c-6b27-4446-bb04-fe67ea444b42
+		sourceLineageTag: category
+		summarizeBy: none
+		sourceColumn: category
+
+		annotation SummarizationSetBy = Automatic
+
+	column product_name
+		dataType: string
+		sourceProviderType: varchar(255)
+		lineageTag: 089e503b-2ce7-484e-bd2d-f0615dcd46df
+		sourceLineageTag: product_name
+		summarizeBy: none
+		sourceColumn: product_name
+
+		annotation SummarizationSetBy = Automatic
+
+	column store_id
+		dataType: string
+		sourceProviderType: varchar(100)
+		lineageTag: ab0f6a49-9c09-410c-a7d7-005f9e831046
+		sourceLineageTag: store_id
+		summarizeBy: none
+		sourceColumn: store_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column city
+		dataType: string
+		sourceProviderType: varchar(100)
+		lineageTag: 98ebc967-85b1-40ad-bd31-efa5bdd3845c
+		sourceLineageTag: city
+		summarizeBy: none
+		sourceColumn: city
+
+		annotation SummarizationSetBy = Automatic
+
+	column revenue
+		dataType: double
+		sourceProviderType: decimal(38, 2)
+		lineageTag: 9c907c6d-be98-4c69-9647-d2121a233c49
+		sourceLineageTag: revenue
+		summarizeBy: sum
+		sourceColumn: revenue
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition Sales_Report = entity
+		mode: directLake
+		source
+			entityName: Sales_Report
+			schemaName: dbo
+			expressionSource: DatabaseQuery
+
+	annotation PBI_ResultType = Table
+

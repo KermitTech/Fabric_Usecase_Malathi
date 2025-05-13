@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "Lakehouse",
+    "displayName": "Campaign_Bronze_Layer"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "7716c300-45a7-a50b-46cf-3d06a996a5ec"
+  }
+}

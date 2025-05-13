@@ -1,0 +1,82 @@
+{
+  "formatVersion": "202502",
+  "computeEngineSettings": {},
+  "name": "Dataflow_core42_test",
+  "queryGroups": [],
+  "documentLocale": "en-GB",
+  "queriesMetadata": {
+    "bronze Account": {
+      "queryId": "76bc9698-19c9-4140-839e-068f584b1e54",
+      "queryName": "bronze Account",
+      "loadEnabled": false
+    },
+    "bronze Contact": {
+      "queryId": "a739972e-3fc2-4ee6-8911-3e65476fe5d2",
+      "queryName": "bronze Contact",
+      "loadEnabled": false
+    },
+    "bronze Lead": {
+      "queryId": "444cbadf-bf0d-426e-abc5-e23c9e6ab8c0",
+      "queryName": "bronze Lead",
+      "loadEnabled": false
+    },
+    "bronze Opportunity": {
+      "queryId": "effcf62f-0ecd-4082-be21-2808c1e6bc8e",
+      "queryName": "bronze Opportunity",
+      "loadEnabled": false
+    },
+    "bronze Quote": {
+      "queryId": "084bed19-6809-4109-bba9-9902675f49f2",
+      "queryName": "bronze Quote",
+      "loadEnabled": false
+    },
+    "bronze User": {
+      "queryId": "4cf4eed1-cc27-4d23-9aa6-bcbf3e4d2d89",
+      "queryName": "bronze User",
+      "loadEnabled": false
+    },
+    "DefaultDestination": {
+      "queryId": "eab665a5-2164-4142-93e0-da93a7d9fe53",
+      "queryName": "DefaultDestination",
+      "isHidden": true,
+      "loadEnabled": false
+    }
+  },
+  "connections": [
+    {
+      "path": "a5kotaldwscevlccuy24crmqsy-56cp7ruqstquvn6gxyigxvglrq.datawarehouse.fabric.microsoft.com;bronze",
+      "kind": "SQL",
+      "connectionId": "{\"ClusterId\":\"1ea2a874-811a-42a0-8dae-9975856a50b8\",\"DatasourceId\":\"0e2d065d-e7a5-4d30-83dd-4f44f7ece533\"}"
+    },
+    {
+      "path": "a5kotaldwscevlccuy24crmqsy-56cp7ruqstquvn6gxyigxvglrq.datawarehouse.fabric.microsoft.com:1433;bronze",
+      "kind": "SQL",
+      "connectionId": "{\"ClusterId\":\"1ea2a874-811a-42a0-8dae-9975856a50b8\",\"DatasourceId\":\"b0775068-0fd6-4f10-8194-68b5603e2339\"}"
+    },
+    {
+      "path": "a5kotaldwscevlccuy24crmqsy-56cp7ruqstquvn6gxyigxvglrq.datawarehouse.fabric.microsoft.com,1433;bronze",
+      "kind": "SQL",
+      "connectionId": "{\"ClusterId\":\"1ea2a874-811a-42a0-8dae-9975856a50b8\",\"DatasourceId\":\"35994993-21a6-4528-8a7d-f0a7cd365802\"}"
+    },
+    {
+      "path": "a5kotaldwscevlccuy24crmqsy-56cp7ruqstquvn6gxyigxvglrq.datawarehouse.fabric.microsoft.com,1433;dbo",
+      "kind": "SQL",
+      "connectionId": "{\"ClusterId\":\"1ea2a874-811a-42a0-8dae-9975856a50b8\",\"DatasourceId\":\"045b6f45-9580-4d8a-a184-9bb949acc029\"}"
+    },
+    {
+      "path": "s5gzoyvwcpeubblw6gvssbnwz4-rtdqlr34a75u7e37nmobdnt7nm.datawarehouse.fabric.microsoft.com,1433;IMDBIDM_ZAA_Analytics_test",
+      "kind": "SQL",
+      "connectionId": "{\"ClusterId\":\"1ea2a874-811a-42a0-8dae-9975856a50b8\",\"DatasourceId\":\"83db0acf-840f-4ca3-bc0e-c0ab7f0715c7\"}"
+    },
+    {
+      "path": "s5gzoyvwcpeubblw6gvssbnwz4-rtdqlr34a75u7e37nmobdnt7nm.datawarehouse.fabric.microsoft.com;IMDBIDM_ZAA_Analytics_test",
+      "kind": "SQL",
+      "connectionId": "{\"ClusterId\":\"1ea2a874-811a-42a0-8dae-9975856a50b8\",\"DatasourceId\":\"9880d4f0-91b5-4cea-9963-00c16bb4f82a\"}"
+    },
+    {
+      "path": "Lakehouse",
+      "kind": "Lakehouse",
+      "connectionId": "{\"ClusterId\":\"1ea2a874-811a-42a0-8dae-9975856a50b8\",\"DatasourceId\":\"587366c4-8cce-4d1c-a22c-41eacc8480ff\"}"
+    }
+  ]
+}

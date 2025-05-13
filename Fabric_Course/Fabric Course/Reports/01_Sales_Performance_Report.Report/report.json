@@ -1,0 +1,86 @@
+{
+  "config": "{\"version\":\"5.59\",\"themeCollection\":{\"baseTheme\":{\"name\":\"CY24SU10\",\"version\":\"5.62\",\"type\":2}},\"activeSectionIndex\":0,\"defaultDrillFilterOtherVisuals\":true,\"settings\":{\"useNewFilterPaneExperience\":true,\"allowChangeFilterTypes\":true,\"useStylableVisualContainerHeader\":true,\"queryLimitOption\":6,\"useEnhancedTooltips\":true,\"exportDataMode\":1,\"useDefaultAggregateDisplayName\":true},\"objects\":{\"section\":[{\"properties\":{\"verticalAlignment\":{\"expr\":{\"Literal\":{\"Value\":\"'Top'\"}}}}}],\"outspacePane\":[{\"properties\":{\"expanded\":{\"expr\":{\"Literal\":{\"Value\":\"false\"}}}}}]}}",
+  "filters": "[]",
+  "layoutOptimization": 0,
+  "pods": [
+    {
+      "boundSection": "80a97269432c8c0ce19d",
+      "config": "{}",
+      "name": "4c9d585ace6e42a3bd17"
+    }
+  ],
+  "resourcePackages": [
+    {
+      "resourcePackage": {
+        "disabled": false,
+        "items": [
+          {
+            "name": "CY24SU10",
+            "path": "BaseThemes/CY24SU10.json",
+            "type": 202
+          }
+        ],
+        "name": "SharedResources",
+        "type": 2
+      }
+    }
+  ],
+  "sections": [
+    {
+      "config": "{\"objects\":{\"outspacePane\":[{\"properties\":{\"backgroundColor\":{\"solid\":{\"color\":{\"expr\":{\"ThemeDataColor\":{\"ColorId\":0,\"Percent\":0}}}}}}}]}}",
+      "displayName": "Sales_Dashboard_Report",
+      "displayOption": 1,
+      "filters": "[]",
+      "height": 720.00,
+      "name": "80a97269432c8c0ce19d",
+      "visualContainers": [
+        {
+          "config": "{\"name\":\"650d646ee0b8e5044094\",\"layouts\":[{\"id\":0,\"position\":{\"x\":534.4329896907217,\"y\":372.7835051546392,\"z\":4,\"width\":280.41237113402065,\"height\":150.10309278350516,\"tabOrder\":3}}],\"singleVisual\":{\"visualType\":\"treemap\",\"projections\":{\"Group\":[{\"queryRef\":\"Dim_Store.city\",\"active\":true}],\"Values\":[{\"queryRef\":\"Sum(Fact_Sales.total_amount)\"}]},\"prototypeQuery\":{\"Version\":2,\"From\":[{\"Name\":\"d\",\"Entity\":\"Dim_Store\",\"Type\":0},{\"Name\":\"f\",\"Entity\":\"Fact_Sales\",\"Type\":0}],\"Select\":[{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"d\"}},\"Property\":\"city\"},\"Name\":\"Dim_Store.city\",\"NativeReferenceName\":\"city\"},{\"Aggregation\":{\"Expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"f\"}},\"Property\":\"total_amount\"}},\"Function\":0},\"Name\":\"Sum(Fact_Sales.total_amount)\",\"NativeReferenceName\":\"Sum of total_amount\"}]},\"drillFilterOtherVisuals\":true}}",
+          "filters": "[]",
+          "height": 150.10,
+          "width": 280.41,
+          "x": 534.43,
+          "y": 372.78,
+          "z": 4.00
+        },
+        {
+          "config": "{\"name\":\"798c7074249037993dbc\",\"layouts\":[{\"id\":0,\"position\":{\"x\":0,\"y\":0,\"z\":0,\"width\":280.41237113402065,\"height\":280.41237113402065,\"tabOrder\":0}}],\"singleVisual\":{\"visualType\":\"donutChart\",\"projections\":{\"Category\":[{\"queryRef\":\"Dim_Product.category\",\"active\":true}],\"Y\":[{\"queryRef\":\"Sum(Fact_Sales.quantity)\"}]},\"prototypeQuery\":{\"Version\":2,\"From\":[{\"Name\":\"d\",\"Entity\":\"Dim_Product\",\"Type\":0},{\"Name\":\"f\",\"Entity\":\"Fact_Sales\",\"Type\":0}],\"Select\":[{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"d\"}},\"Property\":\"category\"},\"Name\":\"Dim_Product.category\",\"NativeReferenceName\":\"category\"},{\"Aggregation\":{\"Expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"f\"}},\"Property\":\"quantity\"}},\"Function\":0},\"Name\":\"Sum(Fact_Sales.quantity)\",\"NativeReferenceName\":\"Sum of quantity\"}],\"OrderBy\":[{\"Direction\":2,\"Expression\":{\"Aggregation\":{\"Expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"f\"}},\"Property\":\"quantity\"}},\"Function\":0}}}]},\"drillFilterOtherVisuals\":true,\"hasDefaultSort\":true}}",
+          "filters": "[]",
+          "height": 280.41,
+          "width": 280.41,
+          "x": 0.00,
+          "y": 0.00,
+          "z": 0.00
+        },
+        {
+          "config": "{\"name\":\"9c2d8a6ac7e366c609a0\",\"layouts\":[{\"id\":0,\"position\":{\"x\":550.9278350515465,\"y\":0,\"z\":2,\"width\":280.41237113402065,\"height\":280.41237113402065,\"tabOrder\":1}}],\"singleVisual\":{\"visualType\":\"clusteredColumnChart\",\"projections\":{\"Category\":[{\"queryRef\":\"Fact_Sales.month_key\",\"active\":true}],\"Y\":[{\"queryRef\":\"Sum(Fact_Sales.total_amount)\"}]},\"prototypeQuery\":{\"Version\":2,\"From\":[{\"Name\":\"f\",\"Entity\":\"Fact_Sales\",\"Type\":0}],\"Select\":[{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"f\"}},\"Property\":\"month_key\"},\"Name\":\"Fact_Sales.month_key\",\"NativeReferenceName\":\"month_key\"},{\"Aggregation\":{\"Expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"f\"}},\"Property\":\"total_amount\"}},\"Function\":0},\"Name\":\"Sum(Fact_Sales.total_amount)\",\"NativeReferenceName\":\"Sum of total_amount\"}],\"OrderBy\":[{\"Direction\":2,\"Expression\":{\"Aggregation\":{\"Expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"f\"}},\"Property\":\"total_amount\"}},\"Function\":0}}}]},\"drillFilterOtherVisuals\":true,\"hasDefaultSort\":true}}",
+          "filters": "[]",
+          "height": 280.41,
+          "width": 280.41,
+          "x": 550.93,
+          "y": 0.00,
+          "z": 2.00
+        },
+        {
+          "config": "{\"name\":\"f4df18511a571a5db89e\",\"layouts\":[{\"id\":0,\"position\":{\"x\":0,\"y\":0,\"width\":100,\"height\":40,\"z\":1}}],\"singleVisual\":{\"visualType\":\"actionButton\",\"drillFilterOtherVisuals\":true,\"objects\":{\"icon\":[{\"properties\":{\"shapeType\":{\"expr\":{\"Literal\":{\"Value\":\"'back'\"}}}},\"selector\":{\"id\":\"default\"}}]},\"vcObjects\":{\"visualLink\":[{\"properties\":{\"show\":{\"expr\":{\"Literal\":{\"Value\":\"true\"}}},\"type\":{\"expr\":{\"Literal\":{\"Value\":\"'Back'\"}}}}}]}},\"howCreated\":\"InsertVisualButton\"}",
+          "filters": "[]",
+          "height": 40.00,
+          "width": 100.00,
+          "x": 0.00,
+          "y": 0.00,
+          "z": 1.00
+        },
+        {
+          "config": "{\"name\":\"fd348900031159700c31\",\"layouts\":[{\"id\":0,\"position\":{\"x\":0,\"y\":290,\"width\":280,\"height\":280,\"z\":3,\"tabOrder\":2}}],\"singleVisual\":{\"visualType\":\"clusteredBarChart\",\"projections\":{\"Y\":[{\"queryRef\":\"Sum(Fact_Sales.total_amount)\"}],\"Category\":[{\"queryRef\":\"Dim_Product.category\",\"active\":true}]},\"prototypeQuery\":{\"Version\":2,\"From\":[{\"Name\":\"f\",\"Entity\":\"Fact_Sales\",\"Type\":0},{\"Name\":\"d\",\"Entity\":\"Dim_Product\",\"Type\":0}],\"Select\":[{\"Aggregation\":{\"Expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"f\"}},\"Property\":\"total_amount\"}},\"Function\":0},\"Name\":\"Sum(Fact_Sales.total_amount)\",\"NativeReferenceName\":\"Sum of total_amount\"},{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"d\"}},\"Property\":\"category\"},\"Name\":\"Dim_Product.category\",\"NativeReferenceName\":\"category\"}],\"OrderBy\":[{\"Direction\":2,\"Expression\":{\"Aggregation\":{\"Expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"f\"}},\"Property\":\"total_amount\"}},\"Function\":0}}}]},\"drillFilterOtherVisuals\":true,\"hasDefaultSort\":true}}",
+          "filters": "[]",
+          "height": 280.00,
+          "width": 280.00,
+          "x": 0.00,
+          "y": 290.00,
+          "z": 3.00
+        }
+      ],
+      "width": 1280.00
+    }
+  ]
+}

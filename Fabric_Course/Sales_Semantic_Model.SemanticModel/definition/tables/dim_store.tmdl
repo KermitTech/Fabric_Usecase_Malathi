@@ -1,0 +1,117 @@
+table dim_store
+	lineageTag: ffabbdbc-47d5-4808-bbfc-49e9fc0cd5aa
+	sourceLineageTag: [gold_layer_shortcut].[dim_store]
+
+	column store_id
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 9bb38ec7-ec19-426e-929d-b5812c733e2e
+		sourceLineageTag: store_id
+		summarizeBy: none
+		sourceColumn: store_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column store_name
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 1c545a39-1e6d-4440-96f7-282c39b2e0e4
+		sourceLineageTag: store_name
+		summarizeBy: none
+		sourceColumn: store_name
+
+		annotation SummarizationSetBy = Automatic
+
+	column address_line1
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: fe3aca7e-2f99-41c0-82d6-c1e810a913bd
+		sourceLineageTag: address_line1
+		summarizeBy: none
+		sourceColumn: address_line1
+
+		annotation SummarizationSetBy = Automatic
+
+	column city
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 50941904-9650-443e-a192-6522283b1a9f
+		sourceLineageTag: city
+		summarizeBy: none
+		sourceColumn: city
+
+		annotation SummarizationSetBy = Automatic
+
+	column state
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 63284b37-a14d-4d77-aad0-789832a7792f
+		sourceLineageTag: state
+		summarizeBy: none
+		sourceColumn: state
+
+		annotation SummarizationSetBy = Automatic
+
+	column country
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: c029daa7-fa74-48c9-9d6d-5bf28597985b
+		sourceLineageTag: country
+		summarizeBy: none
+		sourceColumn: country
+
+		annotation SummarizationSetBy = Automatic
+
+	column postal_code
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: e8833446-1773-462f-8f18-27a03b1dbc81
+		sourceLineageTag: postal_code
+		summarizeBy: none
+		sourceColumn: postal_code
+
+		annotation SummarizationSetBy = Automatic
+
+	column store_manager
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: fc065930-096a-4809-985d-becdf24091a8
+		sourceLineageTag: store_manager
+		summarizeBy: none
+		sourceColumn: store_manager
+
+		annotation SummarizationSetBy = Automatic
+
+	column latitude
+		dataType: double
+		sourceProviderType: float
+		lineageTag: 28c30b49-1e49-4aaf-a9a8-5e0704940279
+		sourceLineageTag: latitude
+		summarizeBy: sum
+		sourceColumn: latitude
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column longitude
+		dataType: double
+		sourceProviderType: float
+		lineageTag: a1b5ca5a-e51c-470b-b4c2-d8a652ca3dab
+		sourceLineageTag: longitude
+		summarizeBy: sum
+		sourceColumn: longitude
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition dim_store = entity
+		mode: directLake
+		source
+			entityName: dim_store
+			schemaName: gold_layer_shortcut
+			expressionSource: DatabaseQuery
+
+	annotation PBI_ResultType = Table
+

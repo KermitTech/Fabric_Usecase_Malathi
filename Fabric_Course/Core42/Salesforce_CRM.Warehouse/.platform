@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "Warehouse",
+    "displayName": "Salesforce_CRM"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "085d9d80-6b9d-a937-47d9-7522efb7127e"
+  }
+}

@@ -1,114 +1,41 @@
 {
-  "formatVersion": "202409",
-  "lastModified": null,
-  "editingSession": {
-    "computeEngineSettings": {},
-    "editingSessionMashup": {
-      "mashupName": "Fact_Inventory_Dataflow",
-      "queryGroups": [],
-      "documentLocale": "en-GB",
-      "queriesMetadata": {
-        "Fact_inventory": {
-          "queryId": "e12d8357-350d-4935-9ac7-6cd2df33f8c7",
-          "queryName": "Fact_inventory",
-          "queryGroupId": null,
-          "entityName": null,
-          "lastKnownIsCalculatedEntity": null,
-          "lastKnownIsLinkedEntity": null,
-          "lastKnownIsParameter": null,
-          "isHidden": false,
-          "lastKnownResultTypeName": null,
-          "loadEnabled": true,
-          "fieldsMetadata": {},
-          "deleteExistingDataOnLoad": false,
-          "hostProperties": {},
-          "jsonOutputDestinations": null,
-          "bindToDefaultOutputDestination": null,
-          "jsonIncrementalRefreshSettings": null
-        },
-        "DefaultDestination": {
-          "queryId": "843222e3-1fb7-46da-83b2-8a87bea005b0",
-          "queryName": "DefaultDestination",
-          "queryGroupId": null,
-          "entityName": null,
-          "lastKnownIsCalculatedEntity": null,
-          "lastKnownIsLinkedEntity": null,
-          "lastKnownIsParameter": null,
-          "isHidden": true,
-          "lastKnownResultTypeName": null,
-          "loadEnabled": false,
-          "fieldsMetadata": {},
-          "deleteExistingDataOnLoad": false,
-          "hostProperties": {},
-          "jsonOutputDestinations": null,
-          "bindToDefaultOutputDestination": null,
-          "jsonIncrementalRefreshSettings": null
-        },
-        "Fact_shipping": {
-          "queryId": "cc8482d5-d8a3-429e-8260-ee8c075aa782",
-          "queryName": "Fact_shipping",
-          "queryGroupId": null,
-          "entityName": null,
-          "lastKnownIsCalculatedEntity": null,
-          "lastKnownIsLinkedEntity": null,
-          "lastKnownIsParameter": null,
-          "isHidden": false,
-          "lastKnownResultTypeName": null,
-          "loadEnabled": true,
-          "fieldsMetadata": {},
-          "deleteExistingDataOnLoad": false,
-          "hostProperties": {},
-          "jsonOutputDestinations": null,
-          "bindToDefaultOutputDestination": null,
-          "jsonIncrementalRefreshSettings": null
-        },
-        "Fact_Demand_Predictions": {
-          "queryId": "e25b09c4-80c7-487e-9896-01c8df71e74c",
-          "queryName": "Fact_Demand_Predictions",
-          "queryGroupId": null,
-          "entityName": null,
-          "lastKnownIsCalculatedEntity": null,
-          "lastKnownIsLinkedEntity": null,
-          "lastKnownIsParameter": null,
-          "isHidden": false,
-          "lastKnownResultTypeName": null,
-          "loadEnabled": true,
-          "fieldsMetadata": {},
-          "deleteExistingDataOnLoad": false,
-          "hostProperties": {},
-          "jsonOutputDestinations": null,
-          "bindToDefaultOutputDestination": null,
-          "jsonIncrementalRefreshSettings": null
-        }
-      },
-      "connectionOverrides": [
-        {
-          "path": "Lakehouse",
-          "kind": "Lakehouse",
-          "provider": "DmtsFabric",
-          "connectionName": "{\"ClusterId\":\"1ea2a874-811a-42a0-8dae-9975856a50b8\",\"DatasourceId\":\"587366c4-8cce-4d1c-a22c-41eacc8480ff\"}",
-          "credentialDetails": {},
-          "connectionParameters": {},
-          "privacyGroup": "None"
-        },
-        {
-          "path": "Warehouse",
-          "kind": "Warehouse",
-          "provider": "DmtsFabric",
-          "connectionName": "{\"ClusterId\":\"1ea2a874-811a-42a0-8dae-9975856a50b8\",\"DatasourceId\":\"fc91e9cf-fd09-4bdb-ab36-107aa3da6c0c\"}",
-          "credentialDetails": {},
-          "connectionParameters": {}
-        }
-      ],
-      "useHostConnectionProvider": false,
-      "fastCombine": false,
-      "allowNativeQueries": true,
-      "skipAutomaticTypeAndHeaderDetection": false,
-      "hostProperties": {
-        "dataflowRefreshOutputFileFormat": "Parquet",
-        "enableDateTimeFieldsForStaging": "true",
-        "enablePublishWithoutLoadedQueries": "true"
-      }
+  "formatVersion": "202502",
+  "computeEngineSettings": {
+    "allowFastCopy": false
+  },
+  "name": "Fact_Inventory_Dataflow",
+  "queryGroups": [],
+  "documentLocale": "en-GB",
+  "queriesMetadata": {
+    "Fact_inventory": {
+      "queryId": "e12d8357-350d-4935-9ac7-6cd2df33f8c7",
+      "queryName": "Fact_inventory"
+    },
+    "DefaultDestination": {
+      "queryId": "843222e3-1fb7-46da-83b2-8a87bea005b0",
+      "queryName": "DefaultDestination",
+      "isHidden": true,
+      "loadEnabled": false
+    },
+    "Fact_shipping": {
+      "queryId": "cc8482d5-d8a3-429e-8260-ee8c075aa782",
+      "queryName": "Fact_shipping"
+    },
+    "Fact_Demand_Predictions": {
+      "queryId": "e25b09c4-80c7-487e-9896-01c8df71e74c",
+      "queryName": "Fact_Demand_Predictions"
     }
-  }
+  },
+  "connections": [
+    {
+      "path": "Lakehouse",
+      "kind": "Lakehouse",
+      "connectionId": "{\"ClusterId\":\"1ea2a874-811a-42a0-8dae-9975856a50b8\",\"DatasourceId\":\"587366c4-8cce-4d1c-a22c-41eacc8480ff\"}"
+    },
+    {
+      "path": "Warehouse",
+      "kind": "Warehouse",
+      "connectionId": "{\"ClusterId\":\"1ea2a874-811a-42a0-8dae-9975856a50b8\",\"DatasourceId\":\"fc91e9cf-fd09-4bdb-ab36-107aa3da6c0c\"}"
+    }
+  ]
 }

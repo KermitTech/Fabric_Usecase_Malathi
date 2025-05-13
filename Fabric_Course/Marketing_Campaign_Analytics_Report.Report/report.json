@@ -1,0 +1,69 @@
+{
+  "config": "{\"version\":\"5.59\",\"themeCollection\":{\"baseTheme\":{\"name\":\"CY24SU10\",\"version\":\"5.60\",\"type\":2}},\"activeSectionIndex\":0,\"defaultDrillFilterOtherVisuals\":true,\"settings\":{\"useNewFilterPaneExperience\":true,\"allowChangeFilterTypes\":true,\"useStylableVisualContainerHeader\":true,\"queryLimitOption\":6,\"useEnhancedTooltips\":true,\"exportDataMode\":1,\"useDefaultAggregateDisplayName\":true},\"objects\":{\"section\":[{\"properties\":{\"verticalAlignment\":{\"expr\":{\"Literal\":{\"Value\":\"'Top'\"}}}}}],\"outspacePane\":[{\"properties\":{\"expanded\":{\"expr\":{\"Literal\":{\"Value\":\"false\"}}}}}]}}",
+  "layoutOptimization": 0,
+  "resourcePackages": [
+    {
+      "resourcePackage": {
+        "disabled": false,
+        "items": [
+          {
+            "name": "CY24SU10",
+            "path": "BaseThemes/CY24SU10.json",
+            "type": 202
+          }
+        ],
+        "name": "SharedResources",
+        "type": 2
+      }
+    }
+  ],
+  "sections": [
+    {
+      "config": "{}",
+      "displayName": "Page 1",
+      "displayOption": 1,
+      "filters": "[]",
+      "height": 720.00,
+      "name": "4dd4c0f7aeacbb297431",
+      "visualContainers": [
+        {
+          "config": "{\"name\":\"2c618f01dad1193c8063\",\"layouts\":[{\"id\":0,\"position\":{\"x\":446,\"y\":292,\"width\":436,\"height\":282,\"z\":3,\"tabOrder\":3}}],\"singleVisual\":{\"visualType\":\"funnel\",\"projections\":{\"Category\":[{\"queryRef\":\"Fact_CampaignPerformance.campaign_type\",\"active\":true}],\"Y\":[{\"queryRef\":\"Sum(Fact_CampaignPerformance.campaign_total)\"}]},\"prototypeQuery\":{\"Version\":2,\"From\":[{\"Name\":\"f\",\"Entity\":\"Fact_CampaignPerformance\",\"Type\":0}],\"Select\":[{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"f\"}},\"Property\":\"campaign_type\"},\"Name\":\"Fact_CampaignPerformance.campaign_type\",\"NativeReferenceName\":\"campaign_type\"},{\"Aggregation\":{\"Expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"f\"}},\"Property\":\"campaign_total\"}},\"Function\":0},\"Name\":\"Sum(Fact_CampaignPerformance.campaign_total)\",\"NativeReferenceName\":\"Sum of campaign_total\"}],\"OrderBy\":[{\"Direction\":2,\"Expression\":{\"Aggregation\":{\"Expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"f\"}},\"Property\":\"campaign_total\"}},\"Function\":0}}}]},\"drillFilterOtherVisuals\":true,\"hasDefaultSort\":true,\"objects\":{\"dataPoint\":[{\"properties\":{\"fill\":{\"solid\":{\"color\":{\"expr\":{\"ThemeDataColor\":{\"ColorId\":2,\"Percent\":0.4}}}}}}}],\"labels\":[{\"properties\":{\"fontFamily\":{\"expr\":{\"Literal\":{\"Value\":\"'Calibri'\"}}},\"bold\":{\"expr\":{\"Literal\":{\"Value\":\"true\"}}}}},{\"properties\":{\"color\":{\"solid\":{\"color\":{\"expr\":{\"ThemeDataColor\":{\"ColorId\":1,\"Percent\":0}}}}}},\"selector\":{\"data\":[{\"dataViewWildcard\":{\"matchingOption\":1}}]}}],\"categoryAxis\":[{\"properties\":{\"fontFamily\":{\"expr\":{\"Literal\":{\"Value\":\"'Calibri'\"}}},\"bold\":{\"expr\":{\"Literal\":{\"Value\":\"true\"}}},\"color\":{\"solid\":{\"color\":{\"expr\":{\"ThemeDataColor\":{\"ColorId\":5,\"Percent\":0}}}}}}}]},\"vcObjects\":{\"title\":[{\"properties\":{\"text\":{\"expr\":{\"Literal\":{\"Value\":\"'Overall Campaign Analysis'\"}}},\"fontFamily\":{\"expr\":{\"Literal\":{\"Value\":\"'Calibri'\"}}},\"bold\":{\"expr\":{\"Literal\":{\"Value\":\"true\"}}},\"fontColor\":{\"solid\":{\"color\":{\"expr\":{\"ThemeDataColor\":{\"ColorId\":9,\"Percent\":0}}}}}}}]}}}",
+          "filters": "[]",
+          "height": 282.00,
+          "width": 436.00,
+          "x": 446.00,
+          "y": 292.00,
+          "z": 3.00
+        },
+        {
+          "config": "{\"name\":\"5645670ac47891d47720\",\"layouts\":[{\"id\":0,\"position\":{\"x\":0,\"y\":0,\"z\":0,\"width\":436.2743091095189,\"height\":281.67860798362335,\"tabOrder\":0}}],\"singleVisual\":{\"visualType\":\"clusteredColumnChart\",\"projections\":{\"Category\":[{\"queryRef\":\"Fact_WinningCampaigns.campaign_name\",\"active\":true}],\"Y\":[{\"queryRef\":\"Sum(Fact_WinningCampaigns.Purchased_count)\"}],\"Series\":[{\"queryRef\":\"Fact_WinningCampaigns.source\"}]},\"prototypeQuery\":{\"Version\":2,\"From\":[{\"Name\":\"f\",\"Entity\":\"Fact_WinningCampaigns\",\"Type\":0}],\"Select\":[{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"f\"}},\"Property\":\"campaign_name\"},\"Name\":\"Fact_WinningCampaigns.campaign_name\",\"NativeReferenceName\":\"campaign_name\"},{\"Aggregation\":{\"Expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"f\"}},\"Property\":\"Purchased_count\"}},\"Function\":0},\"Name\":\"Sum(Fact_WinningCampaigns.Purchased_count)\",\"NativeReferenceName\":\"Sum of Purchased_count\"},{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"f\"}},\"Property\":\"source\"},\"Name\":\"Fact_WinningCampaigns.source\",\"NativeReferenceName\":\"source\"}],\"OrderBy\":[{\"Direction\":2,\"Expression\":{\"Aggregation\":{\"Expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"f\"}},\"Property\":\"Purchased_count\"}},\"Function\":0}}}]},\"drillFilterOtherVisuals\":true,\"hasDefaultSort\":true,\"objects\":{\"categoryAxis\":[{\"properties\":{\"fontFamily\":{\"expr\":{\"Literal\":{\"Value\":\"'Calibri'\"}}},\"bold\":{\"expr\":{\"Literal\":{\"Value\":\"true\"}}},\"labelColor\":{\"solid\":{\"color\":{\"expr\":{\"ThemeDataColor\":{\"ColorId\":1,\"Percent\":0}}}}},\"titleText\":{\"expr\":{\"Literal\":{\"Value\":\"'Campaign Name'\"}}},\"titleFontFamily\":{\"expr\":{\"Literal\":{\"Value\":\"'Calibri'\"}}},\"titleBold\":{\"expr\":{\"Literal\":{\"Value\":\"true\"}}},\"titleColor\":{\"solid\":{\"color\":{\"expr\":{\"ThemeDataColor\":{\"ColorId\":5,\"Percent\":0}}}}}}}],\"valueAxis\":[{\"properties\":{\"fontFamily\":{\"expr\":{\"Literal\":{\"Value\":\"'Calibri'\"}}},\"bold\":{\"expr\":{\"Literal\":{\"Value\":\"true\"}}},\"labelColor\":{\"solid\":{\"color\":{\"expr\":{\"ThemeDataColor\":{\"ColorId\":1,\"Percent\":0}}}}},\"titleText\":{\"expr\":{\"Literal\":{\"Value\":\"'Purchased Count'\"}}},\"titleFontFamily\":{\"expr\":{\"Literal\":{\"Value\":\"'Calibri'\"}}},\"titleBold\":{\"expr\":{\"Literal\":{\"Value\":\"true\"}}},\"titleColor\":{\"solid\":{\"color\":{\"expr\":{\"ThemeDataColor\":{\"ColorId\":5,\"Percent\":0}}}}}}}]},\"vcObjects\":{\"title\":[{\"properties\":{\"text\":{\"expr\":{\"Literal\":{\"Value\":\"'Winning Campaigns Report based on Purchase'\"}}},\"fontFamily\":{\"expr\":{\"Literal\":{\"Value\":\"'Calibri'\"}}},\"bold\":{\"expr\":{\"Literal\":{\"Value\":\"true\"}}},\"fontColor\":{\"solid\":{\"color\":{\"expr\":{\"ThemeDataColor\":{\"ColorId\":9,\"Percent\":0}}}}}}}]}}}",
+          "filters": "[]",
+          "height": 281.68,
+          "width": 436.27,
+          "x": 0.00,
+          "y": 0.00,
+          "z": 0.00
+        },
+        {
+          "config": "{\"name\":\"89f0169e0c340e22a153\",\"layouts\":[{\"id\":0,\"position\":{\"x\":0,\"y\":292,\"width\":436,\"height\":282,\"z\":1,\"tabOrder\":1}}],\"singleVisual\":{\"visualType\":\"clusteredColumnChart\",\"projections\":{\"Category\":[{\"queryRef\":\"Fact_CampaignPerformance.campaign_name\",\"active\":true}],\"Y\":[{\"queryRef\":\"Sum(Fact_CampaignPerformance.campaign_total)\"}]},\"prototypeQuery\":{\"Version\":2,\"From\":[{\"Name\":\"f\",\"Entity\":\"Fact_CampaignPerformance\",\"Type\":0}],\"Select\":[{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"f\"}},\"Property\":\"campaign_name\"},\"Name\":\"Fact_CampaignPerformance.campaign_name\",\"NativeReferenceName\":\"campaign_name\"},{\"Aggregation\":{\"Expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"f\"}},\"Property\":\"campaign_total\"}},\"Function\":0},\"Name\":\"Sum(Fact_CampaignPerformance.campaign_total)\",\"NativeReferenceName\":\"Sum of campaign_total\"}],\"OrderBy\":[{\"Direction\":2,\"Expression\":{\"Aggregation\":{\"Expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"f\"}},\"Property\":\"campaign_total\"}},\"Function\":0}}}]},\"drillFilterOtherVisuals\":true,\"hasDefaultSort\":true,\"objects\":{\"categoryAxis\":[{\"properties\":{\"fontFamily\":{\"expr\":{\"Literal\":{\"Value\":\"'Calibri'\"}}},\"bold\":{\"expr\":{\"Literal\":{\"Value\":\"true\"}}},\"labelColor\":{\"solid\":{\"color\":{\"expr\":{\"ThemeDataColor\":{\"ColorId\":1,\"Percent\":0}}}}},\"titleText\":{\"expr\":{\"Literal\":{\"Value\":\"'Campaign Name'\"}}},\"titleFontFamily\":{\"expr\":{\"Literal\":{\"Value\":\"'Calibri'\"}}},\"titleBold\":{\"expr\":{\"Literal\":{\"Value\":\"true\"}}},\"titleColor\":{\"solid\":{\"color\":{\"expr\":{\"ThemeDataColor\":{\"ColorId\":6,\"Percent\":-0.5}}}}}}}],\"valueAxis\":[{\"properties\":{\"fontFamily\":{\"expr\":{\"Literal\":{\"Value\":\"'Calibri'\"}}},\"bold\":{\"expr\":{\"Literal\":{\"Value\":\"true\"}}},\"labelColor\":{\"solid\":{\"color\":{\"expr\":{\"ThemeDataColor\":{\"ColorId\":1,\"Percent\":0}}}}},\"titleText\":{\"expr\":{\"Literal\":{\"Value\":\"'Total Amount'\"}}},\"titleColor\":{\"solid\":{\"color\":{\"expr\":{\"ThemeDataColor\":{\"ColorId\":6,\"Percent\":-0.5}}}}},\"titleBold\":{\"expr\":{\"Literal\":{\"Value\":\"true\"}}},\"titleFontFamily\":{\"expr\":{\"Literal\":{\"Value\":\"'Calibri'\"}}}}}]},\"vcObjects\":{\"title\":[{\"properties\":{\"bold\":{\"expr\":{\"Literal\":{\"Value\":\"true\"}}},\"fontColor\":{\"solid\":{\"color\":{\"expr\":{\"ThemeDataColor\":{\"ColorId\":9,\"Percent\":0}}}}},\"text\":{\"expr\":{\"Literal\":{\"Value\":\"'Campaign Performance Report'\"}}}}}]}}}",
+          "filters": "[]",
+          "height": 282.00,
+          "width": 436.00,
+          "x": 0.00,
+          "y": 292.00,
+          "z": 1.00
+        },
+        {
+          "config": "{\"name\":\"c5d45fcb2098bc7db385\",\"layouts\":[{\"id\":0,\"position\":{\"x\":446,\"y\":0,\"width\":436,\"height\":282,\"z\":2,\"tabOrder\":2}}],\"singleVisual\":{\"visualType\":\"pieChart\",\"projections\":{\"Category\":[{\"queryRef\":\"Fact_Customer_Engagement_Campaigns.source\",\"active\":true}],\"Y\":[{\"queryRef\":\"Sum(Fact_Customer_Engagement_Campaigns.first_touch_count)\"}]},\"prototypeQuery\":{\"Version\":2,\"From\":[{\"Name\":\"f\",\"Entity\":\"Fact_Customer_Engagement_Campaigns\",\"Type\":0}],\"Select\":[{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"f\"}},\"Property\":\"source\"},\"Name\":\"Fact_Customer_Engagement_Campaigns.source\",\"NativeReferenceName\":\"source\"},{\"Aggregation\":{\"Expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"f\"}},\"Property\":\"first_touch_count\"}},\"Function\":0},\"Name\":\"Sum(Fact_Customer_Engagement_Campaigns.first_touch_count)\",\"NativeReferenceName\":\"Sum of first_touch_count\"}],\"OrderBy\":[{\"Direction\":2,\"Expression\":{\"Aggregation\":{\"Expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"f\"}},\"Property\":\"first_touch_count\"}},\"Function\":0}}}]},\"drillFilterOtherVisuals\":true,\"hasDefaultSort\":true,\"objects\":{\"legend\":[{\"properties\":{\"bold\":{\"expr\":{\"Literal\":{\"Value\":\"true\"}}},\"labelColor\":{\"solid\":{\"color\":{\"expr\":{\"ThemeDataColor\":{\"ColorId\":6,\"Percent\":-0.5}}}}},\"fontFamily\":{\"expr\":{\"Literal\":{\"Value\":\"'Calibri'\"}}}}}],\"labels\":[{\"properties\":{\"fontFamily\":{\"expr\":{\"Literal\":{\"Value\":\"'Calibri'\"}}},\"bold\":{\"expr\":{\"Literal\":{\"Value\":\"true\"}}}}},{\"properties\":{\"color\":{\"solid\":{\"color\":{\"expr\":{\"ThemeDataColor\":{\"ColorId\":4,\"Percent\":-0.5}}}}}},\"selector\":{\"data\":[{\"dataViewWildcard\":{\"matchingOption\":1}}]}}]},\"vcObjects\":{\"title\":[{\"properties\":{\"text\":{\"expr\":{\"Literal\":{\"Value\":\"'Customer Engagement Report Based on First Touch'\"}}},\"bold\":{\"expr\":{\"Literal\":{\"Value\":\"true\"}}},\"fontFamily\":{\"expr\":{\"Literal\":{\"Value\":\"'Calibri'\"}}},\"fontColor\":{\"solid\":{\"color\":{\"expr\":{\"ThemeDataColor\":{\"ColorId\":9,\"Percent\":0}}}}}}}]}}}",
+          "filters": "[]",
+          "height": 282.00,
+          "width": 436.00,
+          "x": 446.00,
+          "y": 0.00,
+          "z": 2.00
+        }
+      ],
+      "width": 1280.00
+    }
+  ]
+}

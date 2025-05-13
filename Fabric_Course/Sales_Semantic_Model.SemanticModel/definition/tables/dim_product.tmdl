@@ -1,0 +1,63 @@
+table dim_product
+	lineageTag: b3e85ffb-e982-4ee0-9daf-cecae4af4164
+	sourceLineageTag: [gold_layer_shortcut].[dim_product]
+
+	column product_id
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 6bb7a765-71fc-4968-856c-425a31607bc5
+		sourceLineageTag: product_id
+		summarizeBy: none
+		sourceColumn: product_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column product_name
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 370f3b4b-f60b-409b-b1d4-d4aca0449149
+		sourceLineageTag: product_name
+		summarizeBy: none
+		sourceColumn: product_name
+
+		annotation SummarizationSetBy = Automatic
+
+	column category
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 594257d4-b50c-426d-9b7c-609941dcdca3
+		sourceLineageTag: category
+		summarizeBy: none
+		sourceColumn: category
+
+		annotation SummarizationSetBy = Automatic
+
+	column sku
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: d869bc8d-a89e-4b42-8e28-46927d9f74ec
+		sourceLineageTag: sku
+		summarizeBy: none
+		sourceColumn: sku
+
+		annotation SummarizationSetBy = Automatic
+
+	column sku_status
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 28a0fabb-d6ad-45b1-9b4f-e41ee0fde85c
+		sourceLineageTag: sku_status
+		summarizeBy: none
+		sourceColumn: sku_status
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dim_product = entity
+		mode: directLake
+		source
+			entityName: dim_product
+			schemaName: gold_layer_shortcut
+			expressionSource: DatabaseQuery
+
+	annotation PBI_ResultType = Table
+

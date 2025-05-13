@@ -1,0 +1,45 @@
+table RPT_WinningCampaigns
+	lineageTag: 610bf6d0-ed06-439e-aa39-c37a03fcdc1d
+	sourceLineageTag: [gold_layer_campaign].[RPT_WinningCampaigns]
+
+	column campaign_id
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 5048aaf9-681a-438c-925f-07aca677e35e
+		sourceLineageTag: campaign_id
+		summarizeBy: none
+		sourceColumn: campaign_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column source_id
+		dataType: int64
+		formatString: 0
+		sourceProviderType: bigint
+		lineageTag: a2d2babd-e1b0-4aa8-8bf7-e1bd49563d49
+		sourceLineageTag: source_id
+		summarizeBy: sum
+		sourceColumn: source_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column Purchased_count
+		dataType: int64
+		formatString: 0
+		sourceProviderType: bigint
+		lineageTag: a92ffe40-63a5-48fd-baf6-799d95d38108
+		sourceLineageTag: Purchased_count
+		summarizeBy: sum
+		sourceColumn: Purchased_count
+
+		annotation SummarizationSetBy = Automatic
+
+	partition RPT_WinningCampaigns = entity
+		mode: directLake
+		source
+			entityName: RPT_WinningCampaigns
+			schemaName: gold_layer_campaign
+			expressionSource: DatabaseQuery
+
+	annotation PBI_ResultType = Table
+

@@ -1,0 +1,1967 @@
+{
+  "name": "{{Dataset_Name}}",
+  "compatibilityLevel": 1604,
+  "model": {
+    "name": "{{Dataset_Name}}",
+    "culture": "en-US",
+    "collation": "Latin1_General_100_BIN2_UTF8",
+    "dataAccessOptions": {
+      "legacyRedirects": true,
+      "returnErrorValuesAsNull": true
+    },
+    "defaultPowerBIDataSourceVersion": "powerBI_V3",
+    "sourceQueryCulture": "en-US",
+    "tables": [
+      {
+        "name": "Contacts",
+        "sourceLineageTag": "[dbo].[Contacts]",
+        "columns": [
+          {
+            "name": "FirstName",
+            "dataType": "string",
+            "sourceColumn": "FirstName",
+            "sourceProviderType": "varchar",
+            "sourceLineageTag": "FirstName",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "LastName",
+            "dataType": "string",
+            "sourceColumn": "LastName",
+            "sourceProviderType": "varchar",
+            "sourceLineageTag": "LastName",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "AccountName",
+            "dataType": "string",
+            "sourceColumn": "AccountName",
+            "sourceProviderType": "varchar",
+            "sourceLineageTag": "AccountName",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "Title",
+            "dataType": "string",
+            "sourceColumn": "Title",
+            "sourceProviderType": "varchar",
+            "sourceLineageTag": "Title",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "LastActivity",
+            "dataType": "dateTime",
+            "sourceColumn": "LastActivity",
+            "formatString": "General Date",
+            "sourceProviderType": "datetime2",
+            "sourceLineageTag": "LastActivity",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "Email",
+            "dataType": "string",
+            "sourceColumn": "Email",
+            "sourceProviderType": "varchar",
+            "sourceLineageTag": "Email",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "Phone",
+            "dataType": "string",
+            "sourceColumn": "Phone",
+            "sourceProviderType": "varchar",
+            "sourceLineageTag": "Phone",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "Mobile",
+            "dataType": "string",
+            "sourceColumn": "Mobile",
+            "sourceProviderType": "varchar",
+            "sourceLineageTag": "Mobile",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "MailingState",
+            "dataType": "string",
+            "sourceColumn": "MailingState",
+            "sourceProviderType": "varchar",
+            "sourceLineageTag": "MailingState",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "MailingCountry",
+            "dataType": "string",
+            "sourceColumn": "MailingCountry",
+            "sourceProviderType": "varchar",
+            "sourceLineageTag": "MailingCountry",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "AccountOwner",
+            "dataType": "string",
+            "sourceColumn": "AccountOwner",
+            "sourceProviderType": "varchar",
+            "sourceLineageTag": "AccountOwner",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "CreatedDate",
+            "dataType": "dateTime",
+            "sourceColumn": "CreatedDate",
+            "formatString": "General Date",
+            "sourceProviderType": "datetime2",
+            "sourceLineageTag": "CreatedDate",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "updated_at",
+            "dataType": "dateTime",
+            "sourceColumn": "updated_at",
+            "formatString": "General Date",
+            "sourceProviderType": "datetime2",
+            "sourceLineageTag": "updated_at",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          }
+        ],
+        "partitions": [
+          {
+            "name": "{{Partition_Name}}",
+            "mode": "directLake",
+            "source": {
+              "type": "entity",
+              "entityName": "Contacts",
+              "expressionSource": "DatabaseQuery",
+              "schemaName": "dbo"
+            }
+          }
+        ],
+        "annotations": [
+          {
+            "name": "IsTableInBiModel",
+            "value": "False"
+          }
+        ]
+      },
+      {
+        "name": "PipelineAuditLogs",
+        "sourceLineageTag": "[dbo].[PipelineAuditLogs]",
+        "columns": [
+          {
+            "name": "RunID",
+            "dataType": "string",
+            "sourceColumn": "RunID",
+            "sourceProviderType": "varchar",
+            "sourceLineageTag": "RunID",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "PipelineName",
+            "dataType": "string",
+            "sourceColumn": "PipelineName",
+            "sourceProviderType": "varchar",
+            "sourceLineageTag": "PipelineName",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "ActivityName",
+            "dataType": "string",
+            "sourceColumn": "ActivityName",
+            "sourceProviderType": "varchar",
+            "sourceLineageTag": "ActivityName",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "Status",
+            "dataType": "string",
+            "sourceColumn": "Status",
+            "sourceProviderType": "varchar",
+            "sourceLineageTag": "Status",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "StartTime",
+            "dataType": "dateTime",
+            "sourceColumn": "StartTime",
+            "formatString": "General Date",
+            "sourceProviderType": "datetime2",
+            "sourceLineageTag": "StartTime",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "EndTime",
+            "dataType": "dateTime",
+            "sourceColumn": "EndTime",
+            "formatString": "General Date",
+            "sourceProviderType": "datetime2",
+            "sourceLineageTag": "EndTime",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "DurationInSeconds",
+            "dataType": "int64",
+            "sourceColumn": "DurationInSeconds",
+            "formatString": "0",
+            "sourceProviderType": "int",
+            "sourceLineageTag": "DurationInSeconds",
+            "summarizeBy": "sum",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "ErrorDetails",
+            "dataType": "string",
+            "sourceColumn": "ErrorDetails",
+            "sourceProviderType": "varchar",
+            "sourceLineageTag": "ErrorDetails",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "TriggeredBy",
+            "dataType": "string",
+            "sourceColumn": "TriggeredBy",
+            "sourceProviderType": "varchar",
+            "sourceLineageTag": "TriggeredBy",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "PipelineRunTime",
+            "dataType": "dateTime",
+            "sourceColumn": "PipelineRunTime",
+            "formatString": "General Date",
+            "sourceProviderType": "datetime2",
+            "sourceLineageTag": "PipelineRunTime",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          }
+        ],
+        "partitions": [
+          {
+            "name": "{{Partition_Name}}",
+            "mode": "directLake",
+            "source": {
+              "type": "entity",
+              "entityName": "PipelineAuditLogs",
+              "expressionSource": "DatabaseQuery",
+              "schemaName": "dbo"
+            }
+          }
+        ],
+        "annotations": [
+          {
+            "name": "IsTableInBiModel",
+            "value": "False"
+          }
+        ]
+      },
+      {
+        "name": "Contact",
+        "sourceLineageTag": "[salesforce_CRM].[Contact]",
+        "columns": [
+          {
+            "name": "FirstName",
+            "dataType": "string",
+            "sourceColumn": "FirstName",
+            "sourceProviderType": "varchar",
+            "sourceLineageTag": "FirstName",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "LastName",
+            "dataType": "string",
+            "sourceColumn": "LastName",
+            "sourceProviderType": "varchar",
+            "sourceLineageTag": "LastName",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "AccountName",
+            "dataType": "string",
+            "sourceColumn": "AccountName",
+            "sourceProviderType": "varchar",
+            "sourceLineageTag": "AccountName",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "Title",
+            "dataType": "string",
+            "sourceColumn": "Title",
+            "sourceProviderType": "varchar",
+            "sourceLineageTag": "Title",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "LastActivityDate",
+            "dataType": "dateTime",
+            "sourceColumn": "LastActivityDate",
+            "formatString": "General Date",
+            "sourceProviderType": "datetime2",
+            "sourceLineageTag": "LastActivityDate",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "Email",
+            "dataType": "string",
+            "sourceColumn": "Email",
+            "sourceProviderType": "varchar",
+            "sourceLineageTag": "Email",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "Phone",
+            "dataType": "string",
+            "sourceColumn": "Phone",
+            "sourceProviderType": "varchar",
+            "sourceLineageTag": "Phone",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "Mobile",
+            "dataType": "string",
+            "sourceColumn": "Mobile",
+            "sourceProviderType": "varchar",
+            "sourceLineageTag": "Mobile",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "MailingState",
+            "dataType": "string",
+            "sourceColumn": "MailingState",
+            "sourceProviderType": "varchar",
+            "sourceLineageTag": "MailingState",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "MailingCountry",
+            "dataType": "string",
+            "sourceColumn": "MailingCountry",
+            "sourceProviderType": "varchar",
+            "sourceLineageTag": "MailingCountry",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "AccountOwner",
+            "dataType": "string",
+            "sourceColumn": "AccountOwner",
+            "sourceProviderType": "varchar",
+            "sourceLineageTag": "AccountOwner",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "CreatedDate",
+            "dataType": "dateTime",
+            "sourceColumn": "CreatedDate",
+            "formatString": "General Date",
+            "sourceProviderType": "datetime2",
+            "sourceLineageTag": "CreatedDate",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "updated_at",
+            "dataType": "dateTime",
+            "sourceColumn": "updated_at",
+            "formatString": "General Date",
+            "sourceProviderType": "datetime2",
+            "sourceLineageTag": "updated_at",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "batch_id",
+            "dataType": "int64",
+            "sourceColumn": "batch_id",
+            "formatString": "0",
+            "sourceProviderType": "int",
+            "sourceLineageTag": "batch_id",
+            "summarizeBy": "sum",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "LoadType",
+            "dataType": "string",
+            "sourceColumn": "LoadType",
+            "sourceProviderType": "varchar",
+            "sourceLineageTag": "LoadType",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          }
+        ],
+        "partitions": [
+          {
+            "name": "{{Partition_Name}}",
+            "mode": "directLake",
+            "source": {
+              "type": "entity",
+              "entityName": "Contact",
+              "expressionSource": "DatabaseQuery",
+              "schemaName": "salesforce_CRM"
+            }
+          }
+        ],
+        "annotations": [
+          {
+            "name": "IsTableInBiModel",
+            "value": "False"
+          }
+        ]
+      },
+      {
+        "name": "Contact_Dest",
+        "sourceLineageTag": "[salesforce_CRM].[Contact_Dest]",
+        "columns": [
+          {
+            "name": "FirstName",
+            "dataType": "string",
+            "sourceColumn": "FirstName",
+            "sourceProviderType": "varchar",
+            "sourceLineageTag": "FirstName",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "LastName",
+            "dataType": "string",
+            "sourceColumn": "LastName",
+            "sourceProviderType": "varchar",
+            "sourceLineageTag": "LastName",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "AccountName",
+            "dataType": "string",
+            "sourceColumn": "AccountName",
+            "sourceProviderType": "varchar",
+            "sourceLineageTag": "AccountName",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "Title",
+            "dataType": "string",
+            "sourceColumn": "Title",
+            "sourceProviderType": "varchar",
+            "sourceLineageTag": "Title",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "LastActivityDate",
+            "dataType": "dateTime",
+            "sourceColumn": "LastActivityDate",
+            "formatString": "General Date",
+            "sourceProviderType": "datetime2",
+            "sourceLineageTag": "LastActivityDate",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "Email",
+            "dataType": "string",
+            "sourceColumn": "Email",
+            "sourceProviderType": "varchar",
+            "sourceLineageTag": "Email",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "Phone",
+            "dataType": "string",
+            "sourceColumn": "Phone",
+            "sourceProviderType": "varchar",
+            "sourceLineageTag": "Phone",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "Mobile",
+            "dataType": "string",
+            "sourceColumn": "Mobile",
+            "sourceProviderType": "varchar",
+            "sourceLineageTag": "Mobile",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "MailingState",
+            "dataType": "string",
+            "sourceColumn": "MailingState",
+            "sourceProviderType": "varchar",
+            "sourceLineageTag": "MailingState",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "MailingCountry",
+            "dataType": "string",
+            "sourceColumn": "MailingCountry",
+            "sourceProviderType": "varchar",
+            "sourceLineageTag": "MailingCountry",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "AccountOwner",
+            "dataType": "string",
+            "sourceColumn": "AccountOwner",
+            "sourceProviderType": "varchar",
+            "sourceLineageTag": "AccountOwner",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "CreatedDate",
+            "dataType": "dateTime",
+            "sourceColumn": "CreatedDate",
+            "formatString": "General Date",
+            "sourceProviderType": "datetime2",
+            "sourceLineageTag": "CreatedDate",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "updated_at",
+            "dataType": "dateTime",
+            "sourceColumn": "updated_at",
+            "formatString": "General Date",
+            "sourceProviderType": "datetime2",
+            "sourceLineageTag": "updated_at",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "batch_id",
+            "dataType": "int64",
+            "sourceColumn": "batch_id",
+            "formatString": "0",
+            "sourceProviderType": "int",
+            "sourceLineageTag": "batch_id",
+            "summarizeBy": "sum",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          }
+        ],
+        "partitions": [
+          {
+            "name": "{{Partition_Name}}",
+            "mode": "directLake",
+            "source": {
+              "type": "entity",
+              "entityName": "Contact_Dest",
+              "expressionSource": "DatabaseQuery",
+              "schemaName": "salesforce_CRM"
+            }
+          }
+        ],
+        "annotations": [
+          {
+            "name": "IsTableInBiModel",
+            "value": "False"
+          }
+        ]
+      },
+      {
+        "name": "Contact_Updated",
+        "sourceLineageTag": "[salesforce_CRM].[Contact_Updated]",
+        "columns": [
+          {
+            "name": "FirstName",
+            "dataType": "string",
+            "sourceColumn": "FirstName",
+            "sourceProviderType": "varchar",
+            "sourceLineageTag": "FirstName",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "LastName",
+            "dataType": "string",
+            "sourceColumn": "LastName",
+            "sourceProviderType": "varchar",
+            "sourceLineageTag": "LastName",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "AccountName",
+            "dataType": "string",
+            "sourceColumn": "AccountName",
+            "sourceProviderType": "varchar",
+            "sourceLineageTag": "AccountName",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "Title",
+            "dataType": "string",
+            "sourceColumn": "Title",
+            "sourceProviderType": "varchar",
+            "sourceLineageTag": "Title",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "LastActivityDate",
+            "dataType": "dateTime",
+            "sourceColumn": "LastActivityDate",
+            "formatString": "General Date",
+            "sourceProviderType": "datetime2",
+            "sourceLineageTag": "LastActivityDate",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "Email",
+            "dataType": "string",
+            "sourceColumn": "Email",
+            "sourceProviderType": "varchar",
+            "sourceLineageTag": "Email",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "Phone",
+            "dataType": "string",
+            "sourceColumn": "Phone",
+            "sourceProviderType": "varchar",
+            "sourceLineageTag": "Phone",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "Mobile",
+            "dataType": "string",
+            "sourceColumn": "Mobile",
+            "sourceProviderType": "varchar",
+            "sourceLineageTag": "Mobile",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "MailingState",
+            "dataType": "string",
+            "sourceColumn": "MailingState",
+            "sourceProviderType": "varchar",
+            "sourceLineageTag": "MailingState",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "MailingCountry",
+            "dataType": "string",
+            "sourceColumn": "MailingCountry",
+            "sourceProviderType": "varchar",
+            "sourceLineageTag": "MailingCountry",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "AccountOwner",
+            "dataType": "string",
+            "sourceColumn": "AccountOwner",
+            "sourceProviderType": "varchar",
+            "sourceLineageTag": "AccountOwner",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "CreatedDate",
+            "dataType": "dateTime",
+            "sourceColumn": "CreatedDate",
+            "formatString": "General Date",
+            "sourceProviderType": "datetime2",
+            "sourceLineageTag": "CreatedDate",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "updated_at",
+            "dataType": "dateTime",
+            "sourceColumn": "updated_at",
+            "formatString": "General Date",
+            "sourceProviderType": "datetime2",
+            "sourceLineageTag": "updated_at",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "batch_id",
+            "dataType": "int64",
+            "sourceColumn": "batch_id",
+            "formatString": "0",
+            "sourceProviderType": "int",
+            "sourceLineageTag": "batch_id",
+            "summarizeBy": "sum",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          }
+        ],
+        "partitions": [
+          {
+            "name": "{{Partition_Name}}",
+            "mode": "directLake",
+            "source": {
+              "type": "entity",
+              "entityName": "Contact_Updated",
+              "expressionSource": "DatabaseQuery",
+              "schemaName": "salesforce_CRM"
+            }
+          }
+        ],
+        "annotations": [
+          {
+            "name": "IsTableInBiModel",
+            "value": "False"
+          }
+        ]
+      },
+      {
+        "name": "Contact_temp",
+        "sourceLineageTag": "[salesforce_CRM].[Contact_temp]",
+        "columns": [
+          {
+            "name": "FirstName",
+            "dataType": "string",
+            "sourceColumn": "FirstName",
+            "sourceProviderType": "varchar",
+            "sourceLineageTag": "FirstName",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "LastName",
+            "dataType": "string",
+            "sourceColumn": "LastName",
+            "sourceProviderType": "varchar",
+            "sourceLineageTag": "LastName",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "AccountName",
+            "dataType": "string",
+            "sourceColumn": "AccountName",
+            "sourceProviderType": "varchar",
+            "sourceLineageTag": "AccountName",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "Title",
+            "dataType": "string",
+            "sourceColumn": "Title",
+            "sourceProviderType": "varchar",
+            "sourceLineageTag": "Title",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "LastActivityDate",
+            "dataType": "dateTime",
+            "sourceColumn": "LastActivityDate",
+            "formatString": "General Date",
+            "sourceProviderType": "datetime2",
+            "sourceLineageTag": "LastActivityDate",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "Email",
+            "dataType": "string",
+            "sourceColumn": "Email",
+            "sourceProviderType": "varchar",
+            "sourceLineageTag": "Email",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "Phone",
+            "dataType": "string",
+            "sourceColumn": "Phone",
+            "sourceProviderType": "varchar",
+            "sourceLineageTag": "Phone",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "Mobile",
+            "dataType": "string",
+            "sourceColumn": "Mobile",
+            "sourceProviderType": "varchar",
+            "sourceLineageTag": "Mobile",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "MailingState",
+            "dataType": "string",
+            "sourceColumn": "MailingState",
+            "sourceProviderType": "varchar",
+            "sourceLineageTag": "MailingState",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "MailingCountry",
+            "dataType": "string",
+            "sourceColumn": "MailingCountry",
+            "sourceProviderType": "varchar",
+            "sourceLineageTag": "MailingCountry",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "AccountOwner",
+            "dataType": "string",
+            "sourceColumn": "AccountOwner",
+            "sourceProviderType": "varchar",
+            "sourceLineageTag": "AccountOwner",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "CreatedDate",
+            "dataType": "dateTime",
+            "sourceColumn": "CreatedDate",
+            "formatString": "General Date",
+            "sourceProviderType": "datetime2",
+            "sourceLineageTag": "CreatedDate",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "updated_at",
+            "dataType": "dateTime",
+            "sourceColumn": "updated_at",
+            "formatString": "General Date",
+            "sourceProviderType": "datetime2",
+            "sourceLineageTag": "updated_at",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "batch_id",
+            "dataType": "int64",
+            "sourceColumn": "batch_id",
+            "formatString": "0",
+            "sourceProviderType": "int",
+            "sourceLineageTag": "batch_id",
+            "summarizeBy": "sum",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          }
+        ],
+        "partitions": [
+          {
+            "name": "{{Partition_Name}}",
+            "mode": "directLake",
+            "source": {
+              "type": "entity",
+              "entityName": "Contact_temp",
+              "expressionSource": "DatabaseQuery",
+              "schemaName": "salesforce_CRM"
+            }
+          }
+        ],
+        "annotations": [
+          {
+            "name": "IsTableInBiModel",
+            "value": "False"
+          }
+        ]
+      },
+      {
+        "name": "ControlTable",
+        "sourceLineageTag": "[salesforce_CRM].[ControlTable]",
+        "columns": [
+          {
+            "name": "TableName",
+            "dataType": "string",
+            "sourceColumn": "TableName",
+            "sourceProviderType": "varchar",
+            "sourceLineageTag": "TableName",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "MaxValue",
+            "dataType": "dateTime",
+            "sourceColumn": "MaxValue",
+            "formatString": "General Date",
+            "sourceProviderType": "datetime2",
+            "sourceLineageTag": "MaxValue",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "BatchValue",
+            "dataType": "int64",
+            "sourceColumn": "BatchValue",
+            "formatString": "0",
+            "sourceProviderType": "int",
+            "sourceLineageTag": "BatchValue",
+            "summarizeBy": "sum",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "LastUpdated",
+            "dataType": "dateTime",
+            "sourceColumn": "LastUpdated",
+            "formatString": "General Date",
+            "sourceProviderType": "datetime2",
+            "sourceLineageTag": "LastUpdated",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          }
+        ],
+        "partitions": [
+          {
+            "name": "{{Partition_Name}}",
+            "mode": "directLake",
+            "source": {
+              "type": "entity",
+              "entityName": "ControlTable",
+              "expressionSource": "DatabaseQuery",
+              "schemaName": "salesforce_CRM"
+            }
+          }
+        ],
+        "annotations": [
+          {
+            "name": "IsTableInBiModel",
+            "value": "False"
+          }
+        ]
+      },
+      {
+        "name": "salesforce_CRM.PipelineAuditLogs",
+        "sourceLineageTag": "[salesforce_CRM].[PipelineAuditLogs]",
+        "columns": [
+          {
+            "name": "RunID",
+            "dataType": "string",
+            "sourceColumn": "RunID",
+            "sourceProviderType": "varchar",
+            "sourceLineageTag": "RunID",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "PipelineName",
+            "dataType": "string",
+            "sourceColumn": "PipelineName",
+            "sourceProviderType": "varchar",
+            "sourceLineageTag": "PipelineName",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "ActivityName",
+            "dataType": "string",
+            "sourceColumn": "ActivityName",
+            "sourceProviderType": "varchar",
+            "sourceLineageTag": "ActivityName",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "Status",
+            "dataType": "string",
+            "sourceColumn": "Status",
+            "sourceProviderType": "varchar",
+            "sourceLineageTag": "Status",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "StartTime",
+            "dataType": "dateTime",
+            "sourceColumn": "StartTime",
+            "formatString": "General Date",
+            "sourceProviderType": "datetime2",
+            "sourceLineageTag": "StartTime",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "EndTime",
+            "dataType": "dateTime",
+            "sourceColumn": "EndTime",
+            "formatString": "General Date",
+            "sourceProviderType": "datetime2",
+            "sourceLineageTag": "EndTime",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "DurationInSeconds",
+            "dataType": "int64",
+            "sourceColumn": "DurationInSeconds",
+            "formatString": "0",
+            "sourceProviderType": "int",
+            "sourceLineageTag": "DurationInSeconds",
+            "summarizeBy": "sum",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "ErrorDetails",
+            "dataType": "string",
+            "sourceColumn": "ErrorDetails",
+            "sourceProviderType": "varchar",
+            "sourceLineageTag": "ErrorDetails",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "TriggeredBy",
+            "dataType": "string",
+            "sourceColumn": "TriggeredBy",
+            "sourceProviderType": "varchar",
+            "sourceLineageTag": "TriggeredBy",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "PipelineRunTime",
+            "dataType": "dateTime",
+            "sourceColumn": "PipelineRunTime",
+            "formatString": "General Date",
+            "sourceProviderType": "datetime2",
+            "sourceLineageTag": "PipelineRunTime",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          }
+        ],
+        "partitions": [
+          {
+            "name": "{{Partition_Name}}",
+            "mode": "directLake",
+            "source": {
+              "type": "entity",
+              "entityName": "PipelineAuditLogs",
+              "expressionSource": "DatabaseQuery",
+              "schemaName": "salesforce_CRM"
+            }
+          }
+        ],
+        "annotations": [
+          {
+            "name": "IsTableInBiModel",
+            "value": "False"
+          }
+        ]
+      },
+      {
+        "name": "Reconciliation_Report",
+        "sourceLineageTag": "[salesforce_CRM].[Reconciliation_Report]",
+        "columns": [
+          {
+            "name": "TableName",
+            "dataType": "string",
+            "sourceColumn": "TableName",
+            "sourceProviderType": "varchar",
+            "sourceLineageTag": "TableName",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "MaxValue_Expected",
+            "dataType": "dateTime",
+            "sourceColumn": "MaxValue_Expected",
+            "formatString": "General Date",
+            "sourceProviderType": "datetime2",
+            "sourceLineageTag": "MaxValue_Expected",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "MaxValue_Actual",
+            "dataType": "dateTime",
+            "sourceColumn": "MaxValue_Actual",
+            "formatString": "General Date",
+            "sourceProviderType": "datetime2",
+            "sourceLineageTag": "MaxValue_Actual",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "BatchID_Expected",
+            "dataType": "int64",
+            "sourceColumn": "BatchID_Expected",
+            "formatString": "0",
+            "sourceProviderType": "int",
+            "sourceLineageTag": "BatchID_Expected",
+            "summarizeBy": "sum",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "BatchID_Actual",
+            "dataType": "int64",
+            "sourceColumn": "BatchID_Actual",
+            "formatString": "0",
+            "sourceProviderType": "int",
+            "sourceLineageTag": "BatchID_Actual",
+            "summarizeBy": "sum",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "MaxValue_Discrepancy",
+            "dataType": "string",
+            "sourceColumn": "MaxValue_Discrepancy",
+            "sourceProviderType": "varchar",
+            "sourceLineageTag": "MaxValue_Discrepancy",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "BatchID_Discrepancy",
+            "dataType": "string",
+            "sourceColumn": "BatchID_Discrepancy",
+            "sourceProviderType": "varchar",
+            "sourceLineageTag": "BatchID_Discrepancy",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "Rows_Inserted",
+            "dataType": "int64",
+            "sourceColumn": "Rows_Inserted",
+            "formatString": "0",
+            "sourceProviderType": "int",
+            "sourceLineageTag": "Rows_Inserted",
+            "summarizeBy": "sum",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "Rows_Updated",
+            "dataType": "int64",
+            "sourceColumn": "Rows_Updated",
+            "formatString": "0",
+            "sourceProviderType": "int",
+            "sourceLineageTag": "Rows_Updated",
+            "summarizeBy": "sum",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "RunTimestamp",
+            "dataType": "dateTime",
+            "sourceColumn": "RunTimestamp",
+            "formatString": "General Date",
+            "sourceProviderType": "datetime2",
+            "sourceLineageTag": "RunTimestamp",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          }
+        ],
+        "partitions": [
+          {
+            "name": "{{Partition_Name}}",
+            "mode": "directLake",
+            "source": {
+              "type": "entity",
+              "entityName": "Reconciliation_Report",
+              "expressionSource": "DatabaseQuery",
+              "schemaName": "salesforce_CRM"
+            }
+          }
+        ],
+        "annotations": [
+          {
+            "name": "IsTableInBiModel",
+            "value": "False"
+          }
+        ]
+      },
+      {
+        "name": "TempTable",
+        "sourceLineageTag": "[salesforce_CRM].[TempTable]",
+        "columns": [
+          {
+            "name": "FirstName",
+            "dataType": "string",
+            "sourceColumn": "FirstName",
+            "sourceProviderType": "varchar",
+            "sourceLineageTag": "FirstName",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "LastName",
+            "dataType": "string",
+            "sourceColumn": "LastName",
+            "sourceProviderType": "varchar",
+            "sourceLineageTag": "LastName",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "AccountName",
+            "dataType": "string",
+            "sourceColumn": "AccountName",
+            "sourceProviderType": "varchar",
+            "sourceLineageTag": "AccountName",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "Title",
+            "dataType": "string",
+            "sourceColumn": "Title",
+            "sourceProviderType": "varchar",
+            "sourceLineageTag": "Title",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "LastActivityDate",
+            "dataType": "dateTime",
+            "sourceColumn": "LastActivityDate",
+            "formatString": "General Date",
+            "sourceProviderType": "datetime2",
+            "sourceLineageTag": "LastActivityDate",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "Email",
+            "dataType": "string",
+            "sourceColumn": "Email",
+            "sourceProviderType": "varchar",
+            "sourceLineageTag": "Email",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "Phone",
+            "dataType": "string",
+            "sourceColumn": "Phone",
+            "sourceProviderType": "varchar",
+            "sourceLineageTag": "Phone",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "Mobile",
+            "dataType": "string",
+            "sourceColumn": "Mobile",
+            "sourceProviderType": "varchar",
+            "sourceLineageTag": "Mobile",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "MailingState",
+            "dataType": "string",
+            "sourceColumn": "MailingState",
+            "sourceProviderType": "varchar",
+            "sourceLineageTag": "MailingState",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "MailingCountry",
+            "dataType": "string",
+            "sourceColumn": "MailingCountry",
+            "sourceProviderType": "varchar",
+            "sourceLineageTag": "MailingCountry",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "AccountOwner",
+            "dataType": "string",
+            "sourceColumn": "AccountOwner",
+            "sourceProviderType": "varchar",
+            "sourceLineageTag": "AccountOwner",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "CreatedDate",
+            "dataType": "dateTime",
+            "sourceColumn": "CreatedDate",
+            "formatString": "General Date",
+            "sourceProviderType": "datetime2",
+            "sourceLineageTag": "CreatedDate",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "updated_at",
+            "dataType": "dateTime",
+            "sourceColumn": "updated_at",
+            "formatString": "General Date",
+            "sourceProviderType": "datetime2",
+            "sourceLineageTag": "updated_at",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "row_num",
+            "dataType": "int64",
+            "sourceColumn": "row_num",
+            "formatString": "0",
+            "sourceProviderType": "bigint",
+            "sourceLineageTag": "row_num",
+            "summarizeBy": "sum",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          }
+        ],
+        "partitions": [
+          {
+            "name": "{{Partition_Name}}",
+            "mode": "directLake",
+            "source": {
+              "type": "entity",
+              "entityName": "TempTable",
+              "expressionSource": "DatabaseQuery",
+              "schemaName": "salesforce_CRM"
+            }
+          }
+        ],
+        "annotations": [
+          {
+            "name": "IsTableInBiModel",
+            "value": "False"
+          }
+        ]
+      }
+    ],
+    "expressions": [
+      {
+        "name": "DatabaseQuery",
+        "kind": "m",
+        "expression": "let\n    database = {{TDS_Endpoint}}\nin\n    database\n"
+      }
+    ],
+    "annotations": [
+      {
+        "name": "__PBI_TimeIntelligenceEnabled",
+        "value": "0"
+      },
+      {
+        "name": "SourceLineageTagType",
+        "value": "DatabaseFullyQualifiedName"
+      }
+    ]
+  }
+}

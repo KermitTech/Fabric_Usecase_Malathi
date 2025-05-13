@@ -1,0 +1,84 @@
+table Fact_WebsiteLogs
+	lineageTag: 5176f063-2314-4577-868b-2091b8739a26
+	sourceLineageTag: [gold_layer_campaign].[Fact_WebsiteLogs]
+
+	column user_id
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: aa6935cc-42d1-4656-95ef-55cbc296b98e
+		sourceLineageTag: user_id
+		summarizeBy: none
+		sourceColumn: user_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column page_url
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: cac84156-962a-463e-a643-a1a8405a1921
+		sourceLineageTag: page_url
+		summarizeBy: none
+		sourceColumn: page_url
+
+		annotation SummarizationSetBy = Automatic
+
+	column session_duration
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 6c7f93cd-800a-4a6a-9ab6-99c78ff59db3
+		sourceLineageTag: session_duration
+		summarizeBy: none
+		sourceColumn: session_duration
+
+		annotation SummarizationSetBy = Automatic
+
+	column source_id
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: aebf2135-2072-48fa-be44-489f35602a52
+		sourceLineageTag: source_id
+		summarizeBy: none
+		sourceColumn: source_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column medium_id
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 9a8e3979-c13c-4f35-812f-ac2f2ba48449
+		sourceLineageTag: medium_id
+		summarizeBy: none
+		sourceColumn: medium_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column campaign_id
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 9029bf13-c366-4466-b84f-23c9004920cd
+		sourceLineageTag: campaign_id
+		summarizeBy: none
+		sourceColumn: campaign_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column timestamp_key
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 57c25472-16d5-4999-83f3-d458b56b9e76
+		sourceLineageTag: timestamp_key
+		summarizeBy: sum
+		sourceColumn: timestamp_key
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Fact_WebsiteLogs = entity
+		mode: directLake
+		source
+			entityName: Fact_WebsiteLogs
+			schemaName: gold_layer_campaign
+			expressionSource: DatabaseQuery
+
+	annotation PBI_ResultType = Table
+
