@@ -1,0 +1,111 @@
+table Fact_Channel_Attribution
+	lineageTag: 1cb0e0a8-89e2-4f8d-b60a-dfa98570895d
+	sourceLineageTag: [gold_layer_campaign].[Fact_Channel_Attribution]
+
+	column customer_id
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 9e40eb33-6d1b-4a4e-ba50-5564f49503df
+		sourceLineageTag: customer_id
+		summarizeBy: none
+		sourceColumn: customer_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column campaign_id
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: ea6501f4-70c7-45b5-b899-7765c1d044e8
+		sourceLineageTag: campaign_id
+		summarizeBy: none
+		sourceColumn: campaign_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column source_id
+		dataType: int64
+		formatString: 0
+		sourceProviderType: bigint
+		lineageTag: d0deb7d7-9eda-416f-82a1-e9e427a2df9d
+		sourceLineageTag: source_id
+		summarizeBy: sum
+		sourceColumn: source_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column touch_position
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: c25888b7-8ac4-48a3-a6a0-00fac9983ad7
+		sourceLineageTag: touch_position
+		summarizeBy: sum
+		sourceColumn: touch_position
+
+		annotation SummarizationSetBy = Automatic
+
+	column is_conversion
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 90302686-be15-481c-b8b0-ab361ee134d2
+		sourceLineageTag: is_conversion
+		summarizeBy: sum
+		sourceColumn: is_conversion
+
+		annotation SummarizationSetBy = Automatic
+
+	column first_touch_attributions
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 9c65d4d2-3b0d-4885-b1ed-978c415045d6
+		sourceLineageTag: first_touch_attributions
+		summarizeBy: sum
+		sourceColumn: first_touch_attributions
+
+		annotation SummarizationSetBy = Automatic
+
+	column last_touch_attributions
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 6fb45f91-fa2a-473d-ab26-bfaf70cee67c
+		sourceLineageTag: last_touch_attributions
+		summarizeBy: sum
+		sourceColumn: last_touch_attributions
+
+		annotation SummarizationSetBy = Automatic
+
+	column linear_attribution_value
+		dataType: double
+		sourceProviderType: float
+		lineageTag: 7fbdab25-e7b9-48b3-acb7-4395e4d551f8
+		sourceLineageTag: linear_attribution_value
+		summarizeBy: sum
+		sourceColumn: linear_attribution_value
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column total_touches
+		dataType: int64
+		formatString: 0
+		sourceProviderType: bigint
+		lineageTag: 982bac46-eb3a-4f5a-9f2b-b03fc62ac672
+		sourceLineageTag: total_touches
+		summarizeBy: sum
+		sourceColumn: total_touches
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Fact_Channel_Attribution = entity
+		mode: directLake
+		source
+			entityName: Fact_Channel_Attribution
+			schemaName: gold_layer_campaign
+			expressionSource: DatabaseQuery
+
+	annotation PBI_ResultType = Table
+

@@ -1,0 +1,89 @@
+table Dim_Date
+	lineageTag: efa4e417-b96b-494f-ae32-ff999e331e73
+	sourceLineageTag: [dbo].[Dim_Date]
+
+	column date_key
+		dataType: dateTime
+		formatString: General Date
+		sourceProviderType: date
+		lineageTag: 095c394a-eb2b-4773-b915-ed56c8184740
+		sourceLineageTag: date_key
+		summarizeBy: none
+		sourceColumn: date_key
+
+		annotation SummarizationSetBy = Automatic
+
+	column day_name
+		dataType: string
+		sourceProviderType: varchar(20)
+		lineageTag: d0f4d115-df61-4da9-91c0-3da30f1190ca
+		sourceLineageTag: day_name
+		summarizeBy: none
+		sourceColumn: day_name
+
+		annotation SummarizationSetBy = Automatic
+
+	column day_of_month
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 4b5806ad-ebf0-4a2b-8995-7f195b4959a1
+		sourceLineageTag: day_of_month
+		summarizeBy: sum
+		sourceColumn: day_of_month
+
+		annotation SummarizationSetBy = Automatic
+
+	column day_of_week
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: d4054294-a52a-4add-a491-46cd81564cde
+		sourceLineageTag: day_of_week
+		summarizeBy: sum
+		sourceColumn: day_of_week
+
+		annotation SummarizationSetBy = Automatic
+
+	column month
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: ce3fd239-2650-4a22-a988-1d2b76c26df6
+		sourceLineageTag: month
+		summarizeBy: sum
+		sourceColumn: month
+
+		annotation SummarizationSetBy = Automatic
+
+	column year
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: cbe29138-9aa4-4a7d-8e9e-698c1294db33
+		sourceLineageTag: year
+		summarizeBy: sum
+		sourceColumn: year
+
+		annotation SummarizationSetBy = Automatic
+
+	column week_of_year
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 572af75b-a486-4f28-8967-39630c35694c
+		sourceLineageTag: week_of_year
+		summarizeBy: sum
+		sourceColumn: week_of_year
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Dim_Date = entity
+		mode: directLake
+		source
+			entityName: Dim_Date
+			schemaName: dbo
+			expressionSource: DatabaseQuery
+
+	annotation PBI_ResultType = Table
+

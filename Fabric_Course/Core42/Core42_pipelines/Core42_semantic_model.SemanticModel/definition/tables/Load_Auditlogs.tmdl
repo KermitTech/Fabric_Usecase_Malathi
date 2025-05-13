@@ -1,0 +1,77 @@
+table Load_Auditlogs
+	lineageTag: 976d9406-e210-4dfb-83ed-2d276dd026eb
+	sourceLineageTag: [gold].[Load_Auditlogs]
+
+	column timestamp
+		dataType: dateTime
+		formatString: General Date
+		sourceProviderType: datetime2
+		lineageTag: fc6a59f7-9f24-4a41-bc21-d1f35dbbd62c
+		sourceLineageTag: timestamp
+		summarizeBy: none
+		sourceColumn: timestamp
+
+		annotation SummarizationSetBy = Automatic
+
+	column operation
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: f5080578-90dc-4c21-be7f-f7dc7b4e3baa
+		sourceLineageTag: operation
+		summarizeBy: none
+		sourceColumn: operation
+
+		annotation SummarizationSetBy = Automatic
+
+	column status
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 67f94e63-acd0-4eb5-8a26-c2269467d039
+		sourceLineageTag: status
+		summarizeBy: none
+		sourceColumn: status
+
+		annotation SummarizationSetBy = Automatic
+
+	column bronze_count
+		dataType: int64
+		formatString: 0
+		sourceProviderType: bigint
+		lineageTag: 0f81a14f-ba8e-42ac-8864-1e2c58a2f725
+		sourceLineageTag: bronze_count
+		summarizeBy: sum
+		sourceColumn: bronze_count
+
+		annotation SummarizationSetBy = Automatic
+
+	column silver_count
+		dataType: int64
+		formatString: 0
+		sourceProviderType: bigint
+		lineageTag: 0d22f3d7-21ed-4b89-8569-f94ba4aa0d58
+		sourceLineageTag: silver_count
+		summarizeBy: sum
+		sourceColumn: silver_count
+
+		annotation SummarizationSetBy = Automatic
+
+	column gold_count
+		dataType: int64
+		formatString: 0
+		sourceProviderType: bigint
+		lineageTag: 9a8d3bc7-b8b5-4c44-ad96-febaea3f8e40
+		sourceLineageTag: gold_count
+		summarizeBy: sum
+		sourceColumn: gold_count
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Load_Auditlogs = entity
+		mode: directLake
+		source
+			entityName: Load_Auditlogs
+			schemaName: gold
+			expressionSource: DatabaseQuery
+
+	annotation PBI_ResultType = Table
+

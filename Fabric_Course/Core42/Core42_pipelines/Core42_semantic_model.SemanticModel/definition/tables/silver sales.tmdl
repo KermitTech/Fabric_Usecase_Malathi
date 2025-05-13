@@ -1,0 +1,102 @@
+table 'silver sales'
+	lineageTag: 044624d9-bd4b-45ad-a290-385d0e1bc9bc
+	sourceLineageTag: [silver].[sales]
+
+	column transaction_id
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 77ecfe52-3d95-4c53-841f-fe851bcb450a
+		sourceLineageTag: transaction_id
+		summarizeBy: sum
+		sourceColumn: transaction_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column product_id
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 9b8fbf32-2913-49ed-83df-f8e4f5665e7c
+		sourceLineageTag: product_id
+		summarizeBy: none
+		sourceColumn: product_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column store_id
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: e60aad49-daa7-40a2-bcae-bbfef61b619f
+		sourceLineageTag: store_id
+		summarizeBy: none
+		sourceColumn: store_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column sale_date
+		dataType: dateTime
+		formatString: General Date
+		sourceProviderType: datetime2
+		lineageTag: d68fc55b-05e4-43ab-a6ae-020ec48a6dbf
+		sourceLineageTag: sale_date
+		summarizeBy: none
+		sourceColumn: sale_date
+
+		annotation SummarizationSetBy = Automatic
+
+	column quantity
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 28adafab-53ee-45c8-bd89-5d437faa4e9a
+		sourceLineageTag: quantity
+		summarizeBy: sum
+		sourceColumn: quantity
+
+		annotation SummarizationSetBy = Automatic
+
+	column unit_price
+		dataType: double
+		sourceProviderType: decimal(34, 6)
+		lineageTag: 1f6d3bb6-f005-4271-b7e8-20e3f3c1979c
+		sourceLineageTag: unit_price
+		summarizeBy: sum
+		sourceColumn: unit_price
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column discount
+		dataType: double
+		sourceProviderType: decimal(34, 6)
+		lineageTag: 93bb68b3-eea4-4468-ab0f-1388372ee092
+		sourceLineageTag: discount
+		summarizeBy: sum
+		sourceColumn: discount
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column sales_amount
+		dataType: double
+		sourceProviderType: decimal(34, 6)
+		lineageTag: e61b3900-1fdb-44bc-a930-1eac7828976c
+		sourceLineageTag: sales_amount
+		summarizeBy: sum
+		sourceColumn: sales_amount
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition 'silver sales' = entity
+		mode: directLake
+		source
+			entityName: sales
+			schemaName: silver
+			expressionSource: DatabaseQuery
+
+	annotation PBI_ResultType = Table
+

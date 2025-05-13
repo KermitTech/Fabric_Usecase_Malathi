@@ -1,0 +1,22 @@
+model Model
+	culture: en-US
+	collation: Latin1_General_100_BIN2_UTF8
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	sourceQueryCulture: en-US
+	dataAccessOptions
+		legacyRedirects
+		returnErrorValuesAsNull
+
+annotation __PBI_TimeIntelligenceEnabled = 0
+
+annotation PBIDesktopVersion = 2.139.7496.1 (Main)+061188de2d27b556d0c15d8f70c4426f68783390
+
+annotation PBI_QueryOrder = ["DatabaseQuery"]
+
+ref table dim_product
+ref table dim_store
+ref table dim_date
+ref table fact_sales
+
+ref cultureInfo en-US
+

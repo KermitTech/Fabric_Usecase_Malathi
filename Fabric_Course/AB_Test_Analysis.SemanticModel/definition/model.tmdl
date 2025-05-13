@@ -1,0 +1,31 @@
+model Model
+	culture: en-US
+	collation: Latin1_General_100_BIN2_UTF8
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	sourceQueryCulture: en-US
+	dataAccessOptions
+		legacyRedirects
+		returnErrorValuesAsNull
+
+annotation __PBI_TimeIntelligenceEnabled = 0
+
+annotation PBIDesktopVersion = 2.139.7496.1 (Main)+061188de2d27b556d0c15d8f70c4426f68783390
+
+annotation PBI_QueryOrder = ["DatabaseQuery"]
+
+ref table RPT_Campaign_Touch_Analysis
+ref table Fact_WebsiteLogs
+ref table RPT_WinningCampaigns
+ref table Error_log_details
+ref table Dim_Date
+ref table Dim_Customer
+ref table Dim_Email_Campaign
+ref table Dim_Social_Campaign
+ref table Dim_Campaign
+ref table Fact_Channel_Attribution
+ref table RPT_Customer_Engagement_Campaigns
+ref table Fact_CampaignPerformance
+ref table Fact_CustomerJourney
+
+ref cultureInfo en-US
+

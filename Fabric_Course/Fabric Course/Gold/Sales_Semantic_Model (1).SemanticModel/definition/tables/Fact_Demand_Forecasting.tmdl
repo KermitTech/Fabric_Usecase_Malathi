@@ -1,0 +1,123 @@
+table Fact_Demand_Forecasting
+	lineageTag: e677ce8d-5c53-48db-91a5-6925859115fd
+	sourceLineageTag: [dbo].[Fact_Demand_Forecasting]
+
+	column date_key
+		dataType: dateTime
+		formatString: General Date
+		sourceProviderType: date
+		lineageTag: 005fd547-b995-4283-92b6-c89616d7059d
+		sourceLineageTag: date_key
+		summarizeBy: none
+		sourceColumn: date_key
+
+		annotation SummarizationSetBy = Automatic
+
+	column month_key
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 82d2a54d-1269-4327-8c55-0ab0ec5fbb30
+		sourceLineageTag: month_key
+		summarizeBy: sum
+		sourceColumn: month_key
+
+		annotation SummarizationSetBy = Automatic
+
+	column year_key
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: db580ae8-a656-4c83-9b98-675c0803df25
+		sourceLineageTag: year_key
+		summarizeBy: sum
+		sourceColumn: year_key
+
+		annotation SummarizationSetBy = Automatic
+
+	column product_key
+		dataType: string
+		sourceProviderType: varchar(100)
+		lineageTag: 38f10e80-2fd7-4319-8de7-c2b6c2eb19c8
+		sourceLineageTag: product_key
+		summarizeBy: none
+		sourceColumn: product_key
+
+		annotation SummarizationSetBy = Automatic
+
+	column store_key
+		dataType: string
+		sourceProviderType: varchar(100)
+		lineageTag: c1ea6f2d-f004-4a1a-aab7-1e1f0230850c
+		sourceLineageTag: store_key
+		summarizeBy: none
+		sourceColumn: store_key
+
+		annotation SummarizationSetBy = Automatic
+
+	column total_quantity_sold
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: dca010b7-c933-43a0-b417-54a5b54437ae
+		sourceLineageTag: total_quantity_sold
+		summarizeBy: sum
+		sourceColumn: total_quantity_sold
+
+		annotation SummarizationSetBy = Automatic
+
+	column total_quantity_shipped
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 4c520a22-8dbb-4638-ab88-cd2a24c1583b
+		sourceLineageTag: total_quantity_shipped
+		summarizeBy: sum
+		sourceColumn: total_quantity_shipped
+
+		annotation SummarizationSetBy = Automatic
+
+	column quantity_in_stock
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 337fbd72-9be5-4978-a6c4-4f6d1a9f534d
+		sourceLineageTag: quantity_in_stock
+		summarizeBy: sum
+		sourceColumn: quantity_in_stock
+
+		annotation SummarizationSetBy = Automatic
+
+	column stock_level
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 8d18fe5d-b783-4dd5-8f96-bae31f3022e0
+		sourceLineageTag: stock_level
+		summarizeBy: sum
+		sourceColumn: stock_level
+
+		annotation SummarizationSetBy = Automatic
+
+	column predicted_sales
+		dataType: decimal
+		formatString: \$#,0.###############;(\$#,0.###############);\$#,0.###############
+		sourceProviderType: decimal(10, 2)
+		lineageTag: eaeff5e5-7b05-4bda-8654-54dad7b56675
+		sourceLineageTag: predicted_sales
+		summarizeBy: sum
+		sourceColumn: predicted_sales
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	partition Fact_Demand_Forecasting = entity
+		mode: directLake
+		source
+			entityName: Fact_Demand_Forecasting
+			schemaName: dbo
+			expressionSource: DatabaseQuery
+
+	annotation PBI_ResultType = Table
+

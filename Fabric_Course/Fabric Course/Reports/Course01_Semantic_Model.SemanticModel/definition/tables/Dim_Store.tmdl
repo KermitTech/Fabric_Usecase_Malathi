@@ -1,0 +1,93 @@
+table Dim_Store
+	lineageTag: c3efe5c6-ab23-4b6b-a622-8f36147d7176
+	sourceLineageTag: [dbo].[Dim_Store]
+
+	column store_id
+		dataType: string
+		sourceProviderType: varchar(100)
+		lineageTag: 3018387e-50b9-46f8-b9e2-aa350c4d7513
+		sourceLineageTag: store_id
+		summarizeBy: none
+		sourceColumn: store_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column store_name
+		dataType: string
+		sourceProviderType: varchar(255)
+		lineageTag: f433240a-ef53-4ab8-9e62-37d5a60aa2d4
+		sourceLineageTag: store_name
+		summarizeBy: none
+		sourceColumn: store_name
+
+		annotation SummarizationSetBy = Automatic
+
+	column address_line1
+		dataType: string
+		sourceProviderType: varchar(255)
+		lineageTag: 8fcc349e-6d7b-42ea-9f1e-0734019c930d
+		sourceLineageTag: address_line1
+		summarizeBy: none
+		sourceColumn: address_line1
+
+		annotation SummarizationSetBy = Automatic
+
+	column city
+		dataType: string
+		sourceProviderType: varchar(100)
+		lineageTag: 2e822416-a368-46b3-8906-5114d1837c46
+		sourceLineageTag: city
+		summarizeBy: none
+		sourceColumn: city
+
+		annotation SummarizationSetBy = Automatic
+
+	column state
+		dataType: string
+		sourceProviderType: varchar(100)
+		lineageTag: dd57d750-b43d-4229-ab85-11f03ae67ace
+		sourceLineageTag: state
+		summarizeBy: none
+		sourceColumn: state
+
+		annotation SummarizationSetBy = Automatic
+
+	column country
+		dataType: string
+		sourceProviderType: varchar(100)
+		lineageTag: 91313c12-5364-44cf-947d-6c9700e7237c
+		sourceLineageTag: country
+		summarizeBy: none
+		sourceColumn: country
+
+		annotation SummarizationSetBy = Automatic
+
+	column postal_code
+		dataType: string
+		sourceProviderType: varchar(20)
+		lineageTag: f8b117ee-9fdb-4c92-9c47-99279bd2e23d
+		sourceLineageTag: postal_code
+		summarizeBy: none
+		sourceColumn: postal_code
+
+		annotation SummarizationSetBy = Automatic
+
+	column store_manager
+		dataType: string
+		sourceProviderType: varchar(255)
+		lineageTag: 4f9eabea-d510-4257-9c18-6a53509bdd86
+		sourceLineageTag: store_manager
+		summarizeBy: none
+		sourceColumn: store_manager
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Dim_Store = entity
+		mode: directLake
+		source
+			entityName: Dim_Store
+			schemaName: dbo
+			expressionSource: DatabaseQuery
+
+	annotation PBI_ResultType = Table
+

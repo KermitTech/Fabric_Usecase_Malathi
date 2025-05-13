@@ -1,0 +1,147 @@
+table fact_sales
+	lineageTag: c5cdecdc-b75e-4d35-b5f8-6409a544893f
+	sourceLineageTag: [gold_layer_shortcut].[fact_sales]
+
+	column transaction_id
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 16bdb643-2af6-4b22-8718-3944842ee0dd
+		sourceLineageTag: transaction_id
+		summarizeBy: sum
+		sourceColumn: transaction_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column date_key
+		dataType: dateTime
+		formatString: General Date
+		sourceProviderType: date
+		lineageTag: d681d8ad-3b4c-4217-b2da-4ca07e522aed
+		sourceLineageTag: date_key
+		summarizeBy: none
+		sourceColumn: date_key
+
+		annotation SummarizationSetBy = Automatic
+
+	column product_key
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: eead1557-e6fa-4293-99e7-2c0f04607e7f
+		sourceLineageTag: product_key
+		summarizeBy: none
+		sourceColumn: product_key
+
+		annotation SummarizationSetBy = Automatic
+
+	column category
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: e53a6fa4-4560-4c90-b77c-a4e15b2077ee
+		sourceLineageTag: category
+		summarizeBy: none
+		sourceColumn: category
+
+		annotation SummarizationSetBy = Automatic
+
+	column store_key
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 27ed5333-9ced-4596-94e1-3801e87e6da8
+		sourceLineageTag: store_key
+		summarizeBy: none
+		sourceColumn: store_key
+
+		annotation SummarizationSetBy = Automatic
+
+	column quantity
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: ded37007-4709-43ca-b040-f84e32381adf
+		sourceLineageTag: quantity
+		summarizeBy: sum
+		sourceColumn: quantity
+
+		annotation SummarizationSetBy = Automatic
+
+	column unit_price
+		dataType: decimal
+		formatString: \$#,0.###############;(\$#,0.###############);\$#,0.###############
+		sourceProviderType: decimal(10, 2)
+		lineageTag: 35c0b90e-1ea5-4e52-ae30-826b89e5aa62
+		sourceLineageTag: unit_price
+		summarizeBy: sum
+		sourceColumn: unit_price
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	column discount
+		dataType: decimal
+		formatString: \$#,0.###############;(\$#,0.###############);\$#,0.###############
+		sourceProviderType: decimal(10, 2)
+		lineageTag: 610b9282-0626-4d6c-82e6-7f35a1b22f29
+		sourceLineageTag: discount
+		summarizeBy: sum
+		sourceColumn: discount
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	column total_amount
+		dataType: decimal
+		formatString: \$#,0.###############;(\$#,0.###############);\$#,0.###############
+		sourceProviderType: decimal(10, 2)
+		lineageTag: 6b03fd68-c94e-4c47-be32-364b3894bb0b
+		sourceLineageTag: total_amount
+		summarizeBy: sum
+		sourceColumn: total_amount
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	column month_key
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 7ab614df-baa7-4d17-883a-0469a80d2ce8
+		sourceLineageTag: month_key
+		summarizeBy: sum
+		sourceColumn: month_key
+
+		annotation SummarizationSetBy = Automatic
+
+	column year_key
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 0b03dc88-cc2d-4033-b1c6-02e7b93cd79d
+		sourceLineageTag: year_key
+		summarizeBy: sum
+		sourceColumn: year_key
+
+		annotation SummarizationSetBy = Automatic
+
+	column country
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 0058b0b7-9081-4a34-a738-91275e19bef7
+		sourceLineageTag: country
+		summarizeBy: none
+		sourceColumn: country
+
+		annotation SummarizationSetBy = Automatic
+
+	partition fact_sales = entity
+		mode: directLake
+		source
+			entityName: fact_sales
+			schemaName: gold_layer_shortcut
+			expressionSource: DatabaseQuery
+
+	annotation PBI_ResultType = Table
+

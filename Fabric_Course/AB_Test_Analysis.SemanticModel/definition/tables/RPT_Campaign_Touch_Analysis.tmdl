@@ -1,0 +1,67 @@
+table RPT_Campaign_Touch_Analysis
+	lineageTag: 80e7cc4c-f425-4dc2-be94-95fcacbca873
+	sourceLineageTag: [gold_layer_campaign].[RPT_Campaign_Touch_Analysis]
+
+	column campaign_id
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: a1f5daa9-092b-4322-bd93-8e99a25a9916
+		sourceLineageTag: campaign_id
+		summarizeBy: none
+		sourceColumn: campaign_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column source_id
+		dataType: int64
+		formatString: 0
+		sourceProviderType: bigint
+		lineageTag: 09d3892d-b60d-4640-ae22-3022e517bc39
+		sourceLineageTag: source_id
+		summarizeBy: sum
+		sourceColumn: source_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column first_touch_count
+		dataType: int64
+		formatString: 0
+		sourceProviderType: bigint
+		lineageTag: 81197bd7-5cdb-4f21-97fa-10415a3a9ae7
+		sourceLineageTag: first_touch_count
+		summarizeBy: sum
+		sourceColumn: first_touch_count
+
+		annotation SummarizationSetBy = Automatic
+
+	column last_touch_count
+		dataType: int64
+		formatString: 0
+		sourceProviderType: bigint
+		lineageTag: 33476767-9f48-4309-aad4-5516af6c87c5
+		sourceLineageTag: last_touch_count
+		summarizeBy: sum
+		sourceColumn: last_touch_count
+
+		annotation SummarizationSetBy = Automatic
+
+	column purchased_count
+		dataType: int64
+		formatString: 0
+		sourceProviderType: bigint
+		lineageTag: 675234a6-d2f1-45ca-b33d-1559fc2406a8
+		sourceLineageTag: purchased_count
+		summarizeBy: sum
+		sourceColumn: purchased_count
+
+		annotation SummarizationSetBy = Automatic
+
+	partition RPT_Campaign_Touch_Analysis = entity
+		mode: directLake
+		source
+			entityName: RPT_Campaign_Touch_Analysis
+			schemaName: gold_layer_campaign
+			expressionSource: DatabaseQuery
+
+	annotation PBI_ResultType = Table
+

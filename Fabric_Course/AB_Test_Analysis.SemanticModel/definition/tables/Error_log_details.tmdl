@@ -1,0 +1,65 @@
+table Error_log_details
+	lineageTag: 2528147b-e2b5-4286-884b-bbb6ccb6a9d8
+	sourceLineageTag: [gold_layer_campaign].[Error_log_details]
+
+	column error_id
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: a3cdaa44-da3f-4b62-a23e-63000ef16336
+		sourceLineageTag: error_id
+		summarizeBy: sum
+		sourceColumn: error_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column entity_name
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: a0eaa960-3d1d-48ad-b9e2-07a87c56a818
+		sourceLineageTag: entity_name
+		summarizeBy: none
+		sourceColumn: entity_name
+
+		annotation SummarizationSetBy = Automatic
+
+	column error_key
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 2d555a55-b255-4e8a-bafc-d3e21120febf
+		sourceLineageTag: error_key
+		summarizeBy: none
+		sourceColumn: error_key
+
+		annotation SummarizationSetBy = Automatic
+
+	column error_description
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 09f4cb93-06c6-4bb7-9e91-78e55e597a3f
+		sourceLineageTag: error_description
+		summarizeBy: none
+		sourceColumn: error_description
+
+		annotation SummarizationSetBy = Automatic
+
+	column created_date
+		dataType: dateTime
+		formatString: General Date
+		sourceProviderType: datetime2
+		lineageTag: b8d01e7b-fe1e-4c25-8f2b-1cc24b0cf58f
+		sourceLineageTag: created_date
+		summarizeBy: none
+		sourceColumn: created_date
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Error_log_details = entity
+		mode: directLake
+		source
+			entityName: Error_log_details
+			schemaName: gold_layer_campaign
+			expressionSource: DatabaseQuery
+
+	annotation PBI_ResultType = Table
+

@@ -1,0 +1,197 @@
+table Dim_customer_interaction
+	lineageTag: c81d44da-68bb-41b4-a000-dd8d1d9ac65f
+	sourceLineageTag: [gold_layer_campaign].[Dim_customer_interaction]
+
+	column campaign_id
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 416f1751-dbe4-483a-a6ef-77b46a5f68bb
+		sourceLineageTag: campaign_id
+		summarizeBy: none
+		sourceColumn: campaign_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column customer_id
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 3d4bae81-87bd-4f13-955d-05846983d968
+		sourceLineageTag: customer_id
+		summarizeBy: none
+		sourceColumn: customer_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column interaction_id
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 466a1d21-f6eb-4da9-acc3-5bc802483b08
+		sourceLineageTag: interaction_id
+		summarizeBy: none
+		sourceColumn: interaction_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column event_type
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: f0f50d59-e1fe-43cd-aeb2-b952d295d5e0
+		sourceLineageTag: event_type
+		summarizeBy: none
+		sourceColumn: event_type
+
+		annotation SummarizationSetBy = Automatic
+
+	column source
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 08ae387e-0c0c-481b-ab5b-7045b63d2245
+		sourceLineageTag: source
+		summarizeBy: none
+		sourceColumn: source
+
+		annotation SummarizationSetBy = Automatic
+
+	column medium
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: bced977c-79d9-46a2-a2ec-93062b5accbe
+		sourceLineageTag: medium
+		summarizeBy: none
+		sourceColumn: medium
+
+		annotation SummarizationSetBy = Automatic
+
+	column url
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: b8b274d6-6d28-4d27-9476-2151529a36fc
+		sourceLineageTag: url
+		summarizeBy: none
+		sourceColumn: url
+
+		annotation SummarizationSetBy = Automatic
+
+	column total_spend
+		dataType: double
+		sourceProviderType: float
+		lineageTag: e16a4d8c-66fa-4f57-be8d-b7ea55644daf
+		sourceLineageTag: total_spend
+		summarizeBy: sum
+		sourceColumn: total_spend
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column preferred_channel
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: e58e9521-c983-4326-a6c3-01b421dde1f4
+		sourceLineageTag: preferred_channel
+		summarizeBy: none
+		sourceColumn: preferred_channel
+
+		annotation SummarizationSetBy = Automatic
+
+	column signup_date
+		dataType: dateTime
+		formatString: General Date
+		sourceProviderType: date
+		lineageTag: f9029521-087a-4d4a-8b74-926aa90272ad
+		sourceLineageTag: signup_date
+		summarizeBy: none
+		sourceColumn: signup_date
+
+		annotation SummarizationSetBy = Automatic
+
+	column event_order
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 7b8285e3-e73d-4731-ae17-b0ee47ae0620
+		sourceLineageTag: event_order
+		summarizeBy: none
+		sourceColumn: event_order
+
+		annotation SummarizationSetBy = Automatic
+
+	column previous_signup_date
+		dataType: dateTime
+		formatString: General Date
+		sourceProviderType: date
+		lineageTag: 40b47dcd-48d1-4971-8bad-90c77cd8b482
+		sourceLineageTag: previous_signup_date
+		summarizeBy: none
+		sourceColumn: previous_signup_date
+
+		annotation SummarizationSetBy = Automatic
+
+	column previous_event_order
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 92d5668d-eb08-4d63-a6e7-e98fa2d8bd23
+		sourceLineageTag: previous_event_order
+		summarizeBy: none
+		sourceColumn: previous_event_order
+
+		annotation SummarizationSetBy = Automatic
+
+	column previous_event_type
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 922c8c45-e9d5-42ea-a76b-65cc3de50dda
+		sourceLineageTag: previous_event_type
+		summarizeBy: none
+		sourceColumn: previous_event_type
+
+		annotation SummarizationSetBy = Automatic
+
+	column validity
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 5d879015-4922-492e-ad14-a0c54c297e2e
+		sourceLineageTag: validity
+		summarizeBy: none
+		sourceColumn: validity
+
+		annotation SummarizationSetBy = Automatic
+
+	column full_name
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 11f0fca9-43a5-49ad-80ae-df62f4a08a17
+		sourceLineageTag: full_name
+		summarizeBy: none
+		sourceColumn: full_name
+
+		annotation SummarizationSetBy = Automatic
+
+	column campaign_name
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 6dc78b51-586a-407c-85f2-1a26d94c6cbb
+		sourceLineageTag: campaign_name
+		summarizeBy: none
+		sourceColumn: campaign_name
+
+		annotation SummarizationSetBy = Automatic
+
+	column source_type
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: f8275336-b2b2-4224-9030-9953eb03074d
+		sourceLineageTag: source_type
+		summarizeBy: none
+		sourceColumn: source_type
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Dim_customer_interaction = entity
+		mode: directLake
+		source
+			entityName: Dim_customer_interaction
+			schemaName: gold_layer_campaign
+			expressionSource: DatabaseQuery
+
+	annotation PBI_ResultType = Table
+

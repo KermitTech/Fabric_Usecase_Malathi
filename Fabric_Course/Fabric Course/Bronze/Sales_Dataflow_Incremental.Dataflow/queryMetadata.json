@@ -1,86 +1,39 @@
 {
-  "formatVersion": "202409",
-  "lastModified": null,
-  "editingSession": {
-    "computeEngineSettings": {},
-    "editingSessionMashup": {
-      "mashupName": "Sales_Dataflow_Incremental",
-      "queryGroups": [],
-      "documentLocale": "en-GB",
-      "queriesMetadata": {
-        "demo sales": {
-          "queryId": "a8d13d6f-9238-4a93-bece-caad8db50700",
-          "queryName": "demo sales",
-          "queryGroupId": null,
-          "entityName": null,
-          "lastKnownIsCalculatedEntity": null,
-          "lastKnownIsLinkedEntity": null,
-          "lastKnownIsParameter": null,
-          "isHidden": false,
-          "lastKnownResultTypeName": null,
-          "loadEnabled": false,
-          "fieldsMetadata": {},
-          "deleteExistingDataOnLoad": false,
-          "hostProperties": {},
-          "jsonOutputDestinations": null,
-          "bindToDefaultOutputDestination": null,
-          "jsonIncrementalRefreshSettings": null
-        },
-        "DefaultDestination": {
-          "queryId": "7cf22187-9696-4a44-a3ed-8e759033c4c5",
-          "queryName": "DefaultDestination",
-          "queryGroupId": null,
-          "entityName": null,
-          "lastKnownIsCalculatedEntity": null,
-          "lastKnownIsLinkedEntity": null,
-          "lastKnownIsParameter": null,
-          "isHidden": true,
-          "lastKnownResultTypeName": null,
-          "loadEnabled": false,
-          "fieldsMetadata": {},
-          "deleteExistingDataOnLoad": false,
-          "hostProperties": {},
-          "jsonOutputDestinations": null,
-          "bindToDefaultOutputDestination": null,
-          "jsonIncrementalRefreshSettings": null
-        }
-      },
-      "connectionOverrides": [
-        {
-          "path": "database-1.c5awoeiuuje1.us-east-1.rds.amazonaws.com;demo",
-          "kind": "SQL",
-          "provider": "DmtsFabric",
-          "connectionName": "{\"ClusterId\":\"1ea2a874-811a-42a0-8dae-9975856a50b8\",\"DatasourceId\":\"26fdb8f0-e736-4fcb-a1a2-f097e9039a1a\"}",
-          "credentialDetails": {},
-          "connectionParameters": {}
-        },
-        {
-          "path": "database-1.c5awoeiuuje1.us-east-1.rds.amazonaws.com;demo",
-          "kind": "MySql",
-          "provider": "DmtsFabric",
-          "connectionName": "{\"ClusterId\":\"1ea2a874-811a-42a0-8dae-9975856a50b8\",\"DatasourceId\":\"5be3fcba-4863-4876-a428-da0b70705e37\"}",
-          "credentialDetails": {},
-          "connectionParameters": {}
-        },
-        {
-          "path": "Lakehouse",
-          "kind": "Lakehouse",
-          "provider": "DmtsFabric",
-          "connectionName": "{\"ClusterId\":\"1ea2a874-811a-42a0-8dae-9975856a50b8\",\"DatasourceId\":\"587366c4-8cce-4d1c-a22c-41eacc8480ff\"}",
-          "credentialDetails": {},
-          "connectionParameters": {},
-          "privacyGroup": "None"
-        }
-      ],
-      "useHostConnectionProvider": false,
-      "fastCombine": false,
-      "allowNativeQueries": true,
-      "skipAutomaticTypeAndHeaderDetection": false,
-      "hostProperties": {
-        "dataflowRefreshOutputFileFormat": "Parquet",
-        "enableDateTimeFieldsForStaging": "true",
-        "enablePublishWithoutLoadedQueries": "true"
-      }
+  "formatVersion": "202502",
+  "computeEngineSettings": {
+    "allowFastCopy": false
+  },
+  "name": "Sales_Dataflow_Incremental",
+  "queryGroups": [],
+  "documentLocale": "en-GB",
+  "queriesMetadata": {
+    "demo sales": {
+      "queryId": "a8d13d6f-9238-4a93-bece-caad8db50700",
+      "queryName": "demo sales",
+      "loadEnabled": false
+    },
+    "DefaultDestination": {
+      "queryId": "7cf22187-9696-4a44-a3ed-8e759033c4c5",
+      "queryName": "DefaultDestination",
+      "isHidden": true,
+      "loadEnabled": false
     }
-  }
+  },
+  "connections": [
+    {
+      "path": "database-1.c5awoeiuuje1.us-east-1.rds.amazonaws.com;demo",
+      "kind": "SQL",
+      "connectionId": "{\"ClusterId\":\"1ea2a874-811a-42a0-8dae-9975856a50b8\",\"DatasourceId\":\"26fdb8f0-e736-4fcb-a1a2-f097e9039a1a\"}"
+    },
+    {
+      "path": "database-1.c5awoeiuuje1.us-east-1.rds.amazonaws.com;demo",
+      "kind": "MySql",
+      "connectionId": "{\"ClusterId\":\"1ea2a874-811a-42a0-8dae-9975856a50b8\",\"DatasourceId\":\"5be3fcba-4863-4876-a428-da0b70705e37\"}"
+    },
+    {
+      "path": "Lakehouse",
+      "kind": "Lakehouse",
+      "connectionId": "{\"ClusterId\":\"1ea2a874-811a-42a0-8dae-9975856a50b8\",\"DatasourceId\":\"587366c4-8cce-4d1c-a22c-41eacc8480ff\"}"
+    }
+  ]
 }

@@ -1,0 +1,120 @@
+table Dim_Channel_Attribution
+	lineageTag: 9a091ec2-c704-4e77-82dc-1079924b1be4
+	sourceLineageTag: [gold_layer_campaign].[Dim_Channel_Attribution]
+
+	column customer_id
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: adafe601-e35c-40fb-8d57-0dfb75891eec
+		sourceLineageTag: customer_id
+		summarizeBy: none
+		sourceColumn: customer_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column campaign_id
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 5cbaf51f-17b5-4042-ba05-e30ecd2ecc95
+		sourceLineageTag: campaign_id
+		summarizeBy: none
+		sourceColumn: campaign_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column campaign_name
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: aab532f6-065c-4670-967e-1ff23d6aadac
+		sourceLineageTag: campaign_name
+		summarizeBy: none
+		sourceColumn: campaign_name
+
+		annotation SummarizationSetBy = Automatic
+
+	column source
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 44e57c7f-4d53-4c22-95a2-2e23ac572a5f
+		sourceLineageTag: source
+		summarizeBy: none
+		sourceColumn: source
+
+		annotation SummarizationSetBy = Automatic
+
+	column touch_position
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 926ad324-b8c3-41fe-bfe5-59624fe9d65b
+		sourceLineageTag: touch_position
+		summarizeBy: sum
+		sourceColumn: touch_position
+
+		annotation SummarizationSetBy = Automatic
+
+	column is_conversion
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 7db3340b-8bcd-4b6a-a6b0-099193bb9abf
+		sourceLineageTag: is_conversion
+		summarizeBy: sum
+		sourceColumn: is_conversion
+
+		annotation SummarizationSetBy = Automatic
+
+	column first_touch_attributions
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: bcef018f-3899-4873-8102-ad8ed2d8dce6
+		sourceLineageTag: first_touch_attributions
+		summarizeBy: sum
+		sourceColumn: first_touch_attributions
+
+		annotation SummarizationSetBy = Automatic
+
+	column last_touch_attributions
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: a8312ae7-8fd6-4b8d-afc3-9d76b1d85c59
+		sourceLineageTag: last_touch_attributions
+		summarizeBy: sum
+		sourceColumn: last_touch_attributions
+
+		annotation SummarizationSetBy = Automatic
+
+	column linear_attribution_value
+		dataType: double
+		sourceProviderType: float
+		lineageTag: 43b88d8e-6ca7-455b-8c41-fa50650427ee
+		sourceLineageTag: linear_attribution_value
+		summarizeBy: sum
+		sourceColumn: linear_attribution_value
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column total_touches
+		dataType: int64
+		formatString: 0
+		sourceProviderType: bigint
+		lineageTag: d0d4a821-8abb-4a28-bd0e-241f8ad47745
+		sourceLineageTag: total_touches
+		summarizeBy: sum
+		sourceColumn: total_touches
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Dim_Channel_Attribution = entity
+		mode: directLake
+		source
+			entityName: Dim_Channel_Attribution
+			schemaName: gold_layer_campaign
+			expressionSource: DatabaseQuery
+
+	annotation PBI_ResultType = Table
+

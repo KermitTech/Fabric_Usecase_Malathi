@@ -1,0 +1,112 @@
+table fact_sales
+	lineageTag: facbe044-7bdb-46bb-8435-2d1bb7da31ac
+	sourceLineageTag: [gold_layer_shortcut].[fact_sales]
+
+	column transaction_id
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: c8b9809f-7c94-4ef5-9ad5-dc30ae08a1ec
+		sourceLineageTag: transaction_id
+		summarizeBy: sum
+		sourceColumn: transaction_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column date_key
+		dataType: dateTime
+		formatString: General Date
+		sourceProviderType: date
+		lineageTag: 4b3df464-7fe6-43ce-a35e-382f8ac31c1d
+		sourceLineageTag: date_key
+		summarizeBy: none
+		sourceColumn: date_key
+
+		annotation SummarizationSetBy = Automatic
+
+	column product_key
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 588f1ac0-7ef0-4b46-a116-75c7e1dedf50
+		sourceLineageTag: product_key
+		summarizeBy: none
+		sourceColumn: product_key
+
+		annotation SummarizationSetBy = Automatic
+
+	column store_key
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: b6ad09a2-c09a-4e3a-b96b-3e640452474e
+		sourceLineageTag: store_key
+		summarizeBy: none
+		sourceColumn: store_key
+
+		annotation SummarizationSetBy = Automatic
+
+	column quantity
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: aefaf349-4489-4697-ad39-41ba8d895a32
+		sourceLineageTag: quantity
+		summarizeBy: sum
+		sourceColumn: quantity
+
+		annotation SummarizationSetBy = Automatic
+
+	column unit_price
+		dataType: double
+		sourceProviderType: float
+		lineageTag: 3cc9cc94-0b81-4632-aceb-4ed6acfb8f1f
+		sourceLineageTag: unit_price
+		summarizeBy: sum
+		sourceColumn: unit_price
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column discount
+		dataType: double
+		sourceProviderType: float
+		lineageTag: 25a23c24-ca8d-4c0a-9014-2d73c6f820c6
+		sourceLineageTag: discount
+		summarizeBy: sum
+		sourceColumn: discount
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column total_amount
+		dataType: double
+		sourceProviderType: float
+		lineageTag: c13adf24-7c02-4d8c-a46f-b21701357e94
+		sourceLineageTag: total_amount
+		summarizeBy: sum
+		sourceColumn: total_amount
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column category
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 12e574fd-a495-4949-ac0b-79d259769832
+		sourceLineageTag: category
+		summarizeBy: none
+		sourceColumn: category
+
+		annotation SummarizationSetBy = Automatic
+
+	partition fact_sales = entity
+		mode: directLake
+		source
+			entityName: fact_sales
+			schemaName: gold_layer_shortcut
+			expressionSource: DatabaseQuery
+
+	annotation PBI_ResultType = Table
+

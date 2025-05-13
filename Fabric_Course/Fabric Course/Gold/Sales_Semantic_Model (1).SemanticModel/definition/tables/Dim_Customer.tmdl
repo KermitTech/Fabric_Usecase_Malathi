@@ -1,0 +1,105 @@
+table Dim_Customer
+	lineageTag: 52b9e6ae-94d3-4524-894f-ac9d8a708e55
+	sourceLineageTag: [dbo].[Dim_Customer]
+
+	column customer_id
+		dataType: string
+		sourceProviderType: varchar(100)
+		lineageTag: 6c9a0b33-1a98-4bca-82ed-d2bcd18ac548
+		sourceLineageTag: customer_id
+		summarizeBy: none
+		sourceColumn: customer_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column customer_name
+		dataType: string
+		sourceProviderType: varchar(255)
+		lineageTag: 3aebd32f-800c-43e5-9ade-9bedbfb041ef
+		sourceLineageTag: customer_name
+		summarizeBy: none
+		sourceColumn: customer_name
+
+		annotation SummarizationSetBy = Automatic
+
+	column email
+		dataType: string
+		sourceProviderType: varchar(255)
+		lineageTag: 5e23c7ad-6dc3-4666-8bdd-c958d6f6c384
+		sourceLineageTag: email
+		summarizeBy: none
+		sourceColumn: email
+
+		annotation SummarizationSetBy = Automatic
+
+	column phone
+		dataType: string
+		sourceProviderType: varchar(50)
+		lineageTag: 8d2b6c8a-ba00-4d40-a41f-78ebc2f12d8d
+		sourceLineageTag: phone
+		summarizeBy: none
+		sourceColumn: phone
+
+		annotation SummarizationSetBy = Automatic
+
+	column address
+		dataType: string
+		sourceProviderType: varchar(255)
+		lineageTag: a0df267d-7a5d-4d65-a205-6e1234b0e67f
+		sourceLineageTag: address
+		summarizeBy: none
+		sourceColumn: address
+
+		annotation SummarizationSetBy = Automatic
+
+	column social_security_number
+		dataType: string
+		sourceProviderType: varchar(50)
+		lineageTag: 5c2078ae-ceaa-490e-a89c-32978f6ce054
+		sourceLineageTag: social_security_number
+		summarizeBy: none
+		sourceColumn: social_security_number
+
+		annotation SummarizationSetBy = Automatic
+
+	column date_of_birth
+		dataType: dateTime
+		formatString: General Date
+		sourceProviderType: date
+		lineageTag: f0d7582c-3e63-4f37-915a-688b6bb4c3bd
+		sourceLineageTag: date_of_birth
+		summarizeBy: none
+		sourceColumn: date_of_birth
+
+		annotation SummarizationSetBy = Automatic
+
+	column age
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 4087a970-0cfe-4878-86f2-ef4adb551ea0
+		sourceLineageTag: age
+		summarizeBy: sum
+		sourceColumn: age
+
+		annotation SummarizationSetBy = Automatic
+
+	column gender
+		dataType: string
+		sourceProviderType: varchar(10)
+		lineageTag: aecec98f-c65c-401b-a3f4-d4e1ea4c57f9
+		sourceLineageTag: gender
+		summarizeBy: none
+		sourceColumn: gender
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Dim_Customer = entity
+		mode: directLake
+		source
+			entityName: Dim_Customer
+			schemaName: dbo
+			expressionSource: DatabaseQuery
+
+	annotation PBI_ResultType = Table
+

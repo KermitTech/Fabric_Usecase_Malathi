@@ -1,0 +1,51 @@
+{
+  "config": "{\"version\":\"5.59\",\"themeCollection\":{\"baseTheme\":{\"name\":\"CY24SU10\",\"version\":\"5.60\",\"type\":2}},\"activeSectionIndex\":0,\"defaultDrillFilterOtherVisuals\":true,\"settings\":{\"useNewFilterPaneExperience\":true,\"allowChangeFilterTypes\":true,\"useStylableVisualContainerHeader\":true,\"queryLimitOption\":6,\"useEnhancedTooltips\":true,\"exportDataMode\":1,\"useDefaultAggregateDisplayName\":true},\"objects\":{\"section\":[{\"properties\":{\"verticalAlignment\":{\"expr\":{\"Literal\":{\"Value\":\"'Top'\"}}}}}]}}",
+  "layoutOptimization": 0,
+  "resourcePackages": [
+    {
+      "resourcePackage": {
+        "disabled": false,
+        "items": [
+          {
+            "name": "CY24SU10",
+            "path": "BaseThemes/CY24SU10.json",
+            "type": 202
+          }
+        ],
+        "name": "SharedResources",
+        "type": 2
+      }
+    }
+  ],
+  "sections": [
+    {
+      "config": "{}",
+      "displayName": "Page 1",
+      "displayOption": 1,
+      "filters": "[]",
+      "height": 720.00,
+      "name": "0d375d32518d9d805946",
+      "visualContainers": [
+        {
+          "config": "{\"name\":\"b3ecafb15dfbe6304c1b\",\"layouts\":[{\"id\":0,\"position\":{\"x\":9.493201483312731,\"y\":441.433868974042,\"z\":1,\"width\":618.6402966625463,\"height\":278.46724351050676,\"tabOrder\":1}}],\"singleVisual\":{\"visualType\":\"donutChart\",\"projections\":{\"Series\":[{\"queryRef\":\"fact_sales.product_key\"}],\"Y\":[{\"queryRef\":\"Sum(fact_sales.total_amount)\"}]},\"prototypeQuery\":{\"Version\":2,\"From\":[{\"Name\":\"f\",\"Entity\":\"fact_sales\",\"Type\":0}],\"Select\":[{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"f\"}},\"Property\":\"product_key\"},\"Name\":\"fact_sales.product_key\",\"NativeReferenceName\":\"product_key\"},{\"Aggregation\":{\"Expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"f\"}},\"Property\":\"total_amount\"}},\"Function\":0},\"Name\":\"Sum(fact_sales.total_amount)\",\"NativeReferenceName\":\"Sum of total_amount\"}],\"OrderBy\":[{\"Direction\":2,\"Expression\":{\"Aggregation\":{\"Expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"f\"}},\"Property\":\"total_amount\"}},\"Function\":0}}}]},\"drillFilterOtherVisuals\":true,\"hasDefaultSort\":true,\"objects\":{\"legend\":[{\"properties\":{\"fontFamily\":{\"expr\":{\"Literal\":{\"Value\":\"'Calibri'\"}}},\"fontSize\":{\"expr\":{\"Literal\":{\"Value\":\"12D\"}}},\"bold\":{\"expr\":{\"Literal\":{\"Value\":\"true\"}}},\"titleText\":{\"expr\":{\"Literal\":{\"Value\":\"'Products'\"}}},\"labelColor\":{\"solid\":{\"color\":{\"expr\":{\"ThemeDataColor\":{\"ColorId\":4,\"Percent\":-0.25}}}}}}}],\"dataPoint\":[{\"properties\":{\"fill\":{\"solid\":{\"color\":{\"expr\":{\"ThemeDataColor\":{\"ColorId\":9,\"Percent\":0}}}}}},\"selector\":{\"data\":[{\"scopeId\":{\"Comparison\":{\"ComparisonKind\":0,\"Left\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Entity\":\"fact_sales\"}},\"Property\":\"product_key\"}},\"Right\":{\"Literal\":{\"Value\":\"'Blue Jeans'\"}}}}}]}},{\"properties\":{\"fill\":{\"solid\":{\"color\":{\"expr\":{\"Literal\":{\"Value\":\"'#702254'\"}}}}}},\"selector\":{\"data\":[{\"scopeId\":{\"Comparison\":{\"ComparisonKind\":0,\"Left\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Entity\":\"fact_sales\"}},\"Property\":\"product_key\"}},\"Right\":{\"Literal\":{\"Value\":\"'Red TShirt'\"}}}}}]}}]},\"vcObjects\":{\"title\":[{\"properties\":{\"text\":{\"expr\":{\"Literal\":{\"Value\":\"'Contribution of Top 5 Products'\"}}},\"heading\":{\"expr\":{\"Literal\":{\"Value\":\"'Normal'\"}}},\"fontFamily\":{\"expr\":{\"Literal\":{\"Value\":\"'Calibri'\"}}},\"fontSize\":{\"expr\":{\"Literal\":{\"Value\":\"20D\"}}},\"bold\":{\"expr\":{\"Literal\":{\"Value\":\"true\"}}},\"fontColor\":{\"solid\":{\"color\":{\"expr\":{\"ThemeDataColor\":{\"ColorId\":7,\"Percent\":-0.5}}}}}}}]}}}",
+          "filters": "[]",
+          "height": 278.47,
+          "width": 618.64,
+          "x": 9.49,
+          "y": 441.43,
+          "z": 1.00
+        },
+        {
+          "config": "{\"name\":\"e2557e9c88a047b5119b\",\"layouts\":[{\"id\":0,\"position\":{\"x\":9.493201483312731,\"y\":0,\"z\":0,\"width\":618.6402966625463,\"height\":419.28306551297896,\"tabOrder\":0}}],\"singleVisual\":{\"visualType\":\"clusteredBarChart\",\"projections\":{\"Y\":[{\"queryRef\":\"Sum(fact_sales.total_amount)\"},{\"queryRef\":\"Sum(fact_sales.quantity)\"}],\"Category\":[{\"queryRef\":\"fact_sales.product_key\",\"active\":true}]},\"prototypeQuery\":{\"Version\":2,\"From\":[{\"Name\":\"f\",\"Entity\":\"fact_sales\",\"Type\":0}],\"Select\":[{\"Aggregation\":{\"Expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"f\"}},\"Property\":\"total_amount\"}},\"Function\":0},\"Name\":\"Sum(fact_sales.total_amount)\",\"NativeReferenceName\":\"Total Amount\"},{\"Aggregation\":{\"Expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"f\"}},\"Property\":\"quantity\"}},\"Function\":0},\"Name\":\"Sum(fact_sales.quantity)\",\"NativeReferenceName\":\"Total quantity\"},{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"f\"}},\"Property\":\"product_key\"},\"Name\":\"fact_sales.product_key\",\"NativeReferenceName\":\"product_key\"}],\"OrderBy\":[{\"Direction\":2,\"Expression\":{\"Aggregation\":{\"Expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"f\"}},\"Property\":\"total_amount\"}},\"Function\":0}}}]},\"columnProperties\":{\"Sum(fact_sales.quantity)\":{\"displayName\":\"Total quantity\"},\"Sum(fact_sales.total_amount)\":{\"displayName\":\"Total Amount\"}},\"drillFilterOtherVisuals\":true,\"hasDefaultSort\":true,\"objects\":{\"categoryAxis\":[{\"properties\":{\"titleText\":{\"expr\":{\"Literal\":{\"Value\":\"'Products'\"}}},\"titleFontFamily\":{\"expr\":{\"Literal\":{\"Value\":\"'Calibri'\"}}},\"titleBold\":{\"expr\":{\"Literal\":{\"Value\":\"true\"}}},\"titleFontSize\":{\"expr\":{\"Literal\":{\"Value\":\"16D\"}}},\"titleItalic\":{\"expr\":{\"Literal\":{\"Value\":\"false\"}}},\"titleColor\":{\"solid\":{\"color\":{\"expr\":{\"ThemeDataColor\":{\"ColorId\":6,\"Percent\":-0.5}}}}},\"bold\":{\"expr\":{\"Literal\":{\"Value\":\"true\"}}},\"fontFamily\":{\"expr\":{\"Literal\":{\"Value\":\"'Calibri'\"}}},\"switchAxisPosition\":{\"expr\":{\"Literal\":{\"Value\":\"false\"}}},\"italic\":{\"expr\":{\"Literal\":{\"Value\":\"false\"}}},\"fontSize\":{\"expr\":{\"Literal\":{\"Value\":\"11D\"}}}}}],\"valueAxis\":[{\"properties\":{\"titleText\":{\"expr\":{\"Literal\":{\"Value\":\"'Total Value'\"}}},\"showAxisTitle\":{\"expr\":{\"Literal\":{\"Value\":\"true\"}}},\"titleFontFamily\":{\"expr\":{\"Literal\":{\"Value\":\"'Calibri'\"}}},\"titleFontSize\":{\"expr\":{\"Literal\":{\"Value\":\"16D\"}}},\"titleBold\":{\"expr\":{\"Literal\":{\"Value\":\"true\"}}},\"titleColor\":{\"solid\":{\"color\":{\"expr\":{\"Literal\":{\"Value\":\"'#702254'\"}}}}},\"bold\":{\"expr\":{\"Literal\":{\"Value\":\"true\"}}},\"fontFamily\":{\"expr\":{\"Literal\":{\"Value\":\"'Calibri'\"}}},\"fontSize\":{\"expr\":{\"Literal\":{\"Value\":\"11D\"}}}}}],\"legend\":[{\"properties\":{\"titleText\":{\"expr\":{\"Literal\":{\"Value\":\"''\"}}},\"showTitle\":{\"expr\":{\"Literal\":{\"Value\":\"false\"}}},\"fontFamily\":{\"expr\":{\"Literal\":{\"Value\":\"'Calibri'\"}}},\"bold\":{\"expr\":{\"Literal\":{\"Value\":\"true\"}}}}}]},\"vcObjects\":{\"title\":[{\"properties\":{\"text\":{\"expr\":{\"Literal\":{\"Value\":\"'Top 5 Performing Products'\"}}},\"heading\":{\"expr\":{\"Literal\":{\"Value\":\"'Normal'\"}}},\"fontFamily\":{\"expr\":{\"Literal\":{\"Value\":\"'Calibri'\"}}},\"fontSize\":{\"expr\":{\"Literal\":{\"Value\":\"20D\"}}},\"bold\":{\"expr\":{\"Literal\":{\"Value\":\"true\"}}},\"fontColor\":{\"solid\":{\"color\":{\"expr\":{\"ThemeDataColor\":{\"ColorId\":7,\"Percent\":-0.5}}}}}}}]}}}",
+          "filters": "[]",
+          "height": 419.28,
+          "width": 618.64,
+          "x": 9.49,
+          "y": 0.00,
+          "z": 0.00
+        }
+      ],
+      "width": 1280.00
+    }
+  ]
+}

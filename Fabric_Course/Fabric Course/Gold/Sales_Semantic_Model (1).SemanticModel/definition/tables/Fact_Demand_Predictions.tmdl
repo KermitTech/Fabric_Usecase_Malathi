@@ -1,0 +1,89 @@
+table Fact_Demand_Predictions
+	lineageTag: 97b783d3-7557-4855-9b22-2255ed3e91fa
+	sourceLineageTag: [dbo].[Fact_Demand_Predictions]
+
+	column product_id
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: c1c08757-8f98-4b15-8b7b-a141c1681091
+		sourceLineageTag: product_id
+		summarizeBy: none
+		sourceColumn: product_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column store_id
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 95818a18-4f1d-4311-a4e6-8f22c71e1b19
+		sourceLineageTag: store_id
+		summarizeBy: none
+		sourceColumn: store_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column Date
+		dataType: dateTime
+		formatString: General Date
+		sourceProviderType: datetime2
+		lineageTag: 4a21951c-7be7-4b7b-90b4-35cb890a82fd
+		sourceLineageTag: Date
+		summarizeBy: none
+		sourceColumn: Date
+
+		annotation SummarizationSetBy = Automatic
+
+	column year
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: de6f4836-bcd4-458b-90cf-da82a106f2c8
+		sourceLineageTag: year
+		summarizeBy: sum
+		sourceColumn: year
+
+		annotation SummarizationSetBy = Automatic
+
+	column DayOfWeek
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: ce52474d-695b-4dc6-91c8-744999e2ccb1
+		sourceLineageTag: DayOfWeek
+		summarizeBy: sum
+		sourceColumn: DayOfWeek
+
+		annotation SummarizationSetBy = Automatic
+
+	column month
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: a9a882f8-ddd6-439b-8426-2395d6915fff
+		sourceLineageTag: month
+		summarizeBy: sum
+		sourceColumn: month
+
+		annotation SummarizationSetBy = Automatic
+
+	column prediction
+		dataType: double
+		sourceProviderType: float
+		lineageTag: fa89e31a-4e9f-493d-8cc4-36977eb979a7
+		sourceLineageTag: prediction
+		summarizeBy: sum
+		sourceColumn: prediction
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition Fact_Demand_Predictions = entity
+		mode: directLake
+		source
+			entityName: Fact_Demand_Predictions
+			schemaName: dbo
+			expressionSource: DatabaseQuery
+
+	annotation PBI_ResultType = Table
+

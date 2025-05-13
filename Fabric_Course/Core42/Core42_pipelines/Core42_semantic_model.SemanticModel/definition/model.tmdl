@@ -1,0 +1,24 @@
+model Model
+	culture: en-US
+	collation: Latin1_General_100_BIN2_UTF8
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	sourceQueryCulture: en-US
+	dataAccessOptions
+		legacyRedirects
+		returnErrorValuesAsNull
+
+annotation __PBI_TimeIntelligenceEnabled = 0
+
+annotation PBIDesktopVersion = 2.143.7657.7 (Main)+be8585b37c10e69f44bb60748e20297aeca9ce9f
+
+annotation PBI_QueryOrder = ["DatabaseQuery"]
+
+ref table sales
+ref table sales_temp
+ref table 'gold sales'
+ref table Load_Auditlogs
+ref table sales_backup
+ref table 'silver sales'
+
+ref cultureInfo en-US
+

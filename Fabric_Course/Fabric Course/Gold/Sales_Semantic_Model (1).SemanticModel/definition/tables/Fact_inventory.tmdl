@@ -1,0 +1,67 @@
+table Fact_inventory
+	lineageTag: 5da47475-a8b3-4df2-bacd-215fa03d1a84
+	sourceLineageTag: [dbo].[Fact_inventory]
+
+	column inventory_id
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 7a56a3bb-f7b2-4641-a10a-3a9e8b28941b
+		sourceLineageTag: inventory_id
+		summarizeBy: sum
+		sourceColumn: inventory_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column product_id
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 8a61c7f1-11cb-48e5-92ae-22b04e740974
+		sourceLineageTag: product_id
+		summarizeBy: sum
+		sourceColumn: product_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column store_id
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 6ca6a42e-ea9b-4de7-bbe7-8eebdbbe7523
+		sourceLineageTag: store_id
+		summarizeBy: none
+		sourceColumn: store_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column quantity_in_stock
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 6a943302-d829-4f8c-9532-5291b8a4f0ec
+		sourceLineageTag: quantity_in_stock
+		summarizeBy: sum
+		sourceColumn: quantity_in_stock
+
+		annotation SummarizationSetBy = Automatic
+
+	column inventory_date
+		dataType: dateTime
+		formatString: General Date
+		sourceProviderType: date
+		lineageTag: 2e343b48-8e34-44ee-a95d-cdbf6941ca7b
+		sourceLineageTag: inventory_date
+		summarizeBy: none
+		sourceColumn: inventory_date
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Fact_inventory = entity
+		mode: directLake
+		source
+			entityName: Fact_inventory
+			schemaName: dbo
+			expressionSource: DatabaseQuery
+
+	annotation PBI_ResultType = Table
+

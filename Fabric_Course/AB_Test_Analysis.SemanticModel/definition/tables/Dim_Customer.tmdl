@@ -1,0 +1,123 @@
+table Dim_Customer
+	lineageTag: 9941d23c-7c22-40ba-882a-822606b5d1f1
+	sourceLineageTag: [gold_layer_campaign].[Dim_Customer]
+
+	column customer_id
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 32b99b0d-ae34-4379-b596-81af78128b92
+		sourceLineageTag: customer_id
+		summarizeBy: none
+		sourceColumn: customer_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column email
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: f482448d-6a73-421c-b80b-203b646044bf
+		sourceLineageTag: email
+		summarizeBy: none
+		sourceColumn: email
+
+		annotation SummarizationSetBy = Automatic
+
+	column dob
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: a9c43053-1960-49e0-93e9-d1c01e2a4dd6
+		sourceLineageTag: dob
+		summarizeBy: none
+		sourceColumn: dob
+
+		annotation SummarizationSetBy = Automatic
+
+	column gender
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 91d90675-0340-4584-9143-fcb853c770d0
+		sourceLineageTag: gender
+		summarizeBy: none
+		sourceColumn: gender
+
+		annotation SummarizationSetBy = Automatic
+
+	column address
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 84a482ce-6ecc-4e2a-ba80-13086a1c9905
+		sourceLineageTag: address
+		summarizeBy: none
+		sourceColumn: address
+
+		annotation SummarizationSetBy = Automatic
+
+	column city
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 83d878f9-c86e-47dc-9135-7c8c1c324cab
+		sourceLineageTag: city
+		summarizeBy: none
+		sourceColumn: city
+
+		annotation SummarizationSetBy = Automatic
+
+	column country
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 97cb97ae-8694-4762-9e61-f5b62f32bf6f
+		sourceLineageTag: country
+		summarizeBy: none
+		sourceColumn: country
+
+		annotation SummarizationSetBy = Automatic
+
+	column social_security_number
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: e9b4bc83-caf0-4e64-b890-61dcc93e7948
+		sourceLineageTag: social_security_number
+		summarizeBy: none
+		sourceColumn: social_security_number
+
+		annotation SummarizationSetBy = Automatic
+
+	column phone_number
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: a3c97722-6572-4cdf-be06-c4f58c228a23
+		sourceLineageTag: phone_number
+		summarizeBy: none
+		sourceColumn: phone_number
+
+		annotation SummarizationSetBy = Automatic
+
+	column variant
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: ca7bdb83-3567-4495-b2d2-b7f35cae80fc
+		sourceLineageTag: variant
+		summarizeBy: none
+		sourceColumn: variant
+
+		annotation SummarizationSetBy = Automatic
+
+	column full_name
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 68d12c77-7db2-4c35-b91c-7a02c12d646e
+		sourceLineageTag: full_name
+		summarizeBy: none
+		sourceColumn: full_name
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Dim_Customer = entity
+		mode: directLake
+		source
+			entityName: Dim_Customer
+			schemaName: gold_layer_campaign
+			expressionSource: DatabaseQuery
+
+	annotation PBI_ResultType = Table
+

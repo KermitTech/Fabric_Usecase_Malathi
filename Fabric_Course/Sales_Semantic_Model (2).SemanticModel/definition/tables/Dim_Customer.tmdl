@@ -1,0 +1,89 @@
+table Dim_Customer
+	lineageTag: f4a3b97d-dbc5-4422-af5f-096bb0382d81
+	sourceLineageTag: [dbo].[Dim_Customer]
+
+	column date_key
+		dataType: dateTime
+		formatString: General Date
+		sourceProviderType: date
+		lineageTag: 0258b2fe-f41b-4987-9432-d96268851c44
+		sourceLineageTag: date_key
+		summarizeBy: none
+		sourceColumn: date_key
+
+		annotation SummarizationSetBy = Automatic
+
+	column day_name
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 3421ee6b-230b-4f26-a374-49a067337e6b
+		sourceLineageTag: day_name
+		summarizeBy: none
+		sourceColumn: day_name
+
+		annotation SummarizationSetBy = Automatic
+
+	column day_of_month
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 8f8b7eeb-8e8f-4542-882e-985721e07822
+		sourceLineageTag: day_of_month
+		summarizeBy: sum
+		sourceColumn: day_of_month
+
+		annotation SummarizationSetBy = Automatic
+
+	column day_of_week
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 7a874b7b-66de-4f10-9d38-9cee0ca3f94f
+		sourceLineageTag: day_of_week
+		summarizeBy: sum
+		sourceColumn: day_of_week
+
+		annotation SummarizationSetBy = Automatic
+
+	column month
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 08d721d4-97d2-4057-95b8-94365745424e
+		sourceLineageTag: month
+		summarizeBy: sum
+		sourceColumn: month
+
+		annotation SummarizationSetBy = Automatic
+
+	column year
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: e81eb36f-953f-4cbf-84e8-832a5d8029fe
+		sourceLineageTag: year
+		summarizeBy: sum
+		sourceColumn: year
+
+		annotation SummarizationSetBy = Automatic
+
+	column week_of_year
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 2329531d-eff2-4aa7-9fcd-decd19cc40ab
+		sourceLineageTag: week_of_year
+		summarizeBy: sum
+		sourceColumn: week_of_year
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Dim_Customer = entity
+		mode: directLake
+		source
+			entityName: Dim_Customer
+			schemaName: dbo
+			expressionSource: DatabaseQuery
+
+	annotation PBI_ResultType = Table
+

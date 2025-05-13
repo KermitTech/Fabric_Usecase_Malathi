@@ -1,0 +1,63 @@
+table Dim_Product
+	lineageTag: b668394b-655d-4954-b404-439ac0ecdf68
+	sourceLineageTag: [dbo].[Dim_Product]
+
+	column product_id
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: b9a164f6-fb05-4d6d-9be0-5f2e6e82afd4
+		sourceLineageTag: product_id
+		summarizeBy: none
+		sourceColumn: product_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column product_name
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 217f01b4-4afe-48a9-9dba-acd4e387038e
+		sourceLineageTag: product_name
+		summarizeBy: none
+		sourceColumn: product_name
+
+		annotation SummarizationSetBy = Automatic
+
+	column category
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: b24cc6ce-15d4-46dd-ace8-19cc7d49c2d7
+		sourceLineageTag: category
+		summarizeBy: none
+		sourceColumn: category
+
+		annotation SummarizationSetBy = Automatic
+
+	column sku
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: b8616d15-a065-4fe4-8861-1cb1df7c5b26
+		sourceLineageTag: sku
+		summarizeBy: none
+		sourceColumn: sku
+
+		annotation SummarizationSetBy = Automatic
+
+	column sku_status
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 704a1a99-5645-4e14-97cd-b2bd90de3c14
+		sourceLineageTag: sku_status
+		summarizeBy: none
+		sourceColumn: sku_status
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Dim_Product = entity
+		mode: directLake
+		source
+			entityName: Dim_Product
+			schemaName: dbo
+			expressionSource: DatabaseQuery
+
+	annotation PBI_ResultType = Table
+
