@@ -1,0 +1,98 @@
+{
+  "formatVersion": "202502",
+  "computeEngineSettings": {},
+  "name": "GetCore42_data",
+  "queryGroups": [],
+  "documentLocale": "en-GB",
+  "queriesMetadata": {
+    "Account": {
+      "queryId": "e0e98c2f-383a-4c68-9109-822a6b51b62d",
+      "queryName": "Account",
+      "loadEnabled": false
+    },
+    "Contact": {
+      "queryId": "45e66266-df7d-497c-903e-3e2b0ad08f51",
+      "queryName": "Contact",
+      "loadEnabled": false
+    },
+    "Lead": {
+      "queryId": "3782bc76-e2e8-410d-a38c-e2c712d188f9",
+      "queryName": "Lead",
+      "loadEnabled": false
+    },
+    "Opportunity": {
+      "queryId": "3a245b42-3608-4ad7-b255-ccb63260c0d0",
+      "queryName": "Opportunity",
+      "loadEnabled": false
+    },
+    "Partner": {
+      "queryId": "647e6162-8e01-4de0-ae96-9a1d9025bc4e",
+      "queryName": "Partner",
+      "loadEnabled": false
+    },
+    "SBQQ__Quote__c": {
+      "queryId": "4cd7e785-1174-4d69-b6f4-ce61a3d34d29",
+      "queryName": "SBQQ__Quote__c",
+      "loadEnabled": false
+    },
+    "User": {
+      "queryId": "c45cd0c6-ed15-4208-bc8d-e7eba34922ef",
+      "queryName": "User",
+      "loadEnabled": false
+    },
+    "Opportunity_DataDestination": {
+      "queryId": "6a6697d9-9b87-4044-8c01-d097e526ea85",
+      "queryName": "Opportunity_DataDestination",
+      "isHidden": true,
+      "loadEnabled": false
+    },
+    "Account_DataDestination": {
+      "queryId": "8d7bdb99-e2a8-43bd-8eee-7ec6c0cc0711",
+      "queryName": "Account_DataDestination",
+      "isHidden": true,
+      "loadEnabled": false
+    },
+    "Contact_DataDestination": {
+      "queryId": "6b257e9f-ef3f-4193-9664-c826a7364ef8",
+      "queryName": "Contact_DataDestination",
+      "isHidden": true,
+      "loadEnabled": false
+    },
+    "Lead_DataDestination": {
+      "queryId": "cdc090ab-378c-4851-9705-09fe8128863a",
+      "queryName": "Lead_DataDestination",
+      "isHidden": true,
+      "loadEnabled": false
+    },
+    "Partner_DataDestination": {
+      "queryId": "68e8bec2-b895-4a5b-a8bd-6dbfd16210b3",
+      "queryName": "Partner_DataDestination",
+      "isHidden": true,
+      "loadEnabled": false
+    },
+    "SBQQ__Quote__c_DataDestination": {
+      "queryId": "a7c4595b-b1ae-44ec-8134-f45901d14068",
+      "queryName": "SBQQ__Quote__c_DataDestination",
+      "isHidden": true,
+      "loadEnabled": false
+    },
+    "User_DataDestination": {
+      "queryId": "9e3828ed-d2fb-4a19-a711-a4e224727634",
+      "queryName": "User_DataDestination",
+      "isHidden": true,
+      "loadEnabled": false
+    }
+  },
+  "connections": [
+    {
+      "path": "s5gzoyvwcpeubblw6gvssbnwz4-rtdqlr34a75u7e37nmobdnt7nm.datawarehouse.fabric.microsoft.com;bronze",
+      "kind": "SQL",
+      "connectionId": "{\"ClusterId\":\"1ea2a874-811a-42a0-8dae-9975856a50b8\",\"DatasourceId\":\"ad23b3b0-ccbc-4ac0-a4b3-5394da8fe1dc\"}"
+    },
+    {
+      "path": "Lakehouse",
+      "kind": "Lakehouse",
+      "connectionId": "{\"ClusterId\":\"1ea2a874-811a-42a0-8dae-9975856a50b8\",\"DatasourceId\":\"587366c4-8cce-4d1c-a22c-41eacc8480ff\"}"
+    }
+  ]
+}
