@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "DataPipeline",
+    "displayName": "LoadOpportunityFile_To_DeltaTable"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "e445311f-c37d-9a69-4dfa-d555754870b7"
+  }
+}

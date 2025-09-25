@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "DataPipeline",
+    "displayName": "Gartner_DataLoad"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "faaa1797-4dc0-bad7-4547-45d1b52436a7"
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "DataPipeline",
+    "displayName": "CosmosDB_DataCheck"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "324b6184-a214-a72d-4b6c-b57562b9fd04"
+  }
+}

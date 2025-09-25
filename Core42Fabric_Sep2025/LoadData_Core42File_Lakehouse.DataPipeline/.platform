@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "DataPipeline",
+    "displayName": "LoadData_Core42File_Lakehouse"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "59f96c86-ebd9-866f-41b6-1ec0fe4a38a4"
+  }
+}

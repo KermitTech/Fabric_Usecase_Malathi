@@ -1,0 +1,187 @@
+{
+  "properties": {
+    "activities": [
+      {
+        "type": "Copy",
+        "typeProperties": {
+          "source": {
+            "type": "ExcelSource",
+            "storeSettings": {
+              "type": "LakehouseReadSettings",
+              "recursive": true,
+              "enablePartitionDiscovery": false
+            },
+            "datasetSettings": {
+              "type": "Excel",
+              "typeProperties": {
+                "location": {
+                  "type": "LakehouseLocation",
+                  "fileName": "Core42 1.xlsx"
+                },
+                "sheetName": "Test_Opportunity_Data",
+                "firstRowAsHeader": true
+              },
+              "schema": [],
+              "linkedService": {
+                "name": "Core42",
+                "properties": {
+                  "type": "Lakehouse",
+                  "typeProperties": {
+                    "artifactId": "17866f8c-a6eb-98ec-4c55-efc26ab9a74f",
+                    "workspaceId": "00000000-0000-0000-0000-000000000000",
+                    "rootFolder": "Files"
+                  },
+                  "annotations": []
+                }
+              },
+              "annotations": []
+            }
+          },
+          "sink": {
+            "type": "CosmosDbMongoDbApiSink",
+            "writeBehavior": "upsert",
+            "writeBatchTimeout": "10:30:00",
+            "datasetSettings": {
+              "type": "CosmosDbMongoDbApiCollection",
+              "typeProperties": {
+                "collection": "training_data",
+                "database": "core42db"
+              },
+              "version": "1.1",
+              "schema": [],
+              "externalReferences": {
+                "connection": "1ece23f3-9aff-4826-a986-bb829648a22d"
+              },
+              "annotations": []
+            }
+          },
+          "translator": {
+            "type": "TabularTranslator",
+            "mappings": [
+              {
+                "source": {
+                  "name": "_id",
+                  "physicalType": "string"
+                },
+                "sink": {
+                  "name": "_id"
+                }
+              },
+              {
+                "source": {
+                  "name": "ABR_Value__c",
+                  "type": "String",
+                  "physicalType": "string"
+                },
+                "sink": {
+                  "name": "abr_usd",
+                  "physicalType": "String"
+                }
+              },
+              {
+                "source": {
+                  "name": "TCV_USD__c",
+                  "type": "String",
+                  "physicalType": "string"
+                },
+                "sink": {
+                  "name": "tcv_usd",
+                  "physicalType": "String"
+                }
+              },
+              {
+                "source": {
+                  "name": "offerings",
+                  "physicalType": "string"
+                },
+                "sink": {
+                  "name": "offerings",
+                  "physicalType": "String"
+                }
+              },
+              {
+                "source": {
+                  "name": "sub_offerings",
+                  "physicalType": "string"
+                },
+                "sink": {
+                  "name": "sub_offerings",
+                  "physicalType": "String"
+                }
+              },
+              {
+                "source": {
+                  "name": "core42_vertical",
+                  "physicalType": "string"
+                },
+                "sink": {
+                  "name": "core42_vertical",
+                  "physicalType": "String"
+                }
+              },
+              {
+                "source": {
+                  "name": "Engagement_Model__c",
+                  "type": "String",
+                  "physicalType": "string"
+                },
+                "sink": {
+                  "name": "engagement_model",
+                  "physicalType": "String"
+                }
+              },
+              {
+                "source": {
+                  "name": "Account_Name_Alias__c",
+                  "type": "String",
+                  "physicalType": "string"
+                },
+                "sink": {
+                  "name": "account_name",
+                  "physicalType": "String"
+                }
+              },
+              {
+                "source": {
+                  "name": "StageName",
+                  "type": "String",
+                  "physicalType": "string"
+                },
+                "sink": {
+                  "name": "sales_stage",
+                  "physicalType": "String"
+                }
+              },
+              {
+                "source": {
+                  "name": "Pursuit_Reference_Code_Bid_ID__c",
+                  "type": "String",
+                  "physicalType": "string"
+                },
+                "sink": {
+                  "name": "bid_id",
+                  "physicalType": "String"
+                }
+              }
+            ],
+            "typeConversion": true,
+            "typeConversionSettings": {
+              "allowDataTruncation": true,
+              "treatBooleanAsNumber": false
+            }
+          },
+          "enableStaging": false
+        },
+        "policy": {
+          "timeout": "0.12:00:00",
+          "retry": 0,
+          "retryIntervalInSeconds": 30,
+          "secureInput": false,
+          "secureOutput": false
+        },
+        "name": "Copy data1",
+        "dependsOn": []
+      }
+    ]
+  }
+}
