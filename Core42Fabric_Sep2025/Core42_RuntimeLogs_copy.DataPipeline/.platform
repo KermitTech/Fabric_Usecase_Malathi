@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "DataPipeline",
+    "displayName": "Core42_RuntimeLogs_copy"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "51beac19-8ea9-9c1f-484d-efddcd6ec743"
+  }
+}

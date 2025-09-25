@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "DataPipeline",
+    "displayName": "Core42_RuntimeLogs_Updated"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "3918848e-2f42-bc13-42a8-151254b20206"
+  }
+}

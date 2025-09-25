@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "DataPipeline",
+    "displayName": "Core42_Pipeline_RuntimeLogs"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "bef0f52f-aa2b-a820-4035-b6bee17f272e"
+  }
+}
